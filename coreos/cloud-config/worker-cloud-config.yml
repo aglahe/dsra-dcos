@@ -11,7 +11,17 @@ coreos:
       Type=oneshot
       RemainAfterExit=yes
       ExecStart=/usr/sbin/wipefs -f /dev/sda
-      ExecStart=/usr/sbin/mkfs.btrfs -f /dev/sda
+      ExecStart=/usr/sbin/mkfs.btrfs -m single -f /dev/sda
+  - name: format-data.service
+    command: start
+    content: |
+      [Unit]
+      Description=Formats the data drive
+      [Service]
+      Type=oneshot
+      RemainAfterExit=yes
+      ExecStart=/usr/sbin/wipefs -f /dev/sdb
+      ExecStart=/usr/sbin/mkfs.btrfs -m single -f /dev/sdb
   - name: var-lib-docker.mount
     command: start
     content: |
@@ -24,16 +34,6 @@ coreos:
         What=/dev/sda
         Where=/var/lib/docker
         Type=btrfs
-  - name: format-data.service
-    command: start
-    content: |
-      [Unit]
-      Description=Formats the data drive
-      [Service]
-      Type=oneshot
-      RemainAfterExit=yes
-      ExecStart=/usr/sbin/wipefs -f /dev/sdb
-      ExecStart=/usr/sbin/mkfs.btrfs -f /dev/sdb
   - name: data.mount
     command: start
     content: |
