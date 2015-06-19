@@ -17,8 +17,6 @@ coreos:
     listen-client-urls: http://0.0.0.0:2379
     listen-peer-urls: http://$private_ipv4:2380
   
-  fleet:
-    
   units:
   - name: etcd.service
     command: start
