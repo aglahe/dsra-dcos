@@ -2,21 +2,7 @@
 
 
 coreos:
-  etcd2:
-    -name: dsra
-  
-       # Created for cluster size 3. Generate a new token for each unique 
-       # cluster from http://discovery.etc.io/new?size=<SIZE>
-    discovery: https://discovery.etcd.io/ee4bbe64a738fc91b5bfbb93749634d3 
 
-       #Multi-region and multi-cloud deployments need to use $public_ipv4
-    advertise-client-urls: http://$public_ipv4:2379
-    initial-advertise-peer-urls: http://$public_ipv4:2380
-
-       #Listen on the official ports 
-    listen-client-urls: http://0.0.0.0:2379
-    listen-peer-urls: http://$private_ipv4:2380
-  
   units:
   - name: etcd.service
     command: start
