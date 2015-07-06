@@ -2,6 +2,12 @@
 
 
 coreos:
+  etcd2:
+    discovery: https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
+    initial-advertise-peer-urls: http://0.0.0.0:2380,
+    listen-client-urls: http://0.0.0.0:2379
+    listen-peer-urls: http://0.0.0.0:2380
+    initial-cluster-token: dsra-cluster
   units:
   - name: etcd.service
     command: start
