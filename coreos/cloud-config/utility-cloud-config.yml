@@ -1,15 +1,52 @@
 #cloud-config
 
+#
+# Work around given that $private_ipv4 isn't supported when performing bare metal installs.
+# Generates unit drop-in for etc2.service
+#
+write_files:
+  - path: /home/core/get_ip.sh
+    permissions: 755
+    owner: root:root
+    content: |
+      #!/bin/bash
+      PRIV_IP=`ifconfig eno1 | sed -n 2p | awk '{ print $2 }'`
+      TARGET_DIR=/run/systemd/system/etcd2.service.d/
+      TARGET="$TARGET_DIR/20-settings.conf"
+      DISC_URL=https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
+      HOST=`/usr/bin/hostname`
+      mkdir -p $TARGET_DIR
+
+      echo "[Service]" > $TARGET
+      echo "Environment=\"ETCD2_NAME=$HOST\"" >> $TARGET
+      echo "Environment=\"ETCD2_ADVERTISE_CLIENT_URLS=http://$PRIV_IP:2379\"" >> $TARGET
+      echo "Environment=\"ETCD2_INIITIAL_ADVERTISE_PEER_URLS=https://$PRIV_IP:2380\"" >> $TARGET
+      echo "Environment=\"ETCD2_LISTEN_CLIENT_URLS=http://$PRIV_IP:2379,http://127.0.0.1:2379\"" >> $TARGET
+      echo "Environment=\"ETCD2_LISTEN_PEERS_URLS=http://$PRIV_IP:2380\"" >> $TARGET
+      echo "Environment=\"ETCD2_INITIAL_CLUSTER=r105u03=http://10.105.0.3:2380,r105u05=http://10.105.0.5:2380,r105u07=http://10.105.0.7:2380\"" >> $TARGET
+      echo "Environment=\"ETCD2_INITIAL_CLUSTER_STATE=new\"" >> $TARGET
+      echo "Environment=\"ETCD2_INITIAL_CLUSTER_TOKEN=dsra-cluster\"" >> $TARGET
 
 coreos:
-  etcd2:
-    discovery: https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
-    initial-advertise-peer-urls: http://0.0.0.0:2380,
-    listen-client-urls: http://0.0.0.0:2379
-    listen-peer-urls: http://0.0.0.0:2380
-    initial-cluster-token: dsra-cluster
+  # etcd2:
+  #   discovery: https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
+  #   initial-advertise-peer-urls: http://$private_ipv4:2380
+  #   advertise-client-urls: http://$private_ipv4:2379,http://$private_ipv4:4001
+  #   listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+  #   listen-peer-urls: http://$private_ipv4:2380
+  #   initial-cluster-token: dsra-cluster
+  
   units:
-  - name: etcd.service
+  - name: config-etcd2.service
+    command: start
+    content: |
+      [Unit]
+      Description = Config ETCD2
+      Before = etcd2.service
+      [Service]
+      User=root
+      ExecStart=/home/core/get_ip.sh
+  - name: etcd2.service
     command: start
   - name: fleet.service
     command: start
