@@ -1,11 +1,8 @@
 #cloud-config
 
 #
-# Changes 
-# =======
-# 07/08/2014 - Work around given that $private_ipv4 isn't supported when performing bare metal installs.
-#              Generates unit drop-in for etc2.service. Generates etcd2 service settings based on machine's
-#              IP address. INITIAL_CLUSTER setting is static. Need more dynamic way to launch cluster. - MP
+# Work around given that $private_ipv4 isn't supported when performing bare metal installs.
+# Generates unit drop-in for etc2.service
 #
 write_files:
   - path: /home/core/get_ip.sh
@@ -16,20 +13,28 @@ write_files:
       PRIV_IP=`ifconfig eno1 | sed -n 2p | awk '{ print $2 }'`
       TARGET_DIR=/run/systemd/system/etcd2.service.d/
       TARGET="$TARGET_DIR/20-settings.conf"
-      # DISC_URL=https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
+      #DISC_URL=https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
       HOST=`/usr/bin/hostname`
       mkdir -p $TARGET_DIR
 
       echo "[Service]" > $TARGET
-      echo "Environment=\"ETCD2_NAME=$HOST\"" >> $TARGET
-      echo "Environment=\"ETCD2_ADVERTISE_CLIENT_URLS=http://$PRIV_IP:2379\"" >> $TARGET
-      echo "Environment=\"ETCD2_INIITIAL_ADVERTISE_PEER_URLS=https://$PRIV_IP:2380\"" >> $TARGET
-      echo "Environment=\"ETCD2_LISTEN_CLIENT_URLS=http://$PRIV_IP:2379,http://127.0.0.1:2379\"" >> $TARGET
-      echo "Environment=\"ETCD2_LISTEN_PEERS_URLS=http://$PRIV_IP:2380\"" >> $TARGET
-      echo "Environment=\"ETCD2_INITIAL_CLUSTER=r105u03=http://10.105.0.3:2380,r105u05=http://10.105.0.5:2380,r105u07=http://10.105.0.7:2380\"" >> $TARGET
-      echo "Environment=\"ETCD2_INITIAL_CLUSTER_STATE=new\"" >> $TARGET
-      echo "Environment=\"ETCD2_INITIAL_CLUSTER_TOKEN=dsra-cluster\"" >> $TARGET
+      echo "Environment=\"ETCD_NAME=$HOST\"" >> $TARGET
+      # echo "Environment=\"ETCD_DISCOVERY=$DISC_URL\"" >> $TARGET
+      echo "Environment=\"ETCD_ADVERTISE_CLIENT_URLS=http://$PRIV_IP:2379\"" >> $TARGET
+      echo "Environment=\"ETCD_INITIAL_ADVERTISE_PEER_URLS=http://$PRIV_IP:2380\"" >> $TARGET
+      echo "Environment=\"ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379\"" >> $TARGET
+      echo "Environment=\"ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380\"" >> $TARGET
+      echo "Environment=\"ETCD_INITIAL_CLUSTER=r105u03=http://10.105.0.3:2380,r105u05=http://10.105.0.5:2380,r105u07=http://10.105.0.7:2380\"" >> $TARGET
+      echo "Environment=\"ETCD_INITIAL_CLUSTER_STATE=new\"" >> $TARGET
+      # echo "Environment=\"ETCD_INITIAL_CLUSTER_TOKEN=dsra-201507081923\"" >> $TARGET
 
+      TARGET_DIR=/run/systemd/system/fleet.service.d/
+      TARGET="$TARGET_DIR/20-settings.conf"
+      mkdir -p $TARGET_DIR     
+      echo "[Service]" > $TARGET
+      echo "Environment=\"FLEET_ETC_SERVERS=http://$PRIV_IP:2379\"" >> $TARGET
+      echo "Environment=\"FLEET_PUBLIC_IP=$PRIV_IP\"" >> $TARGET
+      
 coreos:
   units:
   - name: config-etcd2.service
@@ -44,7 +49,7 @@ coreos:
   - name: etcd2.service
     command: start
   - name: fleet.service
-    command: start
+    command: start               
   # - name: format-var-lib-docker.service
   #   command: start
   #   content: |
