@@ -1,8 +1,11 @@
 #cloud-config
 
 #
-# Work around given that $private_ipv4 isn't supported when performing bare metal installs.
-# Generates unit drop-in for etc2.service
+# Changes 
+# =======
+# 07/08/2014 - Work around given that $private_ipv4 isn't supported when performing bare metal installs.
+#              Generates unit drop-in for etc2.service. Generates etcd2 service settings based on machine's
+#              IP address. INITIAL_CLUSTER setting is static. Need more dynamic way to launch cluster. - MP
 #
 write_files:
   - path: /home/core/get_ip.sh
@@ -13,7 +16,7 @@ write_files:
       PRIV_IP=`ifconfig eno1 | sed -n 2p | awk '{ print $2 }'`
       TARGET_DIR=/run/systemd/system/etcd2.service.d/
       TARGET="$TARGET_DIR/20-settings.conf"
-      DISC_URL=https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
+      # DISC_URL=https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
       HOST=`/usr/bin/hostname`
       mkdir -p $TARGET_DIR
 
@@ -28,14 +31,6 @@ write_files:
       echo "Environment=\"ETCD2_INITIAL_CLUSTER_TOKEN=dsra-cluster\"" >> $TARGET
 
 coreos:
-  # etcd2:
-  #   discovery: https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
-  #   initial-advertise-peer-urls: http://$private_ipv4:2380
-  #   advertise-client-urls: http://$private_ipv4:2379,http://$private_ipv4:4001
-  #   listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
-  #   listen-peer-urls: http://$private_ipv4:2380
-  #   initial-cluster-token: dsra-cluster
-  
   units:
   - name: config-etcd2.service
     command: start
