@@ -32,9 +32,10 @@ write_files:
       TARGET="$TARGET_DIR/20-settings.conf"
       mkdir -p $TARGET_DIR     
       echo "[Service]" > $TARGET
-      echo "Environment=\"FLEET_ETC_SERVERS=http://$PRIV_IP:2379\"" >> $TARGET
+      echo "Environment=\"FLEET_ETCD_SERVERS=http://127.0.0.1:2379\"" >> $TARGET
       echo "Environment=\"FLEET_PUBLIC_IP=$PRIV_IP\"" >> $TARGET
-      
+      echo "Environment=\"FLEET_METADATA='role=services'\"" >> $ TARGET
+    
 coreos:
   units:
   - name: config-etcd2.service
