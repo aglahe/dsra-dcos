@@ -34,9 +34,16 @@ write_files:
       echo "[Service]" > $TARGET
       echo "Environment=\"FLEET_ETCD_SERVERS=http://127.0.0.1:2379\"" >> $TARGET
       echo "Environment=\"FLEET_PUBLIC_IP=$PRIV_IP\"" >> $TARGET
-      echo "Environment=\"FLEET_METADATA='role=services'\"" >> $ TARGET
-    
+      echo "Environment=\"FLEET_METADATA=role=services\"" >> $ TARGET
+     
 coreos:
+  #flannel: 
+  #   etc_prefix: /dsra.local/network
+  locksmith: 
+      endpont: dsra.local:2379
+  #update:
+  #   reboot-strategy: etcd-lock
+  #   group: beta
   units:
   - name: config-etcd2.service
     command: start
