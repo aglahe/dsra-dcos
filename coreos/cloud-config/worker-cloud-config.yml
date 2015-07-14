@@ -10,7 +10,7 @@ coreos:
     etcd_servers: http://10.105.0.3:2379,http://10.105.0.5:2379,http://10.105.0.7:2379
     metadata: role=worker
   locksmith:
-    endpoint: :http://localhost:2379
+    endpoint: http://localhost:2379
   units:
   - name: etcd2.service
     command: start
