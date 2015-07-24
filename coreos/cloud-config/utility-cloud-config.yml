@@ -13,34 +13,29 @@ write_files:
       PRIV_IP=`ifconfig eno1 | sed -n 2p | awk '{ print $2 }'`
       TARGET_DIR=/run/systemd/system/etcd2.service.d/
       TARGET="$TARGET_DIR/20-settings.conf"
-      #DISC_URL=https://discovery.etcd.io/27e443645534ae1b3c746314c48341b6
       HOST=`/usr/bin/hostname`
       mkdir -p $TARGET_DIR
 
       echo "[Service]" > $TARGET
       echo "Environment=\"ETCD_NAME=$HOST\"" >> $TARGET
-      # echo "Environment=\"ETCD_DISCOVERY=$DISC_URL\"" >> $TARGET
       echo "Environment=\"ETCD_ADVERTISE_CLIENT_URLS=http://$PRIV_IP:2379\"" >> $TARGET
       echo "Environment=\"ETCD_INITIAL_ADVERTISE_PEER_URLS=http://$PRIV_IP:2380\"" >> $TARGET
       echo "Environment=\"ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379\"" >> $TARGET
       echo "Environment=\"ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380\"" >> $TARGET
       echo "Environment=\"ETCD_INITIAL_CLUSTER=r105u03=http://10.105.0.3:2380,r105u05=http://10.105.0.5:2380,r105u07=http://10.105.0.7:2380\"" >> $TARGET
       echo "Environment=\"ETCD_INITIAL_CLUSTER_STATE=new\"" >> $TARGET
-      # echo "Environment=\"ETCD_INITIAL_CLUSTER_TOKEN=dsra-201507081923\"" >> $TARGET
 
-      TARGET_DIR=/run/systemd/system/fleet.service.d/
+      TARGET_DIR=/run/systemd/system/fleet.service.d
       TARGET="$TARGET_DIR/20-settings.conf"
       mkdir -p $TARGET_DIR     
       echo "[Service]" > $TARGET
-      echo "Environment=\"FLEET_ETCD_SERVERS=http://127.0.0.1:2379\"" >> $TARGET
+      echo "Environment=\"FLEET_ETCD_SERVERS=http://10.105.0.3:2379,http://10.105.0.5:2379,http://10.105.0.7:2379\"" >> $TARGET
       echo "Environment=\"FLEET_PUBLIC_IP=$PRIV_IP\"" >> $TARGET
-      echo "Environment=\"FLEET_METADATA=role=services\"" >> $ TARGET
+      echo "Environment=\"FLEET_METADATA=role=service\"" >> $TARGET
      
-coreos:
-  #flannel: 
-  #   etc_prefix: /dsra.local/network
-  locksmith: 
-      endpont: dsra.local:2379
+coreos: 
+  #locksmith: 
+  #    endpont: dsra.local:2379
   #update:
   #   reboot-strategy: etcd-lock
   #   group: beta
@@ -58,6 +53,13 @@ coreos:
     command: start
   - name: fleet.service
     command: start               
+  #- name: flanneld.service
+  #  drop-ins:
+  #    - name: 50-network-config.conf
+  #      content: |
+  #        [Service]
+  #        ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
+  #  command: start
   # - name: format-var-lib-docker.service
   #   command: start
   #   content: |

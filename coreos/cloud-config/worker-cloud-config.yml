@@ -6,16 +6,29 @@ coreos:
     proxy: on
     discovery-srv: dsra.local
     listen-client-urls: http://0.0.0.0:2379
+
   fleet:
     etcd_servers: http://10.105.0.3:2379,http://10.105.0.5:2379,http://10.105.0.7:2379
     metadata: role=worker
+
   locksmith:
     endpoint: http://localhost:2379
+
   units:
   - name: etcd2.service
     command: start
+
   - name: fleet.service
     command: start
+
+  - name: flanneld.service
+    drop-ins:
+      - name: 50-network-config.conf
+        content: |
+          [Service]
+          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
+    command: start
+
   - name: var-lib-docker.mount
     command: start
     content: |
@@ -26,6 +39,7 @@ coreos:
        What=/dev/sda
        Where=/var/lib/docker
        Type=btrfs
+
   - name: data.mount
     command: start
     content: |
