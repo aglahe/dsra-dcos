@@ -1,0 +1,20 @@
+[Unit]
+Description=mesosphere-docker-mesos-slave
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull garland/%p
+ExecStart=/usr/bin/docker run -d --name=%p-%i --entrypoint="mesos-slave" -e "MESOS_MASTER=zk://10.105.0.3:2181,10.105.0.5:2181,10.105.0.7:2181/mesos" -e "MESOS_LOG_DIR=/var/log/mesos" -e "MESOS_LOGGING_LEVEL=INFO" garland/mesosphere-docker-mesos-master:latest
+
+ExecStop=/usr/bin/docker stop %p-%i
+TimeoutStartSec=900s
+
+[X-Fleet]
+Conflicts=zookeeper@*.service
+Conflicts=mesosphere-docker-mesos-master@*.service
+Conflicts=%p@*.service
+
+
