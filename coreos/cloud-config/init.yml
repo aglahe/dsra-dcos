@@ -6,6 +6,7 @@
 # Generates unit drop-in for etc2.service
 #
 coreos:
+  units:
    - name: format-var-lib-docker.service
      command: start
      content: |
