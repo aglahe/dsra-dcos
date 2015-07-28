@@ -1,0 +1,55 @@
+#cloud-config
+
+#
+# Work around given that $private_ipv4 isn't supported when performing bare metal installs.
+# Generates unit drop-in for etc2.service
+#
+coreos: 
+  - name: flanneld.service
+    drop-ins:
+      - name: 50-network-config.conf
+        content: |
+          [Service]
+          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
+    command: start
+   - name: format-var-lib-docker.service
+     command: start
+     content: |
+       [Unit]
+       Description=Formats the ephemeral drive
+       [Service]
+       Type=oneshot
+       RemainAfterExit=yes
+       ExecStart=/usr/sbin/wipefs -f /dev/sda
+       ExecStart=/usr/sbin/mkfs.btrfs -m single -f /dev/sda
+   - name: format-data.service
+     command: start
+     content: |
+       [Unit]
+       Description=Formats the data drive
+       [Service]
+       Type=oneshot
+       RemainAfterExit=yes
+       ExecStart=/usr/sbin/wipefs -f /dev/sdb
+       ExecStart=/usr/sbin/mkfs.btrfs -m single  -f /dev/sdb
+  - name: var-lib-docker.mount
+    command: start
+    content: |
+        [Unit]
+        Description=Mount ephemeral to /var/lib/docker
+        Before=docker.service
+        [Mount]
+        What=/dev/sda
+        Where=/var/lib/docker
+        Type=btrfs
+  - name: data.mount
+    command: start
+    content: |
+        [Unit]
+        Description=Mount data
+        [Mount]
+        What=/dev/sdb
+        Where=/data
+        Type=btrfs
+ssh_authorized_keys:
+ - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFDeCKt/GYFLig9AViMGsCADyXpt3F/D62m2eJPmxUs4EQAT/R3KKMb34T5JIoTfD/AMMffFO4aiRey1YP9ezkbpCBgA6PSU3DO2E75Kb9Y4P+W0iJetGv0pfr8D1nI0bc1wCF96cvODrGwzpSu2tyHeh2IGNYZc3EiExvXb3GhhZ17sXTW5RfBYqgZiV1SJBCbCajeDP4c4ZAI2mW87nJGWXocvZltSKW/GJlNSzNxz6u4mKsKl8YgF812UGDZwbJdI46vFBQ/LKVd0A3nKhh7zMdZU/kYYc1xgUJGHgXr5LM8UK7EhLeHOwLazQPw2mL3EF6kQn6g8FGmQgdeFrb
