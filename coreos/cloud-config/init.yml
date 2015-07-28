@@ -5,13 +5,6 @@
 # Generates unit drop-in for etc2.service
 #
 coreos: 
-  - name: flanneld.service
-    drop-ins:
-      - name: 50-network-config.conf
-        content: |
-          [Service]
-          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
-    command: start
    - name: format-var-lib-docker.service
      command: start
      content: |
