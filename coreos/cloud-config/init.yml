@@ -4,7 +4,7 @@
 # Work around given that $private_ipv4 isn't supported when performing bare metal installs.
 # Generates unit drop-in for etc2.service
 #
-coreos: 
+coreos:
    - name: format-var-lib-docker.service
      command: start
      content: |
@@ -25,19 +25,19 @@ coreos:
        RemainAfterExit=yes
        ExecStart=/usr/sbin/wipefs -f /dev/sdb
        ExecStart=/usr/sbin/mkfs.btrfs -m single  -f /dev/sdb
-  - name: var-lib-docker.mount
-    command: start
-    content: |
-        [Unit]
+   - name: var-lib-docker.mount
+     command: start
+     content: |
+       [Unit]
         Description=Mount ephemeral to /var/lib/docker
         Before=docker.service
         [Mount]
         What=/dev/sda
         Where=/var/lib/docker
         Type=btrfs
-  - name: data.mount
-    command: start
-    content: |
+   - name: data.mount
+     command: start
+     content: |
         [Unit]
         Description=Mount data
         [Mount]
