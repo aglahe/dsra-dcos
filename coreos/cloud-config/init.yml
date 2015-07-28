@@ -1,5 +1,6 @@
 #cloud-config
 
+
 #
 # Work around given that $private_ipv4 isn't supported when performing bare metal installs.
 # Generates unit drop-in for etc2.service
