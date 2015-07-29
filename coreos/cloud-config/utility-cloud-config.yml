@@ -20,8 +20,8 @@ write_files:
       echo "Environment=\"ETCD_NAME=$HOST\"" >> $TARGET
       echo "Environment=\"ETCD_ADVERTISE_CLIENT_URLS=http://$PRIV_IP:2379\"" >> $TARGET
       echo "Environment=\"ETCD_INITIAL_ADVERTISE_PEER_URLS=http://$PRIV_IP:2380\"" >> $TARGET
-      echo "Environment=\"ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379\"" >> $TARGET
-      echo "Environment=\"ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380\"" >> $TARGET
+      echo "Environment=\"ETCD_LISTEN_CLIENT_URLS=http://$PRIV_IP:2379,http://127.0.0.1:2379\"" >> $TARGET
+      echo "Environment=\"ETCD_LISTEN_PEER_URLS=http://$PRIV_IP:2380\"" >> $TARGET
       echo "Environment=\"ETCD_INITIAL_CLUSTER=r105u01=http://10.105.0.1:2380,r105u03=http://10.105.0.3:2380,r105u05=http://10.105.0.5:2380,r105u07=http://10.105.0.7:2380,r105u09=http://10.105.0.9:2380\"" >> $TARGET
       echo "Environment=\"ETCD_INITIAL_CLUSTER_STATE=new\"" >> $TARGET
 
