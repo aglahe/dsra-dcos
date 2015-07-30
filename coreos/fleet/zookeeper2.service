@@ -7,7 +7,7 @@ Requires=docker.service
 ExecStartPre=-/usr/bin/docker kill zookeeper2
 ExecStartPre=-/usr/bin/docker rm zookeeper2
 ExecStartPre=/usr/bin/docker pull endocode/zookeeper
-ExecStart=/usr/bin/docker run --name zookeeper2 -e JVMFLAGS='-Xmx64m -Xms64M' -e ZK_SERVERS='server.1=10.105.0.1:2888:3888,server.2=10.105.0.3:2888:3888,server.3=10.105.0.5:2888:3888,server.4=10.105.0.7:2888:3888,server.5=10.105.0.9:2888:3888' -e ZK_ID=2 --hostname 10.105.0.3 --publish 2181:2181 --publish 2888:2888 --publish 3888:3888 endocode/zookeeper
+ExecStart=/usr/bin/docker run -d --name zookeeper2 -e JVMFLAGS='-Xmx64m -Xms64M' -e ZK_SERVERS='server.1=10.105.0.1:2888:3888,server.2=10.105.0.3:2888:3888,server.3=10.105.0.5:2888:3888,server.4=10.105.0.7:2888:3888,server.5=10.105.0.9:2888:3888' -e ZK_ID=2 --hostname 10.105.0.3 --publish 2181:2181 --publish 2888:2888 --publish 3888:3888 endocode/zookeeper
 ExecStop=/usr/bin/docker stop zookeeper2
 TimeoutStartSec=900s
 
