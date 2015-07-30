@@ -1,0 +1,15 @@
+[Unit]
+Description=zookeeper1
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill zookeeper1
+ExecStartPre=-/usr/bin/docker rm zookeeper1
+ExecStartPre=/usr/bin/docker pull endocode/zookeeper
+ExecStart=/usr/bin/docker run --name zookeeper1 -e JVMFLAGS='-Xmx64m -Xms64M' -e ZK_SERVERS='server.1=10.105.0.1:2888:3888,server.2=10.105.0.3:2888:3888,server.3=10.105.0.5:2888:3888,server.4=10.105.0.7:2888:3888,server.5=10.105.0.9:2888:3888' -e ZK_ID=1 --hostname 10.105.0.1 --publish 2181:2181 --publish 2888:2888 --publish 3888:3888 endocode/zookeeper
+ExecStop=/usr/bin/docker stop zookeeper1
+TimeoutStartSec=900s
+
+[X-Fleet]
+MachineID=93e3898601f943d3bf4aa28bc6d45eb0
