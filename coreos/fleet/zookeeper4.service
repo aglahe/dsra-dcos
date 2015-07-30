@@ -7,9 +7,9 @@ Requires=docker.service
 ExecStartPre=-/usr/bin/docker kill zookeeper4
 ExecStartPre=-/usr/bin/docker rm zookeeper4
 ExecStartPre=/usr/bin/docker pull endocode/zookeeper
-ExecStart=usr/bin/docker run -d --name zookeeper4 -e JVMFLAGS='-Xmx64m -Xms64M' -e ZK_SERVERS='server.1=10.105.0.1:2888:3888,server.2=10.105.0.3:2888:3888,server.3=10.105.0.5:2888:3888,server.4=10.105.0.7:2888:3888,server.5=10.105.0.9:2888:3888' -e ZK_ID=4 --hostname 10.105.0.7 --publish 2181:2181 --publish 2888:2888 --publish 3888:3888 endocode/zookeeper
+ExecStart=/usr/bin/docker run -d --name zookeeper4 -e JVMFLAGS='-Xmx64m -Xms64M' -e ZK_SERVERS='server.1=r105u01:2888:3888 server.2=r105u03:2888:3888 server.3=r105u05:2888:3888 server.4=r105u07:2888:3888 server.5=r105u09:2888:3888' -e ZK_ID=4 --hostname r105u07 -p 2181:2181 -p 2888:2888 -p 3888:3888 endocode/zookeeper
 ExecStop=/usr/bin/docker stop zookeeper4
 TimeoutStartSec=900s
 
 [X-Fleet]
-MachineID=58bca416994947669f28ecec23844ef1
+MachineMetadata=hostname=r105u07
