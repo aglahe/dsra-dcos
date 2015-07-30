@@ -31,7 +31,7 @@ write_files:
       echo "[Service]" > $TARGET
       echo "Environment=\"FLEET_ETCD_SERVERS=http://10.105.0.1:2379,http://10.105.0.3:2379,http://10.105.0.5:2379,http://10.105.0.7:2379,http://10.105.0.9:2379\"" >> $TARGET
       echo "Environment=\"FLEET_PUBLIC_IP=$PRIV_IP\"" >> $TARGET
-      echo "Environment=\"FLEET_METADATA=role=service\"" >> $TARGET
+      echo "Environment=\"FLEET_METADATA=role=service,ip=$PRIV_IP\"" >> $TARGET
      
 coreos: 
   #locksmith: 
