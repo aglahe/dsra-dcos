@@ -107,7 +107,7 @@ write_files:
      permissions: 0644
      owner: root
      content: |
-      options bonding mode=6 primary=eno1 miimon=100
+      options bonding mode=6 primary=eno2 miimon=100
    - path: /etc/modules-load.d/bonding.conf
      permissions: 0644
      owner: root
