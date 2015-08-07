@@ -103,6 +103,12 @@ write_files:
 
       [Network]
       DHCP=true
+   - path: /etc/modules-load.d/bonding.conf
+     permissions: 0644
+     owner: root
+     content: |
+      alias bond0 bonding
+      options bonding mode=6 miimon=100
 
 ssh_authorized_keys:
     - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFDeCKt/GYFLig9AViMGsCADyXpt3F/D62m2eJPmxUs4EQAT/R3KKMb34T5JIoTfD/AMMffFO4aiRey1YP9ezkbpCBgA6PSU3DO2E75Kb9Y4P+W0iJetGv0pfr8D1nI0bc1wCF96cvODrGwzpSu2tyHeh2IGNYZc3EiExvXb3GhhZ17sXTW5RfBYqgZiV1SJBCbCajeDP4c4ZAI2mW87nJGWXocvZltSKW/GJlNSzNxz6u4mKsKl8YgF812UGDZwbJdI46vFBQ/LKVd0A3nKhh7zMdZU/kYYc1xgUJGHgXr5LM8UK7EhLeHOwLazQPw2mL3EF6kQn6g8FGmQgdeFrb
