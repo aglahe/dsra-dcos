@@ -48,9 +48,6 @@ write_files:
       [NetDev]
       Name=bond0
       Kind=bond
-
-      [Bond]
-      Mode=6
   - path: /etc/systemd/network/20-eno1.network
     permissions: 0644
     owner: root
