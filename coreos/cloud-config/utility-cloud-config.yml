@@ -105,6 +105,7 @@ coreos:
       Description = Config ETCD2
       Before = etcd2.service
       After=reset-interfaces.service
+      Requires=reset-interfaces.service
 
       [Service]
       User=root
@@ -167,6 +168,7 @@ coreos:
       Description=Setting interfaces to down and restarting networking post boot.
       After=network-online.target
       Before=config-etcd2.service
+      Requires=config-etcd2.service
 
       [Service]
       User=root
