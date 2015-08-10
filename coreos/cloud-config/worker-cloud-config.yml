@@ -44,6 +44,16 @@ coreos:
        What=/dev/sdb
        Where=/data
        Type=btrfs
+  - name: reset-interfaces.service
+    command: start
+    content: |
+     [Unit]
+      Description=Setting interfaces to down and restarting networking post boot.
+      After=network-online.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/tmp/reset-interfaces
 
 write_files:
    - path: /tmp/reset-interfaces
