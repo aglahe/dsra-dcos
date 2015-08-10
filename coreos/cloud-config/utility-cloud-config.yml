@@ -37,10 +37,11 @@ write_files:
     owner: root
     content: |
      #!/bin/bash
-     logger "Resetting network interfaces for bonding."
+     logger "Resetting network interfaces for bonding...."
      ip link set eno1 down
      ip link set eno2 down
      systemctl restart systemd-networkd
+     logger "Done reseting network, now with bonding."
   - path: /etc/systemd/network/10-eno1.network
     permissions: 0644
     owner: root
