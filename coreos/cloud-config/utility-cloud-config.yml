@@ -100,7 +100,7 @@ coreos:
      [Unit]
       Description=Setting interfaces to down and restarting networking post boot.
       Requires=config-etcd2.service
-      After=config-etcd2.service network-online.target
+      After=config-etcd2.service
 
       [Service]
       User=root
