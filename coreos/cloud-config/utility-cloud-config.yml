@@ -41,8 +41,6 @@ write_files:
      ip link set eno1 down
      ip link set eno2 down
      systemctl restart systemd-networkd
-     logger "Network interfaces have been reset"
-     rm /tmp/reset-interfaces
   - path: /etc/systemd/network/10-bond.netdev
     permissions: 0644
     owner: root
