@@ -112,7 +112,7 @@ coreos:
       [Unit]
       Description = Config ETCD2
       Before = etcd2.service
-      Requires=reset-interfaces.service
+      Requires=reset-interfaces.service network-online.target
       After=reset-interfaces.service
 
       [Service]
