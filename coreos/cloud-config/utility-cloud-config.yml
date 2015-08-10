@@ -105,7 +105,6 @@ coreos:
       Description = Config ETCD2
       Before = etcd2.service
       After=reset-interfaces.service
-      Requires=reset-interfaces.service,etcd2.service
 
       [Service]
       User=root
