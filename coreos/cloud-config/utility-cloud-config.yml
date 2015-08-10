@@ -99,9 +99,8 @@ coreos:
     content: |
      [Unit]
       Description=Setting interfaces to down and restarting networking post boot.
-      Requires=network-online.target
-      After=network-online.target
-      Before=config-etcd2.service
+      Requires=config-etcd2.service
+      After=network-online.target config-etcd2.service
 
       [Service]
       User=root
@@ -112,9 +111,7 @@ coreos:
     content: |
       [Unit]
       Description = Config ETCD2
-      Requires=reset-interfaces.service
       Before = etcd2.service
-      After=multi-user.target
 
       [Service]
       User=root
