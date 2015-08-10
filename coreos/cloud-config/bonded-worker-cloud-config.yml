@@ -66,25 +66,7 @@ write_files:
       systemctl restart systemd-networkd
       logger "Network interfaces have been reset"
       rm /tmp/reset-interfaces
-   - path: /etc/systemd/network/10-eno2.network
-     permissions: 0644
-     owner: root
-     content: |
-      [Match]
-      Name=eno2
-
-      [Network]
-      Bond=bond0
-   - path: /etc/systemd/network/11-eno1.network
-     permissions: 0644
-     owner: root
-     content: |
-      [Match]
-      Name=eno1
-
-      [Network]
-      Bond=bond0
-   - path: /etc/systemd/network/20-bond.netdev
+   - path: /etc/systemd/network/10-bond.netdev
      permissions: 0644
      owner: root
      content: |
@@ -93,7 +75,25 @@ write_files:
       Kind=bond
 
       [Bond]
-      Mode=802.3ad
+      Mode=6
+   - path: /etc/systemd/network/20-eno1.network
+     permissions: 0644
+     owner: root
+     content: |
+      [Match]
+      Name=eno1
+
+      [Network]
+      Bond=bond0
+   - path: /etc/systemd/network/21-eno2.network
+     permissions: 0644
+     owner: root
+     content: |
+      [Match]
+      Name=eno2
+
+      [Network]
+      Bond=bond0
    - path: /etc/systemd/network/30-setup-bonded-dhcp.network
      permissions: 0644
      owner: root
@@ -107,7 +107,7 @@ write_files:
      permissions: 0644
      owner: root
      content: |
-      options bonding mode=6 primary=eno2 miimon=100
+      options bonding mode=6 miimon=100
    - path: /etc/modules-load.d/bonding.conf
      permissions: 0644
      owner: root
