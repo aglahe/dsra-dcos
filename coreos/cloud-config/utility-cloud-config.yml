@@ -41,14 +41,7 @@ write_files:
      ip link set eno1 down
      ip link set eno2 down
      systemctl restart systemd-networkd
-  - path: /etc/systemd/network/10-bond.netdev
-    permissions: 0644
-    owner: root
-    content: |
-      [NetDev]
-      Name=bond0
-      Kind=bond
-  - path: /etc/systemd/network/20-eno1.network
+  - path: /etc/systemd/network/10-eno1.network
     permissions: 0644
     owner: root
     content: |
@@ -57,7 +50,7 @@ write_files:
 
       [Network]
       Bond=bond0
-  - path: /etc/systemd/network/21-eno2.network
+  - path: /etc/systemd/network/11-eno2.network
     permissions: 0644
     owner: root
     content: |
@@ -66,6 +59,13 @@ write_files:
 
       [Network]
       Bond=bond0
+  - path: /etc/systemd/network/20-bond.netdev
+    permissions: 0644
+    owner: root
+    content: |
+      [NetDev]
+      Name=bond0
+      Kind=bond
   - path: /etc/systemd/network/30-setup-bonded-dhcp.network
     permissions: 0644
     owner: root
