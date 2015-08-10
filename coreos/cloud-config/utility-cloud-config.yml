@@ -104,11 +104,12 @@ coreos:
       [Unit]
       Description = Config ETCD2
       Before = etcd2.service
-      Requires=reset-interfaces.service
       After=reset-interfaces.service
+      Requires=reset-interfaces.service,etcd2.service
 
       [Service]
       User=root
+      Type=oneshot
       ExecStart=/home/core/get_ip.sh
   - name: etcd2.service
     command: start
@@ -166,10 +167,10 @@ coreos:
      [Unit]
       Description=Setting interfaces to down and restarting networking post boot.
       After=network-online.target
-      Requires=config-etcd2.service
       Before=config-etcd2.service
 
       [Service]
+      User=root
       Type=oneshot
       ExecStart=/tmp/reset-interfaces
 
