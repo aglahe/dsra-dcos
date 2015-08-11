@@ -39,8 +39,8 @@ coreos:
        What=/dev/sdb
        Where=/data
        Type=btrfs
-#  - name: systemd-networkd.service
-#    command: stop
+  - name: systemd-networkd.service
+    command: stop
   - name: down-interfaces.service
     command: start
     content: |
@@ -80,8 +80,8 @@ coreos:
 
       [Network]
       DHCP=true
-#  - name: systemd-networkd.service
-#    command: start
+  - name: systemd-networkd.service
+    command: start
   - name: etcd2.service
     command: start
   - name: fleet.service
