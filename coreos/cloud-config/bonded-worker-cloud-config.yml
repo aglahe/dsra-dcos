@@ -43,66 +43,54 @@ coreos:
        What=/dev/sdb
        Where=/data
        Type=btrfs
-  - name: reset-interfaces.service
+  - name: systemd-networkd.service
+    command: stop
+  - name: down-interfaces.service
     command: start
     content: |
-     [Unit]
-      Description=Setting interfaces to down and restarting networking post boot.
-      After=network-online.target
-
-      [Service]
-      Type=oneshot
-      ExecStart=/tmp/reset-interfaces
-
-write_files:
-   - path: /tmp/reset-interfaces
-     permissions: 0700
-     owner: root
-     content: |
-      #!/bin/bash
-      logger "Resetting network interfaces for bonding."
-      ip link set eno1 down
-      ip link set eno2 down
-      systemctl restart systemd-networkd
-      logger "Network interfaces have been reset"
-      rm /tmp/reset-interfaces
-   - path: /etc/systemd/network/10-bond.netdev
-     permissions: 0644
-     owner: root
-     content: |
+       [Service]
+       Type=oneshot
+       ExecStart=/usr/bin/ip link set eno1 down
+       ExecStart=/usr/bin/ip addr flush dev eno1
+       ExecStart=/usr/bin/ip link set eno2 down
+       ExecStart=/usr/bin/ip addr flush dev eno2
+  - name: 10-bond.netdev
+    command: start
+    content: |
       [NetDev]
       Name=bond0
       Kind=bond
 
       [Bond]
       Mode=6
-   - path: /etc/systemd/network/20-eno1.network
-     permissions: 0644
-     owner: root
-     content: |
+  - name: 20-eno1.network
+    command: start
+    content: |
       [Match]
       Name=eno1
 
       [Network]
       Bond=bond0
-   - path: /etc/systemd/network/21-eno2.network
-     permissions: 0644
-     owner: root
-     content: |
+  - name: 21-eno2.network
+    command: start
+    content: |
       [Match]
       Name=eno2
 
       [Network]
       Bond=bond0
-   - path: /etc/systemd/network/30-setup-bonded-dhcp.network
-     permissions: 0644
-     owner: root
-     content: |
+  - name: 30-setup-bonded-dhcp.network
+    command: start
+    content: |
       [Match]
       Name=bond0
 
       [Network]
       DHCP=true
+  - name: systemd-networkd.service
+    command: start
+
+write_files:
    - path: /etc/modprobe.d/bonding.conf
      permissions: 0644
      owner: root
