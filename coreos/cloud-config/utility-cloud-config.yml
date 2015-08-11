@@ -5,25 +5,28 @@
 # Generates unit drop-in for etc2.service
 #
 write_files:
-  - path: /home/core/get_ip.sh
-    permissions: 755
+  - path: /tmp/get_ip.sh
+    permissions: 0700
     owner: root:root
     content: |
       #!/bin/bash
+      logger "Create the etcd and fleet config files"
       PRIV_IP=`ifconfig eno1 | sed -n 2p | awk '{ print $2 }'`
       TARGET_DIR=/run/systemd/system/etcd2.service.d/
       TARGET="$TARGET_DIR/20-settings.conf"
-      HOST=`/usr/bin/hostname`
+      HOST=`/usr/bin/hostname | sed -e 's/-.*//'`
       mkdir -p $TARGET_DIR
 
       echo "[Service]" > $TARGET
       echo "Environment=\"ETCD_NAME=$HOST\"" >> $TARGET
-      echo "Environment=\"ETCD_ADVERTISE_CLIENT_URLS=http://$PRIV_IP:2379\"" >> $TARGET
+      #echo "Environment=\"ETCD_DISCOVERY_SRV=dsra.local\"" >> $TARGET
       echo "Environment=\"ETCD_INITIAL_ADVERTISE_PEER_URLS=http://$PRIV_IP:2380\"" >> $TARGET
+      #echo "Environment=\"ETCD_INITIAL_CLUSTER_TOKEN=dsra-cluster\"" >> $TARGET
+      echo "Environment=\"ETCD_INITIAL_CLUSTER_STATE=new\"" >> $TARGET
+      echo "Environment=\"ETCD_INITIAL_CLUSTER=r105u01=http://10.105.0.1:2380,r105u03=http://10.105.0.3:2380,r105u05=http://10.105.0.5:2380,r105u07=http://10.105.0.7:2380,r105u09=http://10.105.0.9:2380\"" >> $TARGET
+      echo "Environment=\"ETCD_ADVERTISE_CLIENT_URLS=http://$PRIV_IP:2379\"" >> $TARGET
       echo "Environment=\"ETCD_LISTEN_CLIENT_URLS=http://$PRIV_IP:2379,http://127.0.0.1:2379\"" >> $TARGET
       echo "Environment=\"ETCD_LISTEN_PEER_URLS=http://$PRIV_IP:2380\"" >> $TARGET
-      echo "Environment=\"ETCD_INITIAL_CLUSTER=r105u01=http://10.105.0.1:2380,r105u03=http://10.105.0.3:2380,r105u05=http://10.105.0.5:2380,r105u07=http://10.105.0.7:2380,r105u09=http://10.105.0.9:2380\"" >> $TARGET
-      echo "Environment=\"ETCD_INITIAL_CLUSTER_STATE=new\"" >> $TARGET
 
       TARGET_DIR=/run/systemd/system/fleet.service.d
       TARGET="$TARGET_DIR/20-settings.conf"
@@ -32,9 +35,10 @@ write_files:
       echo "Environment=\"FLEET_ETCD_SERVERS=http://10.105.0.1:2379,http://10.105.0.3:2379,http://10.105.0.5:2379,http://10.105.0.7:2379,http://10.105.0.9:2379\"" >> $TARGET
       echo "Environment=\"FLEET_PUBLIC_IP=$PRIV_IP\"" >> $TARGET
       echo "Environment=\"FLEET_METADATA=role=service,ip=$PRIV_IP\"" >> $TARGET
+      logger "etcd and fleet config files written"
   - path: /tmp/reset-interfaces
     permissions: 0700
-    owner: root
+    owner: root:root
     content: |
      #!/bin/bash
      logger "Resetting network interfaces for bonding...."
@@ -94,29 +98,30 @@ coreos:
   #   reboot-strategy: etcd-lock
   #   group: beta
   units:
+  - name: config-etcd2.service
+    command: start
+    content: |
+      [Unit]
+      Description=Config ETCD2
+      Before=etcd2.service reset-interfaces.service
+
+      [Service]
+      User=root
+      Type=oneshot
+      ExecStart=/tmp/get_ip.sh
   - name: reset-interfaces.service
     command: start
     content: |
-     [Unit]
+      [Unit]
       Description=Setting interfaces to down and restarting networking post boot.
       Requires=config-etcd2.service
-      After=config-etcd2.service
+      Before=etcd2.service
+      After=config-etcd2.service network-online.target
 
       [Service]
       User=root
       Type=oneshot
       ExecStart=/tmp/reset-interfaces
-  - name: config-etcd2.service
-    command: start
-    content: |
-      [Unit]
-      Description = Config ETCD2
-      Before = etcd2.service
-
-      [Service]
-      User=root
-      Type=oneshot
-      ExecStart=/home/core/get_ip.sh
   - name: etcd2.service
     command: start
   - name: fleet.service
