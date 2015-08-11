@@ -47,9 +47,7 @@ coreos:
        [Service]
        Type=oneshot
        ExecStart=/usr/bin/ip link set eno1 down
-       ExecStart=/usr/bin/ip addr flush dev eno1
        ExecStart=/usr/bin/ip link set eno2 down
-       ExecStart=/usr/bin/ip addr flush dev eno2
   - name: 10-bond.netdev
     command: start
     content: |
