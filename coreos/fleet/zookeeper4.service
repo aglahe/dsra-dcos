@@ -12,4 +12,4 @@ ExecStop=/usr/bin/docker stop zookeeper4
 TimeoutStartSec=900s
 
 [X-Fleet]
-MachineMetadata=hostname=r105u07
+MachineMetadata=hostname=ip=10.105.0.7
