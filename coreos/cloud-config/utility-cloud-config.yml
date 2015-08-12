@@ -14,7 +14,7 @@ write_files:
       PRIV_IP=`ifconfig eno1 | sed -n 2p | awk '{ print $2 }'`
       TARGET_DIR=/run/systemd/system/etcd2.service.d/
       TARGET="$TARGET_DIR/20-settings.conf"
-      HOST=`/usr/bin/hostname | sed -e 's/-.*//'`
+      HOST=`/usr/bin/hostname`
       mkdir -p $TARGET_DIR
 
       echo "[Service]" > $TARGET
