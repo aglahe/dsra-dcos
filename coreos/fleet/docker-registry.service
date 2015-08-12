@@ -1,0 +1,16 @@
+[Unit]
+Description=docker-registry
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill registry
+ExecStartPre=-/usr/bin/docker rm registry
+ExecStartPre=/usr/bin/docker pull registry:2
+ExecStart=/usr/bin/docker run --net=host --name %p -p 5000:5000 registry:2
+ExecStop=/usr/bin/docker stop registry
+TimeoutStartSec=900s
+
+[X-Fleet]
+MachineOf=mesos-master@%i.service
+
