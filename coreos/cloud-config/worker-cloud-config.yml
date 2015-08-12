@@ -104,6 +104,9 @@ write_files:
 
       [Network]
       DHCP=true
+
+      [DHCP]
+      UseDomains=true
    - path: /etc/modprobe.d/bonding.conf
      permissions: 0644
      owner: root
