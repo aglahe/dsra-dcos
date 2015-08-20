@@ -1,0 +1,16 @@
+[Unit]
+Description=chronos
+After=mesos-master.service
+Requires=mesos-master.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=/usr/bin/docker pull mesosphere/%p
+ExecStart=/usr/bin/docker run --net=host --name %p -p 8081:8081 -e CHRONOS_MASTER='zk://10.105.0.1:2181,10.105.0.3:2181,10.105.0.5:2181,10.105.0.7:2181,10.105.0.9:2181/mesos' -e CHRONOS_ZK_HOSTS='10.105.0.1:2181,10.105.0.3:2181,10.105.0.5:2181,10.105.0.7:2181,10.105.0.9:2181' -e CHRONOS_CLUSTER_NAME='DSRA' mesosphere/chronos
+ExecStop=/usr/bin/docker stop %p
+TimeoutStartSec=900s
+
+[X-Fleet]
+MachineOf=mesos-master@%i.service
+

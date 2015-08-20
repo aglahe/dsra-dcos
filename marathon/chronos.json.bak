@@ -1,0 +1,13 @@
+{
+   "container": {
+      "image": "docker:///ssalazar/chronos",
+      "options":["--net=host","-p=8081:8080"]
+   },
+   "id": "chronos",
+   "instances": 1,
+   "cpus": 0.1,
+   "mem": 256,
+   "uris": [ ],
+   "ports":[8081],
+   "cmd":"bash /chronos/bin/start-chronos.bash --master zk://10.105.0.1:2181,10.105.0.3:2181,10.105.0.5:2181,10.105.0.7:2181,10.105.0.9:2181/mesos --zk_hosts 10.105.0.1:2181,10.105.0.3:2181,10.105.0.5:2181,10.105.0.7:2181,10.105.0.9:2181"
+}
