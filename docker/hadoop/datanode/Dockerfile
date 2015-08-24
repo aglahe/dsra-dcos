@@ -13,11 +13,18 @@ ENV HADOOP_CONF_DIR /usr/local/hadoop/etc/hadoop
 # download hadoop
 RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xz -C /usr/local/
 RUN cd /usr/local && ln -s ./hadoop-2.7.1 hadoop
+RUN  groupadd -r hdfs && useradd -r -g zookeeper hdfs
 
 WORKDIR /usr/local/hadoop
 
+# Copy the Site files up
+COPY core-site.xml /usr/local/hadoop/etc/hadoop/core-site.xml
+COPY hdfs-site.xml /usr/local/hadoop/etc/hadoop/hdfs-site.xml
+
 # Ports
-EXPOSE 50010 1004 50075 1006 50020
+EXPOSE 50010 1004 50075 50475 1006 50020
 
 # Location to store data
 VOLUME ["/data/hdfs/dn"]
+
+# Entry Point for our DataNode

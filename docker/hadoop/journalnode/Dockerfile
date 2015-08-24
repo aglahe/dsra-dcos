@@ -16,6 +16,10 @@ RUN cd /usr/local && ln -s ./hadoop-2.7.1 hadoop
 
 WORKDIR /usr/local/hadoop
 
+# Copy the Site files up
+COPY core-site.xml /usr/local/hadoop/etc/hadoop/core-site.xml
+COPY hdfs-site.xml /usr/local/hadoop/etc/hadoop/hdfs-site.xml
+
 # Ports
 EXPOSE 8485 8480
 
