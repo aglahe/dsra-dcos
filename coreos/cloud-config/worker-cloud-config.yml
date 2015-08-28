@@ -1,6 +1,6 @@
 #cloud-config
 write-files:
-  - path: /etc/docker/cert.d/hub.dsra.local:5000/ca.crt
+  - path: /etc/docker/certs.d/hub.dsra.local:5000/ca.crt
     permissions: 0700
     owner: root:root
     content: |

@@ -37,7 +37,7 @@ write_files:
       echo "Environment=\"FLEET_METADATA=role=service,ip=$PRIV_IP\"" >> $TARGET
       logger "etcd and fleet config files written"
 
-  - path: /etc/docker/cert.d/hub.dsra.local:5000/ca.crt
+  - path: /etc/docker/certs.d/hub.dsra.local:5000/ca.crt
     permissions: 0700
     owner: root:root
     content: |
