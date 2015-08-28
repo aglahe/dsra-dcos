@@ -14,16 +14,17 @@ RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookee
  # Configure inital zookeeper settings
  WORKDIR /usr/local/zookeeper
  COPY start.sh bin/start.sh
+ COPY zoo.cfg.template conf/zoo.cfg
 
 # Have zookeeper own everything
 RUN chown -R zookeeper:zookeeper /var/lib/zookeeper /usr/local/zookeeper-3.4.6
 
-# Zookeeper client port
-EXPOSE 2181
-# Zookeeper peer port
-EXPOSE 2888
-# Zookeeper leader (election) port
-EXPOSE 3888
+# Zookeeper client port, peer port, and leader (election) port
+EXPOSE 2181 2888 3888
+
+# Save the snapshot/log data outside of Zookepeer
+VOLUME ["/var/lib/zookeeper"]
 
 USER zookeeper
 ENTRYPOINT ["/usr/local/zookeeper/bin/start.sh"]
+CMD ["/usr/local/zookeeper/bin/zkServer.sh", "start-foreground"]

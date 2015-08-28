@@ -5,15 +5,6 @@ if [[ -z "${ZK_ID}" || -z "${ZK_SERVERS}" ]]; then
 	exit 1
 fi
 
-# Setup defaults
-echo "maxClientCnxns=50" >> /usr/local/zookeeper/conf/zoo.cfg
-echo "tickTime=2000"  >> /usr/local/zookeeper/conf/zoo.cfg
-echo "initLimit=10"  >> /usr/local/zookeeper/conf/zoo.cfg
-echo "syncLimit=5"  >> /usr/local/zookeeper/conf/zoo.cfg
-echo "clientPort=2181"   >> /usr/local/zookeeper/conf/zoo.cfg
-echo "dataDir=/var/lib/zookeeper"  >> /usr/local/zookeeper/conf/zoo.cfg
-echo "dataLogDir=/var/lib/zookeeper"  >> /usr/local/zookeeper/conf/zoo.cfg
-
 # Store the id
 echo $ZK_ID > /var/lib/zookeeper/myid
 
@@ -36,5 +27,4 @@ if [ ! -z "$ZK_SERVERS" ]; then
   fi
 fi
 
-#Start zookeeper
-/usr/local/zookeeper/bin/zkServer.sh start-foreground
+eval $*
