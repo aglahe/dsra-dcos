@@ -2,7 +2,7 @@
 write-files:
   - path: /etc/docker/certs.d/hub.dsra.local:5000/ca.crt
     permissions: 0700
-    owner: root:root
+    owner: root
     content: |
        -----BEGIN CERTIFICATE-----
        MIIDdTCCAl2gAwIBAgIJAK0Y/ATHLBNyMA0GCSqGSIb3DQEBCwUAMFExCzAJBgNV
@@ -25,30 +25,43 @@ write-files:
        g1bwK8+oC+FGc5Wf74rDU+VEvfdY+Kd5ezlYnE6/sLEBt+i0WM4EdsjoGJtaEvvT
        t+/Cha7Fv0OpCUHLPI0ScF0YWbU4nF2LSw==
        -----END CERTIFICATE-----
+
+   - path: /tmp/get-docker-registry-login.sh
+     permissions: 0644
+     owner: root
+     content: |
+       cd /etc
+       wget http://10.105.255.249:8080/files/dsra/docker.tar.gz
+
 coreos:
   etcd2:
     proxy: on
     discovery-srv: dsra.local
     listen-client-urls: http://0.0.0.0:2379
+
   fleet:
     etcd_servers: http://10.105.0.1:2379,http://10.105.0.3:2379,http://10.105.0.5:2379,http://10.105.0.7:2379,http://10.105.0.9:2379
     metadata: role=worker
 
-  #locksmith:
-  #  endpoint: http://localhost:2379
-
   units:
   - name: etcd2.service
     command: start
+
   - name: fleet.service
     command: start
-  #- name: flanneld.service
-  #  drop-ins:
-  #    - name: 50-network-config.conf
-  #      content: |
-  #        [Service]
-  #        ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
-  #  command: start
+
+  - name: setup-docker-registry-login.service
+    command: start
+    content: |
+      [Unit]
+      Description=Setup Docker Registry Login for Marathon
+      Before=docker.service
+   
+      [Service]
+      User=root
+      Type=oneshot
+      ExecStart=/tmp/get-docker-registry-login.sh
+
   - name: var-lib-docker.mount
     command: start
     content: |
@@ -59,6 +72,7 @@ coreos:
        What=/dev/sda
        Where=/var/lib/docker
        Type=btrfs
+
   - name: data.mount
     command: start
     content: |
@@ -68,6 +82,7 @@ coreos:
        What=/dev/sdb
        Where=/data
        Type=btrfs
+
   - name: reset-interfaces.service
     command: start
     content: |
@@ -141,6 +156,14 @@ write_files:
      owner: root
      content: |
       bonding
+   - path: /tmp/get-docker-registry-login.sh
+     permissions: 0644
+     owner: root
+     content: |
+       cd /etc
+       wget http://10.105.255.249:8080/files/dsra/docker.tar.gz
+
+
 
 ssh_authorized_keys:
     - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFDeCKt/GYFLig9AViMGsCADyXpt3F/D62m2eJPmxUs4EQAT/R3KKMb34T5JIoTfD/AMMffFO4aiRey1YP9ezkbpCBgA6PSU3DO2E75Kb9Y4P+W0iJetGv0pfr8D1nI0bc1wCF96cvODrGwzpSu2tyHeh2IGNYZc3EiExvXb3GhhZ17sXTW5RfBYqgZiV1SJBCbCajeDP4c4ZAI2mW87nJGWXocvZltSKW/GJlNSzNxz6u4mKsKl8YgF812UGDZwbJdI46vFBQ/LKVd0A3nKhh7zMdZU/kYYc1xgUJGHgXr5LM8UK7EhLeHOwLazQPw2mL3EF6kQn6g8FGmQgdeFrb
