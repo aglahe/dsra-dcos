@@ -1,0 +1,15 @@
+{
+  "id": "/dsra/confluence",
+  "cpus": 1,
+  "mem": 2048,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cptactionhank/atlassian-confluence:latest",
+      "network": "BRIDGE",
+      "portMappings" : [
+        { "containerPort": 8090, "hostPort": 8090, "protocol": "tcp" }
+      ]
+    }
+  }
+}
