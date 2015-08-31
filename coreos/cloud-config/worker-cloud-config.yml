@@ -30,6 +30,7 @@ write-files:
      permissions: 0644
      owner: root
      content: |
+       #!/bin/bash
        cd /etc
        wget http://10.105.255.249:8080/files/dsra/docker.tar.gz
 
