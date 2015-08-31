@@ -1,22 +1,20 @@
 #Zookeeper
-sudo docker run -d --name zk01 --link zk02 --link zk03 --link zk04 --link zk05 --env ZK_ID=1 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk01 zookeeper:1.0
-sudo docker run -d --name zk02 --link zk01 --link zk03 --link zk04 --link zk05 --env ZK_ID=2 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk02 zookeeper:1.0
-sudo docker run -d --name zk03 --link zk01 --link zk02 --link zk04 --link zk05 --env ZK_ID=3 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk03 zookeeper:1.0
-sudo docker run -d --name zk04 --link zk01 --link zk02 --link zk03 --link zk05 --env ZK_ID=4 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk04 zookeeper:1.0
-sudo docker run -d --name zk05 --link zk01 --link zk02 --link zk03 --link zk04 --env ZK_ID=5 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk05 zookeeper:1.0
-
-sudo docker run -d --name zk02 --env ZK_ID=2 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk02 zookeeper:1.0
+sudo docker run -it --name zk01 --env ZK_ID=1 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk01 zookeeper:1.0
+sudo docker run -it --name zk02 --env ZK_ID=2 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk02 zookeeper:1.0
+sudo docker run -it --name zk03 --env ZK_ID=3 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk03 zookeeper:1.0
+sudo docker run -it --name zk04 --env ZK_ID=4 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk04 zookeeper:1.0
+sudo docker run -it --name zk05 --env ZK_ID=5 --env ZK_SERVERS=zk01:2888:3888,zk02:2888:3888,zk03:2888:3888,zk04:2888:3888,zk05:2888:3888 --hostname=zk05 zookeeper:1.0
 
 # JournalNodes
-sudo docker run -it --name jn01 --env-file hdfs-envs --hostname=jn01 hdfs:1.0 /bin/bash
-sudo docker run -it --name jn02 --env-file hdfs-envs --hostname=jn02 hdfs:1.0 /bin/bash
-sudo docker run -it --name jn03 --env-file hdfs-envs --hostname=jn03 hdfs:1.0 /bin/bash
-sudo docker run -it --name jn04 --env-file hdfs-envs --hostname=jn04 hdfs:1.0 /bin/bash
-sudo docker run -it --name jn05 --env-file hdfs-envs --hostname=jn05 hdfs:1.0 /bin/bash
+sudo docker run -it --name jn01 --env-file hdfs-envs --hostname=jn01 hdfs:1.0 journalnode
+sudo docker run -it --name jn02 --env-file hdfs-envs --hostname=jn02 hdfs:1.0 journalnode
+sudo docker run -it --name jn03 --env-file hdfs-envs --hostname=jn03 hdfs:1.0 journalnode
+sudo docker run -it --name jn04 --env-file hdfs-envs --hostname=jn04 hdfs:1.0 journalnode
+sudo docker run -it --name jn05 --env-file hdfs-envs --hostname=jn05 hdfs:1.0 journalnode
 
 # NameNodes
-sudo docker run -it --name nn01 --env-file hdfs-envs --hostname=nn01 hdfs:1.0 /bin/bash
-sudo docker run -it --name nn02 --env-file hdfs-envs --hostname=nn02 hdfs:1.0 /bin/bash
+sudo docker run -it --name nn01 --env-file hdfs-envs --hostname=nn01 hdfs:1.0 namenode
+sudo docker run -it --name nn02 --env-file hdfs-envs --hostname=nn02 hdfs:1.0 namenode
 
 # DataNodes
-sudo docker run -it --name dn01 --env-file hdfs-envs --hostname=dn01 hdfs:1.0 /bin/bash
+sudo docker run -it --name dn01 --env-file hdfs-envs --hostname=dn01 hdfs:1.0 datanode
