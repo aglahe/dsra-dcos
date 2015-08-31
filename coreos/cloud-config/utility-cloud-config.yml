@@ -64,7 +64,7 @@ write_files:
        -----END CERTIFICATE-----
 
   - path: /tmp/get-docker-registry-login.sh
-    permissions: 0644
+    permissions: 0700
     owner: root:root
     content: |
       #!/bin/bash
