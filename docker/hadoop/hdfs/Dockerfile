@@ -22,7 +22,9 @@ RUN wget -q -O - http://apache.mirrors.pair.com/hadoop/common/hadoop-2.7.1/hadoo
 WORKDIR /usr/local/hadoop
 COPY core-site.xml.template etc/hadoop/core-site.xml.template
 COPY hdfs-site.xml.template etc/hadoop/hdfs-site.xml.template
-COPY start.sh bin/start.sh
+
+# Copy the bootstrap shell
+COPY bootstrap.sh /bin/start.sh
 
 # Have HDFS own everything
 RUN chown -R hdfs:hdfs /data/hdfs /usr/local/hadoop-2.7.1
@@ -37,6 +39,4 @@ VOLUME ["/data/hdfs/dn", "/data/hdfs/journal", "/data/hdfs/nn"]
 
 # Entry Point for our DataNode
 USER hdfs
-ENTRYPOINT ["/usr/local/hadoop/bin/start.sh"]
-#ENTRYPOINT ["/usr/local/hadoop/bin/start.sh", "/usr/local/hadoop/bin/hadoop-daemon.sh", "start"]
-#CMD ["/usr/local/hadoop/bin/hadoop-daemon.sh", "start", "datanode"]
+CMD ["/bin/bootstrap.sh" "datanode"]
