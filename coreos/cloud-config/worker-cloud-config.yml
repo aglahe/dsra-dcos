@@ -57,7 +57,7 @@ coreos:
       [Unit]
       Description=Setup Docker Registry Login for Marathon
       Before=docker.service
-   
+
       [Service]
       User=root
       Type=oneshot
@@ -74,14 +74,14 @@ coreos:
        Where=/var/lib/docker
        Type=btrfs
 
-  - name: data.mount
+  - name: var-lib-docker-volumes.mount
     command: start
     content: |
        [Unit]
-       Description=Mount data
+       Description=Mount Docker Volumes
        [Mount]
        What=/dev/sdb
-       Where=/data
+       Where=/var/lib/docker/volumes
        Type=btrfs
 
   - name: reset-interfaces.service
