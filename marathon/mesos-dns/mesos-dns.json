@@ -7,12 +7,12 @@
   "container" : {
     "type": "DOCKER",
     "docker": {
-      "image": "hub.dsra.local:5000/dsra/mesos-dns",
+      "image": "hub.dsra.local:5000/dsra/mesos-dns:1.0.1",
       "network": "BRIDGE",
       "portMappings" : [
         {
           "containerPort": 53,
-          "hostPort": 0,
+          "hostPort": 53,
           "protocol": "tcp"
         }
       ]
