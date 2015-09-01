@@ -134,11 +134,6 @@ write_files:
       bonding
 
 coreos:
-  #locksmith:
-  #    endpont: dsra.local:2379
-  #update:
-  #   reboot-strategy: etcd-lock
-  #   group: beta
   units:
   - name: config-etcd2.service
     command: start
@@ -181,33 +176,6 @@ coreos:
     command: start
   - name: fleet.service
     command: start
-  #- name: flanneld.service
-  #  drop-ins:
-  #    - name: 50-network-config.conf
-  #      content: |
-  #        [Service]
-  #        ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
-  #  command: start
-  # - name: format-var-lib-docker.service
-  #   command: start
-  #   content: |
-  #     [Unit]
-  #     Description=Formats the ephemeral drive
-  #     [Service]
-  #     Type=oneshot
-  #     RemainAfterExit=yes
-  #     ExecStart=/usr/sbin/wipefs -f /dev/sda
-  #     ExecStart=/usr/sbin/mkfs.btrfs -m single -f /dev/sda
-  # - name: format-data.service
-  #   command: start
-  #   content: |
-  #     [Unit]
-  #     Description=Formats the data drive
-  #     [Service]
-  #     Type=oneshot
-  #     RemainAfterExit=yes
-  #     ExecStart=/usr/sbin/wipefs -f /dev/sdb
-  #     ExecStart=/usr/sbin/mkfs.btrfs -m single  -f /dev/sdb
   - name: var-lib-docker.mount
     command: start
     content: |
