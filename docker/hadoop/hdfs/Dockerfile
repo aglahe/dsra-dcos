@@ -40,4 +40,4 @@ VOLUME ["/data/hdfs/dn", "/data/hdfs/journal", "/data/hdfs/nn"]
 # Entry Point for our
 USER hdfs
 ENTRYPOINT ["/bin/bootstrap.sh"]
-CMD ["datanode"]
+CMD ["bash"]
