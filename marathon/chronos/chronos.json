@@ -1,12 +1,11 @@
 {
    "container": {
-      "type":"docker",
+      "type":"DOCKER",
       "docker":{
          "image": "ssalazar/chronos",
-         "network": "BRIDGGE",
-         "options":["--net=host","-p=8081:8080"],
+         "network": "BRIDGE",
          "portMappings" : [
-            {"containerPort": 8081, "host
+            {"containerPort": 8081, "hostPort": 8080}
          ]
       }
    },
