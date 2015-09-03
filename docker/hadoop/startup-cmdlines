@@ -23,7 +23,7 @@ sudo docker run -it --name dn01 --hostname=dn01 --env-file hdfs-envs hdfs:latest
 sudo docker run -d --name zk01 --hostname=zk01 --env ZK_ID=1  --env ZK_SERVERS=zk01:2888:3888  zookeeper:1.0
 sudo docker run -it --name jn01 --hostname=jn01 --env-file hdfs-envs hdfs:latest journalnode
 sudo docker run -it --name nn01 --hostname=nn01 --env-file hdfs-envs --link zk01 --link jn01  hdfs:latest active
-sudo docker run -it --name nn02 --hostname=nn02 --env-file hdfs-envs --link zk01 --link jn01  hdfs:latest standby
+sudo docker run -it --name nn02 --hostname=nn02 --env-file hdfs-envs --link zk01 --link jn01  --link nn01 hdfs:latest standby
 sudo docker run -it --name dn01 --hostname=dn01 --env-file hdfs-envs --link nn01 --link nn02  hdfs:latest datanode
 
 
