@@ -24,7 +24,7 @@ sudo docker run -d --name zk01 --hostname=zk01 --env ZK_ID=1  --env ZK_SERVERS=z
 sudo docker run -d --name jn01 --hostname=jn01 --env-file hdfs-envs hdfs:latest /bin/bootstrap.sh journalnode
 sudo docker run -it --name nn01 --hostname=nn01 --env-file hdfs-envs --link zk01 --link jn01  hdfs:latest /bin/bootstrap.sh format namenode
 sudo docker run -it --name nn02 --hostname=nn02 --env-file hdfs-envs --link zk01 --link jn01  hdfs:latest /bin/bootstrap.sh bootstrap namenode
-sudo docker run -it --name dn01 --hostname=dn01 --env-file hdfs-envs --link nn01 --link nn02  hdfs:latest /bin/bootstrap.sh datanode
+sudo docker run -it --name dn01 --hostname=dn01 --env-file hdfs-envs --link nn01 --link nn02  --link jn01  hdfs:latest /bin/bootstrap.sh datanode
 
 
 JN_IPS=jn01:8485,jn02:8485,jn03:8485,jn04:8485,jn05:8485

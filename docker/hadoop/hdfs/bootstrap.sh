@@ -19,7 +19,7 @@ if [[ $# -gt 1 ]]; then
 elif [[ $# -eq 1 ]]; then
   service=$1
 else
-  echo $"Usage: format|bootstrap with namenode or journalnode|namenode|datanode"
+  echo $"Usage: {bootstrap namenode|namenode|journalnode||datanode}"
   service=bash
 fi
 
@@ -37,31 +37,26 @@ sed "s/CLUSTER_NAME/$CLUSTER_NAME/" /usr/local/hadoop/etc/hadoop/hdfs-site.xml.t
 # Replace all the variables in core-site.xml
 sed "s/CLUSTER_NAME/$CLUSTER_NAME/" /usr/local/hadoop/etc/hadoop/core-site.xml.template > /usr/local/hadoop/etc/hadoop/core-site.xml
 
-# If there is a format action
-if [[ $action = "format" ]]; then
-  read -p "Are you sure to format this hdfs volume? " -n 1 -r
-  echo
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
+# If we are staring a namenode, lets see if we need to format it for the 1st time
+if [[ $service = "namenode" ]]; then
+  if [[ ! -a /data/hdfs/nn/current/VERSION ]]; then
+    echo "Format Namenode.."
     $HADOOP_PREFIX/bin/hdfs namenode -format
 
     echo "Format Zookeeper for Fast failover.."
     $HADOOP_PREFIX/bin/hdfs zkfc -formatZK
-
-    exit;
   fi
-  exit;
 fi
 
-# If there is a bootstrap action
+# If there is an action, we are bootstrapping
 if [[ $action = "bootstrap" ]]; then
-  read -p "Are you sure to bootstrap this hdfs namenode? " -n 1 -r
-  echo
-  if [[ $REPLY =~ ^[Yy]$ ]]
-  then
+  # If we are bootstraping a namenode, lets see if we need to first..
+  if [[ ! -a /data/hdfs/nn/current/VERSION ]]; then
+    echo "Bootstrap Namenode.."
     $HADOOP_PREFIX/bin/hdfs namenode -bootstrapStandby
-    exit;
   fi
-  exit;
+else
+  echo $"Usage: {bootstrap namenode|namenode|journalnode||datanode}"
 fi
 
 # Run a journalnode, datanode or namenode
@@ -72,4 +67,6 @@ if [[ $service != "bash" ]]; then
   if [[ $service = "namenode" ]]; then
     $HADOOP_PREFIX/bin/hdfs start zkfc
   fi
+else
+  /bin/bash
 fi

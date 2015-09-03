@@ -24,7 +24,7 @@ COPY core-site.xml.template etc/hadoop/core-site.xml.template
 COPY hdfs-site.xml.template etc/hadoop/hdfs-site.xml.template
 
 # Copy the bootstrap shell
-COPY bootstrap.sh /bin/start.sh
+COPY bootstrap.sh /bin/bootstrap.sh
 
 # Have HDFS own everything
 RUN chown -R hdfs:hdfs /data/hdfs /usr/local/hadoop-2.7.1
@@ -37,6 +37,7 @@ EXPOSE 50010 1004 50075 50475 1006 50020
 # Location to store data
 VOLUME ["/data/hdfs/dn", "/data/hdfs/journal", "/data/hdfs/nn"]
 
-# Entry Point for our DataNode
+# Entry Point for our
 USER hdfs
-CMD ["/bin/bootstrap.sh" "datanode"]
+ENTRYPOINT ["/bin/bootstrap.sh"]
+CMD ["datanode"]
