@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -d -t -i --net=host dsra/mesos-dns /mesos-dns
+docker run -d -t -i --restart=always --net=host dsra/mesos-dns /mesos-dns
