@@ -19,12 +19,13 @@ JNODES=$(echo $JN_IPS | tr "," ";")
 sed "s/CLUSTER_NAME/$CLUSTER_NAME/" /usr/local/hadoop/etc/hadoop/hdfs-site.xml.template \
 | sed "s/NNODE1_IP/$NNODE1_IP/" \
 | sed "s/NNODE2_IP/$NNODE2_IP/" \
-| sed "s/ZK_IPS/$ZK_IPS/" \
 | sed "s/JNODES/$JNODES/" \
 > /usr/local/hadoop/etc/hadoop/hdfs-site.xml
 
 # Replace all the variables in core-site.xml
-sed "s/CLUSTER_NAME/$CLUSTER_NAME/" /usr/local/hadoop/etc/hadoop/core-site.xml.template > /usr/local/hadoop/etc/hadoop/core-site.xml
+sed "s/CLUSTER_NAME/$CLUSTER_NAME/" /usr/local/hadoop/etc/hadoop/core-site.xml.template \
+| sed "s/ZK_IPS/$ZK_IPS/" \
+> /usr/local/hadoop/etc/hadoop/core-site.xml
 
 # Read the 1st arg, and based upon one of the five: format or bootstrap or start the particular service
 # NN and ZKFC stick together

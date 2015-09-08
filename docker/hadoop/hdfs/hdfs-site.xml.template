@@ -27,7 +27,7 @@
   </property>
   <property>
     <name>dfs.namenode.name.dir</name>
-    <value>/data/hdfs/nn</value>
+    <value>file:///data/hdfs/nn</value>
     <description>Path on the local filesystem where the NameNode stores the namespace and transaction logs persistently.</description>
   </property>
 
@@ -45,7 +45,7 @@
   <!-- Data Nodes -->
   <property>
     <name>dfs.datanode.data.dir</name>
-    <value>/data/hdfs/dn</value>
+    <value>file:///data/hdfs/dn</value>
     <description>Comma separated list of paths on the local filesystem of a DataNode where it should store its blocks.</description>
   </property>
   <!-- Data Nodes -->
@@ -55,15 +55,11 @@
     <name>dfs.ha.automatic-failover.enabled</name>
     <value>true</value>
   </property>
-  <property>
-    <name>ha.zookeeper.quorum</name>
-    <value>ZK_IPS</value>
-  </property>
   <!-- Zookeeper failover -->
 
   <!-- Manual Failover -->
   <property>
-    <name>dfs.client.failover.proxy.provider.memex</name>
+    <name>dfs.client.failover.proxy.provider.CLUSTER_NAME</name>
     <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
   </property>
   <property>
