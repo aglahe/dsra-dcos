@@ -1,4 +1,4 @@
-USE dockerfile/haproxy:latest
+FROM haproxy:1.5
 MAINTAINER Matt Parker <matthew.parker@l3-com.com>
 
-ADD dsra.haproxy.cfg /etc/haproxy/haproxy.cfg
+COPY dsra.haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg 
