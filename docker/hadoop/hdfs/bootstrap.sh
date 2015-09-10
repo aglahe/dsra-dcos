@@ -17,6 +17,7 @@ JNODES=$(echo $JN_IPS | tr "," ";")
 
 # Replace all the variables in hdfs-site.xml
 sed "s/CLUSTER_NAME/$CLUSTER_NAME/" /usr/local/hadoop/etc/hadoop/hdfs-site.xml.template \
+| sed "s/NNODE_ID/$NNODE_ID/" \
 | sed "s/NNODE1_IP/$NNODE1_IP/" \
 | sed "s/NNODE2_IP/$NNODE2_IP/" \
 | sed "s/JNODES/$JNODES/" \

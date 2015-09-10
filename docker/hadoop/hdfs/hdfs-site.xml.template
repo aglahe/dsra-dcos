@@ -8,6 +8,10 @@
     <name>dfs.ha.namenodes.CLUSTER_NAME</name>
     <value>nn1,nn2</value>
   </property>
+  <property>
+    <name>dfs.ha.namenode.id</name>
+    <value>NNODE_ID</value>
+  </property>
 
   <property>
     <name>dfs.namenode.rpc-address.CLUSTER_NAME.nn1</name>
