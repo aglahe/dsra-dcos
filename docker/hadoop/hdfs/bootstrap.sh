@@ -39,7 +39,7 @@ case "$1" in
       echo "Format Zookeeper for Fast failover.."
       $HADOOP_PREFIX/bin/hdfs zkfc -formatZK
     fi
-    $HADOOP_PREFIX/bin/hdfs namenode
+    $HADOOP_PREFIX/sbin/hadoop-daemon.sh start namenode
     $HADOOP_PREFIX/bin/hdfs zkfc
     ;;
   standby)
@@ -47,10 +47,12 @@ case "$1" in
       echo "Bootstrap Standby Namenode.."
       $HADOOP_PREFIX/bin/hdfs namenode -bootstrapStandby
     fi
-
-    $HADOOP_PREFIX/bin/hdfs namenode
+    $HADOOP_PREFIX/sbin/hadoop-daemon.sh start namenode
     $HADOOP_PREFIX/bin/hdfs zkfc
     ;;
+  zkfc)
+      $HADOOP_PREFIX/bin/hdfs zkfc
+      ;;
   journalnode)
     $HADOOP_PREFIX/bin/hdfs journalnode
     ;;
@@ -61,6 +63,6 @@ case "$1" in
     /bin/bash
     ;;
   *)
-    echo $"Usage: {active|standby|journalnode|datanode|bash}"
+    echo $"Usage: {active|standby|zkfc|journalnode|datanode|bash}"
     eval $*
 esac

@@ -22,6 +22,14 @@
     <value>NNODE2_IP:8020</value>
   </property>
   <property>
+    <name>dfs.namenode.servicerpc-address.CLUSTER_NAME.nn1</name>
+    <value>NNODE1_IP:8022</value>
+  </property>
+  <property>
+    <name>dfs.namenode.servicerpc-address.CLUSTER_NAME.nn2</name>
+    <value>NNODE2_IP:8022</value>
+  </property>
+  <property>
     <name>dfs.namenode.http-address.CLUSTER_NAME.nn1</name>
     <value>NNODE1_IP:50070</value>
   </property>
