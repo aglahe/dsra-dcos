@@ -102,34 +102,11 @@
     <value>true</value>
   </property>
 
-<!-- Short-Circuit local reads
-  <property>
-    <name>dfs.client.read.shortcircuit</name>
-    <value>true</value>
-  </property>
-  <property>
-    <name>dfs.client.read.shortcircuit.streams.cache.size</name>
-    <value>1000</value>
-  </property>
-  <property>
-    <name>dfs.client.read.shortcircuit.streams.cache.expiry.ms</name>
-    <value>10000</value>
-  </property>
-  <property>
-    <name>dfs.client.file-block-storage-locations.timeout.millis</name>
-    <value>10000</value>
-  </property>
-  <property>
-    <name>dfs.domain.socket.path</name>
-    <value>/var/run/hadoop-hdfs/dn._PORT</value>
-  </property>
-Short-Circuit local reads -->
-
-  <!-- Block location tracking -->
+<!-- Block location tracking -->
   <property>
     <name>dfs.datanode.hdfs-blocks-metadata.enabled</name>
     <value>true</value>
   </property>
-  <!-- Block location tracking -->
+<!-- Block location tracking -->
 
 </configuration>
