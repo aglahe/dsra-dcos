@@ -31,8 +31,8 @@ RUN chown -R hdfs:hdfs /data/hdfs /usr/local/hadoop-2.7.1
 
 # Ports
 EXPOSE 8485 8480
-EXPOSE 8020 50070 50470 50090 50495
-EXPOSE 50010 1004 50075 50475 1006 50020
+EXPOSE 8020 8022 50070 50470 50090 50495
+EXPOSE 1006 1004 50010 50020 50075 50475
 
 # Location to store data
 VOLUME ["/data/hdfs/dn", "/data/hdfs/journal", "/data/hdfs/nn"]
