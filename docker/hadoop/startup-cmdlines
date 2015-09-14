@@ -19,20 +19,20 @@ sudo docker run -it --name nn02 --hostname=nn02 --env-file hdfs-envs hdfs:latest
 # DataNodes
 sudo docker run -it --name dn01 --hostname=dn01 --env-file hdfs-envs hdfs:latest /bin/bootstrap.sh datanode
 
-#testing on a single machine
-sudo docker run -d --name zk01 --hostname zk01 --add-host zk01:192.168.33.10 --add-host jn01:192.168.33.10 --add-host nn01:192.168.33.11 --add-host nn02:192.168.33.12 --env ZK_ID=1 --env ZK_SERVERS=zk01:2888:3888 -p 2181:2181 -p 2888:2888 -p 3888:3888 zookeeper:1.0
-sudo docker run -it --name jn01 --hostname jn01 --add-host zk01:192.168.33.10 --add-host jn01:192.168.33.10 --add-host nn01:192.168.33.11 --add-host nn02:192.168.33.12 --env-file hdfs-envs -p 8485:8485 -p 8480:8480 hdfs:latest journalnode
+#testing on a single machine bridge mode
+sudo docker run -d --name zk01 --env ZK_ID=1 --env ZK_SERVERS=r1:2888:3888 -p 2181:2181 -p 2888:2888 -p 3888:3888 zookeeper
+sudo docker run -d --name jn01 --add-host r1:192.168.33.10 --add-host r2:192.168.33.11 --add-host r3:192.168.33.12 --env-file hdfs-envs -p 8022:8022 -p 8485:8485 -p 8480:8480 hdfs journalnode
+sudo docker run -it --name nn01 --hostname nn01 --add-host nn01:192.168.33.11 --add-host nn02:192.168.33.12 --add-host r1:192.168.33.10 --env-file hdfs-envs --env NNODE_ID=nn1 -p 8020:8020 -p 8022:8022 -p 50070:50070 -p 50470:50470 -p 8019:8019 hdfs active
+sudo docker run -it --name nn02 --hostname nn02 --add-host nn01:192.168.33.11 --add-host nn02:192.168.33.12 --add-host r1:192.168.33.10 --env-file hdfs-envs --env NNODE_ID=nn2 -p 8020:8020 -p 8022:8022 -p 50070:50070 -p 50470:50470 -p 8019:8019 hdfs standby
+sudo docker run -it --name dn01 --add-host r2:192.168.33.11 --add-host r3:192.168.33.12 --add-host r1:192.168.33.10 --env-file hdfs-envs -p 1004:1004 -p 1006:1006 -p 8022:8022 -p 50010:50010 -p 50020:50020 -p 50075:50075 hdfs datanode
 
-sudo docker run -it --name nn01 --env-file hdfs-envs -p 8020:8020 -p 50070:50070 -p 50470:50470 -p 8019:8019 hdfs:latest active
-sudo docker run -it --name nn02 --env-file hdfs-envs -p 8020:8020 -p 50070:50070 -p 50470:50470 -p 8019:8019 hdfs:latest standby
+# testing on a single machine, using HOST route
+sudo docker run -d --name zk01 --env ZK_ID=1 --env ZK_SERVERS=r1:2888:3888 --net=host zookeeper
+sudo docker run -d --name jn01 --net=host --env-file hdfs-envs hdfs journalnode
+sudo docker run -it --name nn01 --net=host --env-file hdfs-envs --env NNODE_ID=nn1 hdfs active
+sudo docker run -it --name nn02 --net=host --env-file hdfs-envs --env NNODE_ID=nn2 hdfs standby
+sudo docker run -it --name dn01 --net=host --env-file hdfs-envs hdfs datanode
 
-sudo docker run -it --name dn01 --hostname dn01 --add-host zk01:192.168.33.10 --add-host jn01:192.168.33.10 --add-host nn01:192.168.33.11 --add-host nn02:192.168.33.12  --env-file hdfs-envs -p 1004:1004 -p 1006:1006 -p 50010:50010 -p 50020:50020 -p 50075:50075 hdfs:latest datanode
-
-sudo docker run -it --name nn01 --hostname nn01 --add-host zk01:192.168.33.10 --add-host jn01:192.168.33.10 --add-host nn01:192.168.33.11 --add-host nn02:192.168.33.12 --env-file hdfs-envs -p 8020:8020 -p 50070:50070 -p 50470:50470 -p 8019:8019 hdfs:latest bash
-sudo docker run -it --name nn02 --hostname nn02 --add-host zk01:192.168.33.10 --add-host jn01:192.168.33.10 --add-host nn01:192.168.33.11 --add-host nn02:192.168.33.12 --env-file hdfs-envs -p 8020:8020 -p 50070:50070 -p 50470:50470 -p 8019:8019 hdfs:latest bash
-
-sudo docker run -it --name nn01 --hostname nn01 --add-host r1:192.168.33.10 --add-host r2:192.168.33.11 --add-host r3:192.168.33.12 --env-file hdfs-envs -p 8020:8020 -p 50070:50070 -p 50470:50470 -p 8019:8019 hdfs:latest active
-
-
+# extras for testing
 JN_IPS=jn01:8485,jn02:8485,jn03:8485,jn04:8485,jn05:8485
 ZK_IPS=zk01:2181,zk02:2181,zk03:2181,zk04:2181,zk05:2181
