@@ -1,0 +1,13 @@
+[Unit]
+Description=journalnode
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill journalnode
+ExecStartPre=/usr/bin/docker pull aarongdocker/hdfs
+ExecStart=/usr/bin/docker run --name journalnode -e ZK_IPS=r105u01:2181,r105u03:2181,r105u05:2181,r105u07:2181,r105u09:2181 -e JN_IPS=r105u01:8485,r105u03:8485,r105u05:8485,r105u07:8485,r105u09:8485 8020:8020 -p 8022:8022 -p 50070:50070 -p 50470:50470 -p 8019:8019 aarongdocker/hdfs journalnode
+TimeoutStartSec=900s
+
+[X-Fleet]
+MachineMetadata=role=service
