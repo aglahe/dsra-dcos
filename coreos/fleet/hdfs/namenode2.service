@@ -11,3 +11,4 @@ TimeoutStartSec=900s
 
 [X-Fleet]
 MachineMetadata=ip=10.105.0.3
+Conflicts=namenode1
