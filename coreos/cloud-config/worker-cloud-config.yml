@@ -40,14 +40,14 @@ write-files:
     permissions: 0700
     owner: core:core
     content: |
-      {
- 	"auths": {
-	  "hub.dsra.local:5000": {
-	    "auth": "bXBhcmtlcjpYREB0YTYxNm1w",
-	    "email": ""
-	  }
-        }
-      }
+     {
+       "auths": {
+         "hub.dsra.local:5000": {
+           "auth": "bXBhcmtlcjpYREB0YTYxNm1w",
+           "email": ""
+         }
+       }
+     }
   
   - path: /tmp/get-docker-registry-login.sh
     permissions: 0700
