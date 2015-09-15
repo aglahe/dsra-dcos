@@ -1,5 +1,10 @@
 #cloud-config
 write-files:
+
+    #
+    # Required to pull private docker images via marathon.
+    #
+
   - path: /etc/docker/certs.d/hub.dsra.local:5000/ca.crt
     permissions: 0700
     owner: root
@@ -26,6 +31,24 @@ write-files:
        t+/Cha7Fv0OpCUHLPI0ScF0YWbU4nF2LSw==
        -----END CERTIFICATE-----
 
+
+    #
+    # Required to pull private docker images via fleet.
+    # 
+
+  - path: /home/core/.docker/config.json 
+    permissions: 0700
+    owner: core:core
+    content: |
+      {
+ 	"auths": {
+	  "hub.dsra.local:5000": {
+	    "auth": "bXBhcmtlcjpYREB0YTYxNm1w",
+	    "email": ""
+	  }
+        }
+      }
+  
   - path: /tmp/get-docker-registry-login.sh
     permissions: 0700
     owner: root:root

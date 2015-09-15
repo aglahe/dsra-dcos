@@ -37,6 +37,10 @@ write_files:
       echo "Environment=\"FLEET_METADATA=role=service,ip=$PRIV_IP\"" >> $TARGET
       logger "etcd and fleet config files written"
 
+    #
+    # Required to pull private docker images via marathon.
+    #
+
   - path: /etc/docker/certs.d/hub.dsra.local:5000/ca.crt
     permissions: 0700
     owner: root:root
@@ -62,6 +66,23 @@ write_files:
        g1bwK8+oC+FGc5Wf74rDU+VEvfdY+Kd5ezlYnE6/sLEBt+i0WM4EdsjoGJtaEvvT
        t+/Cha7Fv0OpCUHLPI0ScF0YWbU4nF2LSw==
        -----END CERTIFICATE-----
+
+    #
+    # Required to pull private docker registry images via fleet.
+    #
+
+  - path: /home/core/.docker/config.json
+    permissions: 0700
+    owner: core:core
+    content: |
+      {
+        "auths": {
+          "hub.dsra.local:5000": {
+            "auth": "bXBhcmtlcjpYREB0YTYxNm1w",
+            "email": ""
+          }
+        }
+      }
 
   - path: /tmp/get-docker-registry-login.sh
     permissions: 0700
