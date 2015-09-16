@@ -1,0 +1,8 @@
+{
+    "id": "spark-mesos-dispatcher", 
+    "cmd": "/opt/sparkyf-1.5.0-bin-hadoop2.6/sbin/start-mesos-dispatcher.sh",
+    "cpus": 0.1,
+    "mem": 10.0,
+    "instances": 1
+}
+
