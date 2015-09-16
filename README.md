@@ -12,9 +12,9 @@ write their own frameworks in different languages: Java, Python, Ruby, C, and Go
 ### Future Releases
 
 Mesos also supports deploying applications as Docker containers. Long running processes are
-managed by Marathon, which can run containers deployed on DockerHub use their own private Docker registry.
+managed by Marathon, which can run containers deployed on DockerHub or use their own private Docker registry.
 
-Distributed storage supported in the first software release is HDFS. 
+Distributed storage is supported in the first software release, utilizing HDFS. 
 
 Future releases and updates will focus on adding more software capabilities, to include, but not limited too, the following:
 
