@@ -6,10 +6,25 @@ git clone https://github.com/coreos/coreos-vagrant.git
 cd coreos-vagrant
 ```
 
-We use the Alpha update channel, which is the current default Vagrant uses, but we need more instances.  First change the user-data.sample -> user-data and config.rb.sample -> config.rb.  In the config.rb, change from 1->3
+We also want to install the vagrant-hostmanager plugin and use it (this will help manage the HOST IPs to find each other)
+```
+vagrant plugin install vagrant-hostmanager
+```
+First, update the Vagrant file (around line 79), add these lines, inside the __$num_instances__ loop:
+```
+config.hostmanager.enabled = true
+config.hostmanager.manage_host = true
+config.hostmanager.include_offline = true
+```
+We use the "alpha" update channel, which is the current default Vagrant uses, but we need more instances.  Change the user-data.sample -> user-data and config.rb.sample -> config.rb.  In the config.rb, change from 1->3
 ```
 $num_instances = 3
 ```
+
+
+
+
+
 Then connect to the vagrant guest via, where the X is 1,2 or 3:
 ```
 vagrant ssh core-0X
