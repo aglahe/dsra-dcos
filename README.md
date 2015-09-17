@@ -7,7 +7,7 @@ significant distributed processing capabilities out of the box, supporting in th
 disparate frameworks. The distributed processing architecture is abstracted for Engineers to 
 write their own frameworks in different languages: Java, Python, Ruby, C, and Go. 
 
-![](./docs/architecture-201509160755.png)
+![](./docs/architecture-201509162029.png)
 
 ### Future Releases
 
