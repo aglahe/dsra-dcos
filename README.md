@@ -5,12 +5,12 @@
 The newest version of the DSRA migrates the system to a Mesos-centric architecture. It provides 
 significant distributed processing capabilities out of the box, supporting a variety of 
 distributed frameworks. The distributed processing architecture has been abstracted for Engineers to 
-develop their own frameworks in a wide-range of different languages, including Java, Python, Ruby, 
+develop their own frameworks in a wide-range of programming languages, including Java, Python, Ruby, 
 C, and Go. 
 
 ![](./docs/architecture-201509162029.png)
 
-### Future Releasesng
+### Future Releases
 
 Mesos also supports deploying applications as Docker containers. Long running processes are
 managed by Marathon, which can run commands across the Mesos cluster, containers deployed 
