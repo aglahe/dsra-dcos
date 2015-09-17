@@ -5,10 +5,10 @@ Following the docs on https://coreos.com/os/docs/latest/booting-on-vagrant.html
 git clone https://github.com/coreos/coreos-vagrant.git
 cd coreos-vagrant
 ```
+
 We use the Alpha update channel, which is the current default Vagrant uses, but we need more instances.  First change the user-data.sample -> user-data and config.rb.sample -> config.rb.  In the config.rb, change from 1->3
 ```
 $num_instances = 3
-```
 ```
 Then connect to the vagrant guest via, where the X is 1,2 or 3:
 ```
