@@ -5,22 +5,21 @@ Following the docs on https://coreos.com/os/docs/latest/booting-on-vagrant.html
 git clone https://github.com/coreos/coreos-vagrant.git
 cd coreos-vagrant
 ```
-
-We also want to install the vagrant-hostmanager plugin and use it (this will help manage the HOST IPs to find each other)
-```
-vagrant plugin install vagrant-hostmanager
-```
-First, update the Vagrant file (around line 79), add these lines, inside the __$num_instances__ loop:
-```
-config.hostmanager.enabled = true
-config.hostmanager.manage_host = true
-config.hostmanager.include_offline = true
-```
 We use the "alpha" update channel, which is the current default Vagrant uses, but we need more instances.  Change the user-data.sample -> user-data and config.rb.sample -> config.rb.  In the config.rb, change from 1->3
 ```
 $num_instances = 3
 ```
 
+We also then want to make sure that the /etc/hosts file is updated...so we are going to brute force our way.  We need to add the code below, after _config.vm.network :private_network, ip: ip_ line (approx. line 124 in the Vagrant file)
+```      
+#  Update hosts file
+(1..$num_instances).each do|v|
+  config.vm.provision "shell" do |s|
+    s.inline = "echo $1 $2 >> /etc/hosts"
+    s.args = ["172.17.8.#{v+100}", "%s-%02d" % [$instance_name_prefix, v]]
+  end
+end
+```
 
 
 
