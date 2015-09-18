@@ -30,6 +30,6 @@ Future releases and updates will focus on adding more software capabilities, to 
 
 ### License
 
-DSRA DCOS is license under [[Apache 2 license| http://www.apache.org/licenses/LICENSE-2.0]]
+DSRA DCOS is licensed under the [[Apache 2 License | http://www.apache.org/licenses/LICENSE-2.0]]
 
 
