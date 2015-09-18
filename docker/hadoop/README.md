@@ -11,7 +11,7 @@ We use the "alpha" update channel, which is the current default Vagrant uses, bu
 $num_instances = 3
 ```
 
-We also then want to make sure that the /etc/hosts file is updated...so we are going to brute force our way.  We need to add the code below, right after the line, 
+We also then want to make sure that the /etc/hosts file is updated...so we are going to brute force our way.  We need to add the code below, right after the line,
 ```
 config.vm.network :private_network, ip: ip
 ```
@@ -33,9 +33,9 @@ vagrant ssh core-0X
 
 ##coreos-01
 ```
-sudo docker run -d --name zk --env ZK_ID=1 --env ZK_SERVERS=core-01:2888:3888 -p 2181:2181 -p 2888:2888 -p 3888:3888 zookeeper
-sudo docker create --name jornalnode-data aarongdocker/hdfs /bin/true
-sudo docker run -d --name jn --volumes-from jornalnode-data -e NNODE1_IP=core-02 -e NNODE2_IP=rcore-03 -e ZK_IPS=core-01:2181 -e JN_IPS=core-01:8485 -p 8485:8485 -p 8480:8480 aarongdocker/hdfs journalnode
+sudo docker run -d --name zk --env ZK_ID=1 --env ZK_SERVERS=core-01:2888:3888 -p 2181:2181 -p 2888:2888 -p 3888:3888 aarongdocker/zookeeper
+sudo docker create --name journalnode-data aarongdocker/hdfs /bin/true
+sudo docker run -it --name jn --volumes-from journalnode-data -e NNODE1_IP=core-02 -e NNODE2_IP=rcore-03 -e ZK_IPS=core-01:2181 -e JN_IPS=core-01:8485 -p 8485:8485 -p 8480:8480 aarongdocker/hdfs journalnode
 ```
 ###coreos-01 after the NNs have started
 ```
