@@ -1,16 +1,21 @@
-# Testing on a single host machine, running 3 VMs using Vagrant
-
 Following the docs on https://coreos.com/os/docs/latest/booting-on-vagrant.html
 ```
 git clone https://github.com/coreos/coreos-vagrant.git
 cd coreos-vagrant
 ```
-We use the "alpha" update channel, which is the current default Vagrant uses, but we need more instances.  Change the user-data.sample -> user-data and config.rb.sample -> config.rb.  In the config.rb, change from 1->3
+We use the "alpha" update channel, which is the current default Vagrant uses, but we need more instances.
+ 1. Save the user-data.sample -> user-data
+ 2. Save the config.rb.sample -> config.rb.  
+ 3. In the config.rb, change from 1->3:
 ```
 $num_instances = 3
 ```
 
-We also then want to make sure that the /etc/hosts file is updated...so we are going to brute force our way.  We need to add the code below, after _config.vm.network :private_network, ip: ip_ line (approx. line 124 in the Vagrant file)
+We also then want to make sure that the /etc/hosts file is updated...so we are going to brute force our way.  We need to add the code below, right after the line, 
+```
+config.vm.network :private_network, ip: ip
+```
+ which is at approximately line 124 in the Vagrant file.  Add the following code below to help update the Hosts file on each VM.
 ```      
 #  Update hosts file
 (1..$num_instances).each do|v|
@@ -20,9 +25,6 @@ We also then want to make sure that the /etc/hosts file is updated...so we are g
   end
 end
 ```
-
-
-
 
 Then connect to the vagrant guest via, where the X is 1,2 or 3:
 ```
