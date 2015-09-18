@@ -7,7 +7,7 @@ Requires=docker.service
 ExecStartPre=-/usr/bin/docker kill datanode
 ExecStartPre=/usr/bin/docker pull aarongdocker/hdfs
 ExecStartPre=-/usr/bin/docker create --name datanode-data aarongdocker/hdfs /bin/true
-ExecStartPre=-/usr/bin/docker rm datanode
+ExecStartPre=-/usr/bin/docker rm -v datanode
 ExecStart=/usr/bin/docker run --name datanode --restart on-failure:5 --volumes-from datanode-data -e CLUSTER_NAME=dsra -e NNODE1_IP=r105u01 -e NNODE2_IP=r105u03 -e ZK_IPS=r105u01:2181,r105u03:2181,r105u05:2181,r105u07:2181,r105u09:2181 -e JN_IPS=r105u01:8485,r105u03:8485,r105u05:8485,r105u07:8485,r105u09:8485 -p 1004:1004 -p 1006:1006 -p 8022:8022 -p 50010:50010 -p 50020:50020 -p 50075:50075 aarongdocker/hdfs datanode
 TimeoutStartSec=900s
 
