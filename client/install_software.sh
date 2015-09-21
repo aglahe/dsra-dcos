@@ -17,10 +17,9 @@ sudo echo "export PATH=\$GOROOT/bin:\$PATH" >> /etc/profile.d/go.sh
 
 # Get Hadoop, and "install" it
 sudo wget -q -O - http://apache.mirrors.pair.com/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xzf - -C /usr/local
-sudo /usr/sbin/groupadd -r hdfs
 sudo /usr/sbin/groupadd -r hadoop
-sudo /usr/sbin/useradd -r -g hdfs -G hadoop hdfs
-sudo /bin/chown hdfs.hadoop -R /usr/local/hadoop-2.7.1
+sudo /usr/sbin/useradd -r -g hadoop hadoop
+sudo /bin/chown hadoop.hadoop -R /usr/local/hadoop-2.7.1
 sudo /bin/ln -s /usr/local/hadoop-2.7.1 /usr/local/hadoop
 sudo echo "export HADOOP_HOME=/usr/local/hadoop:\$PATH" >> /etc/profile.d/hdfs.sh
 sudo echo "export PATH=\$HADOOP_HOME/bin:\$PATH" >> /etc/profile.d/hdfs.sh
@@ -32,8 +31,8 @@ sudo curl -sSL https://get.docker.com/ | sh
 sudo git clone https://github.com/coreos/fleet.git /usr/local/fleet
 sudo git clone https://github.com/coreos/etcd.git /usr/local/etcd
 sudo /bin/bash /etc/profile.d/go.sh
-sudo /usr/local/fleet/build
-sudo /usr/local/etcd/build
+sudo env "PATH=$PATH" /usr/local/fleet/build
+sudo env "PATH=$PATH" /usr/local/etcd/build
 sudo echo "export PATH=/usr/local/etcd/bin:\$PATH" >> /etc/profile.d/etcd.sh
 sudo echo "export PATH=/usr/local/fleet/bin:\$PATH" >> /etc/profile.d/fleet.sh
 
@@ -42,6 +41,12 @@ sudo wget -q -O - http://www.scala-lang.org/files/archive/scala-2.11.7.tgz | tar
 sudo ln -s /usr/lib/scala-2.11.7 /usr/lib/scala
 sudo echo "export SCALA_HOME=/usr/lib/scala" >> /etc/profile.d/scala.sh
 sudo echo "export PATH=\$SCALA_HOME/bin:\$PATH" >> /etc/profile.d/scala.sh
+
+# Kafka
+sudo wget -q -O - https://github.com/apache/kafka/archive/0.8.2.1.tar.gz | tar -xzf - -C /usr/lib
+sudo ln -s /usr/lib/kafka-0.8.2.1 /usr/lib/kafka
+sudo mkdir -p /var/log/kafka
+sudo echo "export PATH=/usr/lib/kafka/bin:\$PATH" >> /etc/profile.d/kafka.sh
 
 # Get MiniConda
 sudo wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
