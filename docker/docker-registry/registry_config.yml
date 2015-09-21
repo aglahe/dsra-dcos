@@ -2,6 +2,10 @@ version: 0.1
 log:
   level: debug
 
+common:
+  search_backend: sqlalchemy
+  sqlalchemy_index_database: sqlite:////tmp/docker-registry.db
+
 storage:
   filesystem:
     rootdirectory: /data
