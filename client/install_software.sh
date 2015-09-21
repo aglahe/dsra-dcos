@@ -13,7 +13,7 @@ sudo echo "JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64" >> /etc/environment
 # Now install golang
 sudo wget -q -O - https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz | tar -xzf - -C /usr/local
 sudo echo "export GOROOT=/usr/local/go" >> /etc/profile.d/go.sh
-sudo echo "export PATH=\$GOROOT/bin:\$PATH" >> /etc/profile.d/go.sh
+sudo echo "export PATH=/usr/local/go/bin:\$PATH" >> /etc/profile.d/go.sh
 
 # Get Hadoop, and "install" it
 sudo wget -q -O - http://apache.mirrors.pair.com/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xzf - -C /usr/local
@@ -21,8 +21,8 @@ sudo /usr/sbin/groupadd -r hadoop
 sudo /usr/sbin/useradd -r -g hadoop hadoop
 sudo /bin/chown hadoop.hadoop -R /usr/local/hadoop-2.7.1
 sudo /bin/ln -s /usr/local/hadoop-2.7.1 /usr/local/hadoop
-sudo echo "export HADOOP_HOME=/usr/local/hadoop:\$PATH" >> /etc/profile.d/hdfs.sh
-sudo echo "export PATH=\$HADOOP_HOME/bin:\$PATH" >> /etc/profile.d/hdfs.sh
+sudo echo "export HADOOP_HOME=/usr/local/hadoop" >> /etc/profile.d/hdfs.sh
+sudo echo "export PATH=/usr/local/hadoop/bin:\$PATH" >> /etc/profile.d/hdfs.sh
 
 # Get Docker installed
 sudo curl -sSL https://get.docker.com/ | sh
