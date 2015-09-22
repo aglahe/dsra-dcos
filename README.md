@@ -3,16 +3,18 @@
 ### Overview
 
 The newest version of the DSRA migrates the system to a Mesos-centric architecture. It provides 
-significant distributed processing capabilities out of the box, supporting in the number of 
-disparate frameworks. The distributed processing architecture is abstracted for Engineers to 
-write their own frameworks in different languages: Java, Python, Ruby, C, and Go. 
+significant distributed processing capabilities out of the box, supporting a variety of 
+distributed frameworks. The distributed processing architecture has been abstracted for Engineers to 
+develop their own frameworks in a wide-range of programming languages, including Java, Python, Ruby, 
+C, and Go. 
 
-![](./docs/architecture-201509160755.png)
+![](./docs/architecture-201509162029.png)
 
 ### Future Releases
 
 Mesos also supports deploying applications as Docker containers. Long running processes are
-managed by Marathon, which can run containers deployed on DockerHub or use their own private Docker registry.
+managed by Marathon, which can run commands across the Mesos cluster, containers deployed 
+from public repoitories, like DockerHub, or it can use an organization's private Docker registry.
 
 Distributed storage is supported in the first software release, utilizing HDFS. 
 
@@ -23,3 +25,11 @@ Future releases and updates will focus on adding more software capabilities, to 
 * HBase
 * Myriad/Yarn
 * Mongo
+* HDFS (Federated)
+* Security
+
+### License
+
+DSRA DCOS is licensed under the [Apache 2 License](http://www.apache.org/licenses/LICENSE-2.0)
+
+

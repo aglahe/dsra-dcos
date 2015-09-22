@@ -15,5 +15,5 @@ ExecStop=/usr/bin/docker stop %p-%i
 TimeoutStartSec=900s
 
 [X-Fleet]
-Conflicts=mesos-slave*
+Global=true
 MachineMetadata=role=worker
