@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.hostname = "dsra-client"
 
-  # Get all the software installed
+  # Get all the software installed or the base box
   config.vm.provision :shell, :path => "install_software.sh"
 
   # Setup configuration for DSRA
