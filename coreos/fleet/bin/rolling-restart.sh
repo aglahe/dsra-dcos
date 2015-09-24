@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# usage: ./rolling-restart.sh [service unit name prefix]
+# usage: ./rolling-restart.sh [service unit name prefix][@]
 # 
 # reference: http://engineering.rainchasers.com/coreos/fleet/2015/03/03/rolling-unit-restart.html
 #
