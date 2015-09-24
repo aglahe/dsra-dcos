@@ -10,6 +10,6 @@ When starting this on Linux, do not use your distribution's Vagrant package to i
 Currently has:
  1. Haddop 2.7.1 with -site files pointing to the DSRA cluster
  2. Kafka
- 3. Scala 2.11.7
- 4. MiniConda environment
- 5. fleetctl and etcdctl for coreos
+ 3. MiniConda environment
+ 4. fleetctl and etcdctl for coreos
+ 5. libmesos
