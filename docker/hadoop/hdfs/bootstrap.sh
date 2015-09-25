@@ -38,16 +38,16 @@ case "$1" in
       echo "Format Zookeeper for Fast failover.."
       $HADOOP_PREFIX/bin/hdfs zkfc -formatZK
     fi
-    $HADOOP_PREFIX/sbin/hadoop-daemon.sh start namenode
-    $HADOOP_PREFIX/bin/hdfs zkfc
+    $HADOOP_PREFIX/sbin/hadoop-daemon.sh start zkfc
+    $HADOOP_PREFIX/bin/hdfs namenode
     ;;
   standby)
     if [[ ! -a /data/hdfs/nn/current/VERSION ]]; then
       echo "Bootstrap Standby Namenode.."
       $HADOOP_PREFIX/bin/hdfs namenode -bootstrapStandby
     fi
-    $HADOOP_PREFIX/sbin/hadoop-daemon.sh start namenode
-    $HADOOP_PREFIX/bin/hdfs zkfc
+    $HADOOP_PREFIX/sbin/hadoop-daemon.sh start zkfc
+    $HADOOP_PREFIX/bin/hdfs namenode
     ;;
   zkfc)
       $HADOOP_PREFIX/bin/hdfs zkfc
