@@ -5,9 +5,9 @@ Requires=docker.service
 
 [Service]
 ExecStartPre=-/usr/bin/docker kill zookeeper3
-ExecStartPre=-/usr/bin/docker rm zookeeper3
 ExecStartPre=/usr/bin/docker pull endocode/zookeeper
-ExecStart=/usr/bin/docker run --name zookeeper3 --log-driver=journald -e JVMFLAGS='-Xmx64m -Xms64M' -e ZK_SERVERS='server.1=r105u01.dsra.local:2888:3888 server.2=r105u03.dsra.local:2888:3888 server.3=r105u05.dsra.local:2888:3888 server.4=r105u07.dsra.local:2888:3888 server.5=r105u09.dsra.local:2888:3888' -e ZK_ID=3 --hostname r105u05 -p 2181:2181 -p 2888:2888 -p 3888:3888 endocode/zookeeper
+ExecStartPre=-/usr/bin/docker create --name zookeeper-data endocode/zookeeper /bin/true
+ExecStart=/usr/bin/docker run --name zookeeper3 --log-driver=journald --volumes-from zookeeper-data -e JVMFLAGS='-Xmx64m -Xms64M' -e ZK_SERVERS='server.1=r105u01.dsra.local:2888:3888 server.2=r105u03.dsra.local:2888:3888 server.3=r105u05.dsra.local:2888:3888 server.4=r105u07.dsra.local:2888:3888 server.5=r105u09.dsra.local:2888:3888' -e ZK_ID=3 --hostname r105u05 -p 2181:2181 -p 2888:2888 -p 3888:3888 endocode/zookeeper
 ExecStop=/usr/bin/docker stop zookeeper3
 TimeoutStartSec=900s
 
