@@ -2,6 +2,7 @@
 
 # install the little things
 sudo apt-get update
+sudo apt-get upgrade -y
 sudo apt-get install -y wget
 
 # Install Java
@@ -58,12 +59,12 @@ sudo ln -s /usr/lib/spark-1.5.0-bin-hadoop2.6 /usr/lib/spark
 sudo echo "export PATH=/usr/lib/sparl/bin:\$PATH" >> /etc/profile.d/spark.sh
 
 # Get MESOS libs installed
-echo "Install Mesos Libs"
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
-echo "deb http://repos.mesosphere.com/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
-sudo apt-get -y update
-sudo apt-get -y install mesos
-sudo pip install mesos.cli
+# echo "Install Mesos Libs"
+# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
+# echo "deb http://repos.mesosphere.com/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
+# sudo apt-get -y update
+# sudo apt-get -y install mesos
+# sudo pip install mesos.cli
 
 # Kafka
 echo "Install Kafka"
