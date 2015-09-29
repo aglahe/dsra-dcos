@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t dsra/mesos-dns .
+docker build -t hub.dsra.local:5000/dsra/mesos-dns .

@@ -8,7 +8,7 @@ distributed frameworks. The distributed processing architecture has been abstrac
 develop their own frameworks in a wide-range of programming languages, including Java, Python, Ruby, 
 C, and Go. 
 
-![](./docs/architecture-201509162029.png)
+![](./docs/architecture.png)
 
 ### Future Releases
 
