@@ -54,17 +54,15 @@ sudo echo "export PATH=/usr/local/fleet/bin:\$PATH" >> /etc/profile.d/fleet.sh
 
 # Spark 1.5
 echo "Install Spark 1.5"
-sudo wget -q -O - http://d3kbcqa49mib13.cloudfront.net/spark-1.5.0-bin-hadoop2.6.tgz | tar -xzf - -C /usr/lib
-sudo ln -s /usr/lib/spark-1.5.0-bin-hadoop2.6 /usr/lib/spark
+sudo wget -q -O - http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz | tar -xzf - -C /usr/lib
+sudo ln -s /usr/lib/spark-1.5.1-bin-hadoop2.6 /usr/lib/spark
 sudo echo "export PATH=/usr/lib/sparl/bin:\$PATH" >> /etc/profile.d/spark.sh
 
 # Get MESOS libs installed
-# echo "Install Mesos Libs"
-# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
-# echo "deb http://repos.mesosphere.com/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
-# sudo apt-get -y update
-# sudo apt-get -y install mesos
-# sudo pip install mesos.cli
+ echo "Install Mesos Libs"
+ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
+ echo "deb http://repos.mesosphere.com/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
+ sudo apt-get -y install mesos
 
 # Kafka
 echo "Install Kafka"
@@ -78,4 +76,4 @@ echo "Install Mongodb"
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 sudo apt-get update
-sudo apt-get install -y mongodb-org 
+sudo apt-get install -y mongodb-org
