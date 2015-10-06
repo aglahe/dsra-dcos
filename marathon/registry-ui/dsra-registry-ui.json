@@ -1,0 +1,20 @@
+{
+  "id": "registry",
+  "cpus": 1.0,
+  "mem": 2048.0,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "atcol/docker-registry-ui",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8080, "hostPort": 0 }
+      ]
+    }
+  },
+  "env": {
+     "REG1": "http://hub.dsra.local:5000/v1/"
+  },
+  "maxLaunchDelaySeconds": 7200
+}
+
