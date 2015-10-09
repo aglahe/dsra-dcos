@@ -29,8 +29,8 @@ COPY bootstrap.sh /bin/bootstrap.sh
 # Have HDFS own everything
 RUN chown -R hdfs:hdfs /data/hdfs /usr/local/hadoop-2.7.1
 
-#Ports: Namenode                         DataNode                          Journal Node
-EXPOSE 8020 8022 50070 50470 50090 50495 1006 1004 50010 50020 50075 50475 8485 8480
+#Ports: Namenode                         DataNode                          Journal Node WebHDFS
+EXPOSE 8020 8022 50070 50470 50090 50495 1006 1004 50010 50020 50075 50475 8485 8480 14000
 
 # Location to store data
 VOLUME ["/data/hdfs/dn", "/data/hdfs/journal", "/data/hdfs/nn"]
