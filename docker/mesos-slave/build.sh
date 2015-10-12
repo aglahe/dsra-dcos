@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t hub.dsra.local:5000/dsra/mesos-slave:0.23.0.2 .
+docker build -t hub.dsra.local:5000/dsra/mesos-slave:0.24.0-1.0.27.ubuntu1404 .
