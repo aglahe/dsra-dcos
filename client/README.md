@@ -1,5 +1,4 @@
-# vagrant-memex
-DSRA Client Vagrant VM
+# DSRA Client Vagrant VM
 
 Please make sure that vbguest is installed (https://github.com/dotless-de/vagrant-vbguest/).  It helps keep the VirtuaalBoxGuestAdditions up to date, install on the cmd line:
 ```
