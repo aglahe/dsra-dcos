@@ -6,7 +6,7 @@ The newest version of the DSRA migrates the system to a Mesos-centric architectu
 significant distributed processing capabilities out of the box, supporting a variety of 
 distributed frameworks. The distributed processing architecture has been abstracted for Engineers to 
 develop their own frameworks in a wide-range of programming languages, including Java, Python, Ruby, 
-C, and Go. Additional system information can be found in the ![](https://github.com/aglahe/dsra-dcos/wiki "Wiki"). 
+C, and Go. Additional system information can be found in the ![Wiki](https://github.com/aglahe/dsra-dcos/wiki). 
 
 ![](./docs/architecture.png)
 
