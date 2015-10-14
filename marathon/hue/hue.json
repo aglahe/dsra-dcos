@@ -6,7 +6,7 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "hub.dsra.local:5000/dsra/hue:3.7.0.5",
+      "image": "hub.dsra.local:5000/dsra/hue:3.9.0",
       "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 8000, "hostPort": 0 },
