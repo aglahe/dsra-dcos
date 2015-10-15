@@ -6,18 +6,17 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "hub.dsra.local:5000/dsra/hue:3.7.0.1",
+      "image": "hub.dsra.local:5000/dsra/hue:3.9.0",
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 8000, "hostPort": 8000 },
-        { "containerPort": 9999, "hostPort": 9999 },
-        { "containerPort": 8020, "hostPort": 8020 },
+        { "containerPort": 8000, "hostPort": 0, "protocol": "tcp" },
         { "containerPort": 50070, "hostPort": 50070 }
       ]
     }
   },
   "uris": [
      "file:///etc/docker.tar.gz"
-  ]
+  ],
+  "maxLaunchDelaySeconds": 7200
 }
 

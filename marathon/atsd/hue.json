@@ -3,10 +3,11 @@
   "cpus": 1.0,
   "mem": 2048.0,
   "cmd": "build/env/bin/hue runserver 0.0.0.0:8000",
+  "ports": [50070],
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "hub.dsra.local:5000/dsra/hue:3.9.0",
+      "image": "hub.dsra.local:5000/dsra/hue:3.7.0.2",
       "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 8000, "hostPort": 0 },

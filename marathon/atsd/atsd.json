@@ -1,0 +1,27 @@
+{
+  "id": "atsd",
+  "cpus": 1.0,
+  "mem": 2048.0,
+  "ports": [5022, 8081, 8088, 8084, 8082],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "axibase/atsd:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 22, "hostPort": 5022 },
+        { "containerPort": 8081, "hostPort": 8081 },
+        { "containerPort": 8088, "hostPort": 8088 },
+        { "containerPort": 8081, "hostPort": 8084 },
+        { "containerPort": 8082, "hostPort": 8082, "protcol": "tcp" }
+      ]
+    }
+  },
+  "env": {
+     "AXIBASE_USER_PASSWORD": "atsd1234",
+     "ATSD_USER_NAME": "atsd",
+     "ATSD_USER_PASSWORD": "atsd1234"
+  },
+  "maxLaunchDelaySeconds": 7200
+}
+
