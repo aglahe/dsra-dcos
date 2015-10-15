@@ -2,6 +2,7 @@
   "id": "hue",
   "cpus": 1.0,
   "mem": 2048.0,
+  "instances": 1,
   "cmd": "build/env/bin/hue runserver 0.0.0.0:8000",
   "container": {
     "type": "DOCKER",
@@ -9,8 +10,7 @@
       "image": "hub.dsra.local:5000/dsra/hue:3.9.0",
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 8000, "hostPort": 0, "protocol": "tcp" },
-        { "containerPort": 50070, "hostPort": 50070 }
+        { "containerPort": 8000, "hostPort": 0, "protocol": "tcp" }
       ]
     }
   },
