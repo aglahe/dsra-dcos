@@ -9,8 +9,8 @@ Meant to standup a Hadoop 2.7.1 HDFS HA on multiple machines inside Docker conta
 * __zkfc__:  If you choose to start the zkfc in as a separate service
 * __journalnode__:  starts a journalnode
 * __datanode__:  starts a datanode
-*__httpfs__:  starts an HTTPFS service because WebHDFS doesn't like HA mode
-*  __bash__:  allows you to jump in and check things out
+* __httpfs__:  starts an HTTPFS service because WebHDFS doesn't like HA mode
+* __bash__:  allows you to jump in and check things out
 
 #### Envrionment Variables
 
