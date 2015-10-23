@@ -50,18 +50,21 @@ case "$1" in
     $HADOOP_PREFIX/bin/hdfs namenode
     ;;
   zkfc)
-      $HADOOP_PREFIX/bin/hdfs zkfc
-      ;;
+    $HADOOP_PREFIX/bin/hdfs zkfc
+    ;;
   journalnode)
     $HADOOP_PREFIX/bin/hdfs journalnode
     ;;
   datanode)
     $HADOOP_PREFIX/bin/hdfs datanode
     ;;
+  httpfs)
+    $HADOOP_PREFIX/sbin/httpf.sh start
+    ;;
   bash)
     /bin/bash
     ;;
   *)
-    echo $"Usage: {active|standby|zkfc|journalnode|datanode|bash}"
+    echo $"Usage: {active|standby|zkfc|journalnode|datanode|httpfs|bash}"
     eval $*
 esac

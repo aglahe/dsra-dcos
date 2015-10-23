@@ -24,6 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "file", source: "./hadoop/hdfs-site.xml.template", destination: "/tmp/hdfs-site.xml.template"
   config.vm.provision "file", source: "./hadoop/core-site.xml.template", destination: "/tmp/core-site.xml.template"
   config.vm.provision :shell, :path => "configure.sh"
+  config.vm.synced_folder "./spark", "/usr/local/spark/conf"
 
   #  iPython Notebook forwarded port
   #config.vm.network "forwarded_port", guest: 8888, host: 18888

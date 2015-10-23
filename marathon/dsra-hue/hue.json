@@ -2,6 +2,7 @@
   "id": "hue",
   "cpus": 1.0,
   "mem": 2048.0,
+  "instances": 1,
   "cmd": "build/env/bin/hue runserver 0.0.0.0:8000",
   "container": {
     "type": "DOCKER",
