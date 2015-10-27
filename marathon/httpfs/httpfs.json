@@ -1,0 +1,21 @@
+{
+  "id": "httpfs",
+  "cpus": 1.0,
+  "mem": 2048.0,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "aarongdocker/hdfs",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 14000, "hostPort": 14000, "protocol": "tcp" }
+      ]
+    }
+  },
+  "args": ["httpfs"],
+  "uris": [
+     "file:///etc/docker.tar.gz"
+  ],
+  "maxLaunchDelaySeconds": 7200
+}
