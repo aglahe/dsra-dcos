@@ -59,7 +59,7 @@ case "$1" in
     $HADOOP_PREFIX/bin/hdfs datanode
     ;;
   httpfs)
-    $HADOOP_PREFIX/sbin/httpfs.sh start
+    $HADOOP_PREFIX/sbin/httpfs.sh run
     ;;
   bash)
     /bin/bash
