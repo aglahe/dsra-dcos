@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -t -i --rm --name=hue -p 8000:8000 -p 8020:8020 -p 50070:50070 -p 9999:9999 hub.dsra.local:5000/dsra/hue:3.9.0
+docker run -t -i --rm --name=hue -p 8000:8000 -e CLUSTER_NAME=dsra -e HTTPFS_SERVER=httpfs.dsra.local -e HTTPFS_PORT=32000 hub.dsra.local:5000/dsra/hue:3.9.0 start

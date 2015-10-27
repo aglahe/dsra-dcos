@@ -3,7 +3,12 @@
   "cpus": 1.0,
   "mem": 2048.0,
   "instances": 1,
-  "cmd": "build/env/bin/hue runserver 0.0.0.0:8000",
+  "args": ["hue"],
+  "env": {
+     "CLUSTER_NAME": "dsra",
+     "HTTPFS_SERVER": "httpfs.dsra.local",
+     "HTTPFS_PORT": "32000"
+  },
   "container": {
     "type": "DOCKER",
     "docker": {
@@ -19,4 +24,3 @@
   ],
   "maxLaunchDelaySeconds": 7200
 }
-

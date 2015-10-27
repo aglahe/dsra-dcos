@@ -80,7 +80,7 @@
   # Help improve Hue with anonymous usage analytics.
   # Use Google Analytics to see how many times an application or specific section of an application is used, nothing more.
   collect_usage=false
-  
+
   # Support for HTTPS termination at the load-balancer level with SECURE_PROXY_SSL_HEADER.
   ## secure_proxy_ssl_header=false
 
@@ -228,7 +228,7 @@
       # Base filter for searching for users
       ## user_filter="objectclass=*"
       user_filter="(memberOf=CN=memexUsers,CN=groups,CN=accounts,DC=xdata,DC=data-tactics-corp,DC=com)"
- 
+
       # The username attribute in the LDAP schema
       ## user_name_attr=sAMAccountName
       user_name_attr=uid
@@ -237,14 +237,14 @@
 
       # Base filter for searching for groups
       ## group_filter="objectclass=*"
-      group_filter="objectclass=groupOfNames"      
+      group_filter="objectclass=groupOfNames"
 
       # The group name attribute in the LDAP schema
-      ## group_name_attr=cn      
+      ## group_name_attr=cn
 
       # The attribute of the group object which identifies the members of the group
       ## group_member_attr=members
-      group_member_attr="member"    
+      group_member_attr="member"
 
     [[[ldap_servers]]]
 
@@ -436,7 +436,7 @@
 ###########################################################################
 
 [libopenid]
-  # (Required) OpenId SSO endpoint url. 
+  # (Required) OpenId SSO endpoint url.
   ## server_endpoint_url=https://www.google.com/accounts/o8/id
 
   # OpenId 1.1 identity url prefix to be used instead of SSO endpoint url
@@ -455,8 +455,8 @@
 ###########################################################################
 
 [liboauth]
-  # NOTE: 
-  # To work, each of the active (i.e. uncommented) service must have 
+  # NOTE:
+  # To work, each of the active (i.e. uncommented) service must have
   # applications created on the social network.
   # Then the "consumer key" and "consumer secret" must be provided here.
   #
@@ -471,17 +471,17 @@
   # Google+ : CONSENT SCREEN must have email address
   # Facebook: Sandbox Mode must be DISABLED
   # Linkedin: "In OAuth User Agreement", r_emailaddress is REQUIRED
-  
+
   # The Consumer key of the application
-  ## consumer_key_twitter=              
-  ## consumer_key_google=               
-  ## consumer_key_facebook=             
+  ## consumer_key_twitter=
+  ## consumer_key_google=
+  ## consumer_key_facebook=
   ## consumer_key_linkedin=
 
   # The Consumer secret of the application
-  ## consumer_secret_twitter=           
-  ## consumer_secret_google=            
-  ## consumer_secret_facebook=          
+  ## consumer_secret_twitter=
+  ## consumer_secret_google=
+  ## consumer_secret_facebook=
   ## consumer_secret_linkedin=
 
   # The Request token URL
@@ -585,7 +585,7 @@
 
     [[[default]]]
       # Enter the filesystem uri
-      fs_defaultfs=hdfs://r105u03.dsra.local:8020
+      fs_defaultfs=hdfs://CLUSTER_NAME
 
       # NameNode logical name.
       ## logical_name=
@@ -593,7 +593,7 @@
       # Use WebHdfs/HttpFs as the communication mechanism.
       # Domain should be the NameNode or HttpFs host.
       # Default port is 14000 for HttpFs.
-      webhdfs_url=http://r105u03.dsra.local:50070/webhdfs/v1
+      webhdfs_url=http://HTTPFS_SERVER:HTTPFS_PORT/webhdfs/v1
 
       # Change this if your HDFS cluster is Kerberos-secured
       ## security_enabled=false

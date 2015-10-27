@@ -3,6 +3,11 @@ FROM hub.dsra.local:5000/cloudera/hue:3.9.0
 
 MAINTAINER Matt Parker <matthew.parker@l3-com.com>
 
-copy hue.ini /local/git/hue/desktop/conf/pseudo-distributed.ini
+# Copy the hue template
+COPY hue.ini.template /tmp/hue.ini.template
 
-# CMD ["build/env/bin/hue","runserver","0.0.0.0:8000"]
+# Copy the bootstrap shell
+COPY bootstrap.sh /bin/bootstrap.sh
+
+ENTRYPOINT ["/bin/bootstrap.sh"]
+CMD ["bash"]

@@ -1,0 +1,15 @@
+[Unit]
+Description=hue
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=/usr/bin/docker pull aarongdocker/hue
+ExecStartPre=-/usr/bin/docker rm -v %p
+ExecStart=/usr/bin/docker run --name %p --restart on-failure:5 --log-driver=journald -e CLUSTER_NAME=dsra -e HTTPFS_SERVER=httpfs.dsra.local -e HTTPFS_PORT=32000 -p 8000:8000 aarongdocker/hue start
+ExecStop=/usr/bin/docker stop %p
+TimeoutStartSec=900s
+
+[X-Fleet]
+MachineMetadata=role=service
