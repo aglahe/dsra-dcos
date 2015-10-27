@@ -1,5 +1,5 @@
 FROM java:7
-MAINTAINER Aaron Glahe <aaron.glahe@gmail.com>
+MAINTAINER Aaron Glahe <aarongmldt@gmail.com>
 
 # Setup env
 USER root
