@@ -3,17 +3,27 @@
   "cpus": 1.0,
   "mem": 2048.0,
   "instances": 1,
+  "env": {
+     "CLUSTER_NAME": "dsra",
+     "NNODE1_IP": "r105u01.dsra.local",
+     "NNODE2_IP": "r105u03.dsra.local",
+     "ZK_IPS": "r105u01:2181,r105u03:2181,r105u05:2181,r105u07:2181,r105u09:2181",
+     "JN_IPS": "r105u01:8485,r105u03:8485,r105u05:8485,r105u07:8485,r105u09:8485"
+  },
+  "args": ["httpfs"],
   "container": {
     "type": "DOCKER",
     "docker": {
       "image": "aarongdocker/hdfs",
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 14000, "hostPort": 14000, "protocol": "tcp" }
+        { "containerPort": 14000, "hostPort": 0, "servicePort": 14000, "protocol": "tcp" }
+      ],
+      "parameters": [
+        { "key": "name", "value": "httpfs" }
       ]
     }
   },
-  "args": ["httpfs"],
   "uris": [
      "file:///etc/docker.tar.gz"
   ],
