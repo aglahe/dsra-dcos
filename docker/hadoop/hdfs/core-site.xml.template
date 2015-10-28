@@ -20,17 +20,7 @@
   </property>
   <!-- Trash minutes to allow recover of deleted files-->
 
-  <!-- History Server proxy -->
-  <property>
-    <name>hadoop.proxyuser.mapred.hosts</name>
-    <value>*</value>
-  </property>
-  <property>
-    <name>hadoop.proxyuser.mapred.groups</name>
-    <value>*</value>
-  </property>
-  <!-- History Server proxy -->
-
+  <!-- Hue WebHDFS proxy user setting -->
   <property>
     <name>hadoop.proxyuser.httpfs.hosts</name>
     <value>*</value>
@@ -39,8 +29,6 @@
     <name>hadoop.proxyuser.httpfs.groups</name>
     <value>*</value>
   </property>
-
-  <!-- Hue WebHDFS proxy user setting -->
   <property>
     <name>hadoop.proxyuser.hue.hosts</name>
     <value>*</value>
@@ -50,6 +38,5 @@
     <value>*</value>
   </property>
   <!-- Hue WebHDFS proxy user setting -->
-
 
 </configuration>

@@ -36,6 +36,6 @@ EXPOSE 8020 8022 50070 50470 50090 50495 1006 1004 50010 50020 50075 50475 8485 
 VOLUME ["/data/hdfs/dn", "/data/hdfs/journal", "/data/hdfs/nn"]
 
 # Entry Point for our
-USER hdfs
+USER ${HDFS_USER:-hdfs}
 ENTRYPOINT ["/bin/bootstrap.sh"]
 CMD ["bash"]
