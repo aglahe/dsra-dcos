@@ -1,14 +1,8 @@
 #!/bin/bash
 
-# Check for cluster name
-if [ -z $CLUSTER_NAME ]; then
-  CLUSTER_NAME="cluster"
-  export CLUSTER_NAME
-fi
-
 # make sure we have everyrthing
-if [ -z $NNODE1_IP ] || [ -z $NNODE2_IP ]  || [ -z $ZK_IPS ] || [ -z $JN_IPS ]; then
-  echo NNODE1_IP, NNODE2_IP, JN_IPS and ZK_IPS needs to be set as environment addresses to be able to run.
+if [ -z $CLUSTER_NAME ] || [ -z $NNODE1_IP ] || [ -z $NNODE2_IP ]  || [ -z $ZK_IPS ] || [ -z $JN_IPS ]; then
+  echo CLUSTER_NAME, NNODE1_IP, NNODE2_IP, JN_IPS and ZK_IPS needs to be set as environment addresses to be able to run.
   exit;
 fi
 
@@ -58,13 +52,10 @@ case "$1" in
   datanode)
     $HADOOP_PREFIX/bin/hdfs datanode
     ;;
-  httpfs)
-    $HADOOP_PREFIX/sbin/httpfs.sh run
-    ;;
   bash)
     /bin/bash
     ;;
   *)
-    echo $"Usage: {active|standby|zkfc|journalnode|datanode|httpfs|bash}"
+    echo $"Usage: {active|standby|zkfc|journalnode|datanode|bash}"
     eval $*
 esac
