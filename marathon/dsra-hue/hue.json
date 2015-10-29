@@ -3,7 +3,7 @@
   "cpus": 1.0,
   "mem": 2048.0,
   "instances": 1,
-  "args": ["hue"],
+  "args": ["start"],
   "env": {
      "CLUSTER_NAME": "dsra",
      "HTTPFS_SERVER": "httpfs.dsra.local",
