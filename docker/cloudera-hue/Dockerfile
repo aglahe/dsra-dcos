@@ -15,6 +15,3 @@ RUN git checkout tags/release-3.9.0 && make apps && rm -rf .git
 RUN chown -R hue:hue /local/git/hue
 
 EXPOSE 8000
-
-#USER hue
-#CMD ["build/env/bin/hue","runserver","0.0.0.0:8000"]
