@@ -13,6 +13,7 @@
     "type": "DOCKER",
     "docker": {
       "image": "hub.dsra.local:5000/dsra/hue:3.9.0",
+      "forcePullImage": true,
       "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 8000, "hostPort": 0, "protocol": "tcp" }
