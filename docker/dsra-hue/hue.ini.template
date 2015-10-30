@@ -616,7 +616,7 @@
       ## resourcemanager_port=8032
 
       # Whether to submit jobs to this cluster
-      submit_to=False
+      submit_to=false
 
       # Resource Manager logical name (required for HA)
       ## logical_name=
@@ -662,7 +662,7 @@
       ## thrift_port=9290
 
       # Whether to submit jobs to this cluster
-      submit_to=False
+      submit_to=false
 
       # Change this if your MapReduce cluster is Kerberos-secured
       ## security_enabled=false
