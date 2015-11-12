@@ -1,0 +1,29 @@
+{
+  "id": "kafka-mesos",
+  "cpus": 1.0,
+  "mem": 2048.0,
+  "instances": 1,
+  "env": {
+     "ZK_HOSTS": "xd-zk01.xdata.data-tactics-corp.com:2181,xd-zk02.xdata.data-tactics-corp.com:2181,xd-zk03.xdata.data-tactics-corp.com:2181",
+     "APPLICATION_SECRET":"pleaseletmeplaywiththeothers"
+  },
+  "args": ["-Dhttp.port=33333"],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "sheepkiller/kafka-manager",
+      "forcePullImage": true,
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 33333, "hostPort": 33333, "servicePort": 33333, "protocol": "tcp" }
+      ],
+      "parameters": [
+        { "key": "name", "value": "kafka-manager" }
+      ]
+    }
+  },
+  "uris": [
+     "file:///etc/docker.tar.gz"
+  ],
+  "maxLaunchDelaySeconds": 7200
+}

@@ -18,7 +18,7 @@
       "forcePullImage": true,
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 14000, "hostPort": 32000, "servicePort": 32000, "protocol": "tcp" }
+        { "containerPort": 14000, "hostPort": 31400, "servicePort": 14000, "protocol": "tcp" }
       ],
       "parameters": [
         { "key": "name", "value": "httpfs" }

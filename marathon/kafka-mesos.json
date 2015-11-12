@@ -11,7 +11,7 @@
       "image": "aarongdocker/kafka-mesos:0.9.3.0",
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 7000, "hostPort": 31700, "servicePort": 0, "protocol": "tcp" }
+        { "containerPort": 7000, "hostPort": 31700, "servicePort": 7000, "protocol": "tcp" }
       ],
       "parameters": [
         { "key": "name", "value": "kafka-mesos-scheduler" }

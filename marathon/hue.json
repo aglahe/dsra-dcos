@@ -7,7 +7,7 @@
   "env": {
      "CLUSTER_NAME": "dsra",
      "HTTPFS_SERVER": "httpfs.marathon.mesos",
-     "HTTPFS_PORT": "32000"
+     "HTTPFS_PORT": "31400"
   },
   "container": {
     "type": "DOCKER",
@@ -16,7 +16,7 @@
       "forcePullImage": true,
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 8000, "hostPort": 0, "protocol": "tcp" }
+        { "containerPort": 8000, "hostPort": 31080, "servicePort": 80, "protocol": "tcp" }
       ]
     }
   },
