@@ -1,0 +1,884 @@
+mparker@hub:~/dsra-dcos/docker/joshua$ docker build -t hub.dsra.local:5000/dsra/joshua:6.0.4 .
+Sending build context to Docker daemon 4.096 kB
+Step 0 : FROM ingensi/oracle-jdk:latest
+ ---> a64d2697169e
+Step 1 : LABEL version 6.0.4
+ ---> Running in 795a59164538
+ ---> 4ae0451d50f0
+Removing intermediate container 795a59164538
+Step 2 : LABEL description "Dockerized version of Joshua MT"
+ ---> Running in 136ff38de113
+ ---> 1dccf086b2a3
+Removing intermediate container 136ff38de113
+Step 3 : LABEL tag "dsra/joshua:6.0.4"
+ ---> Running in fc36b3585556
+ ---> a77fd2174fb2
+Removing intermediate container fc36b3585556
+Step 4 : MAINTAINER Matt Parker <matthew.parker@l-3com.com>
+ ---> Running in 31b9ccf8c7fd
+ ---> d366179511b9
+Removing intermediate container 31b9ccf8c7fd
+Step 5 : RUN yum install --assumeyes make libboost-all-dev gcc-c++ zlib-devel nano ant wget tar
+ ---> Running in f0f3652f9a0f
+Loaded plugins: fastestmirror
+Repodata is over 2 weeks old. Install yum-cron? Or run: yum makecache fast
+Determining fastest mirrors
+ * base: mirror.us.leaseweb.net
+ * extras: reflector.westga.edu
+ * updates: mirror.us.leaseweb.net
+No package libboost-all-dev available.
+Package wget-1.14-10.el7_0.1.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package ant.noarch 0:1.9.2-9.el7 will be installed
+--> Processing Dependency: jpackage-utils >= 1.7.5 for package: ant-1.9.2-9.el7.noarch
+--> Processing Dependency: java-devel >= 1.5.0 for package: ant-1.9.2-9.el7.noarch
+--> Processing Dependency: xerces-j2 for package: ant-1.9.2-9.el7.noarch
+--> Processing Dependency: perl for package: ant-1.9.2-9.el7.noarch
+--> Processing Dependency: jpackage-utils for package: ant-1.9.2-9.el7.noarch
+---> Package gcc-c++.x86_64 0:4.8.3-9.el7 will be installed
+--> Processing Dependency: libstdc++-devel = 4.8.3-9.el7 for package: gcc-c++-4.8.3-9.el7.x86_64
+--> Processing Dependency: gcc = 4.8.3-9.el7 for package: gcc-c++-4.8.3-9.el7.x86_64
+--> Processing Dependency: libmpfr.so.4()(64bit) for package: gcc-c++-4.8.3-9.el7.x86_64
+--> Processing Dependency: libmpc.so.3()(64bit) for package: gcc-c++-4.8.3-9.el7.x86_64
+---> Package make.x86_64 1:3.82-21.el7 will be installed
+---> Package nano.x86_64 0:2.3.1-10.el7 will be installed
+---> Package tar.x86_64 2:1.26-29.el7 will be installed
+---> Package zlib-devel.x86_64 0:1.2.7-13.el7 will be installed
+--> Running transaction check
+---> Package gcc.x86_64 0:4.8.3-9.el7 will be installed
+--> Processing Dependency: cpp = 4.8.3-9.el7 for package: gcc-4.8.3-9.el7.x86_64
+--> Processing Dependency: glibc-devel >= 2.2.90-12 for package: gcc-4.8.3-9.el7.x86_64
+---> Package java-1.7.0-openjdk-devel.x86_64 1:1.7.0.91-2.6.2.1.el7_1 will be installed
+--> Processing Dependency: java-1.7.0-openjdk = 1:1.7.0.91-2.6.2.1.el7_1 for package: 1:java-1.7.0-openjdk-devel-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libX11.so.6()(64bit) for package: 1:java-1.7.0-openjdk-devel-1.7.0.91-2.6.2.1.el7_1.x86_64
+---> Package javapackages-tools.noarch 0:3.4.1-6.el7_0 will be installed
+--> Processing Dependency: python-javapackages = 3.4.1-6.el7_0 for package: javapackages-tools-3.4.1-6.el7_0.noarch
+--> Processing Dependency: libxslt for package: javapackages-tools-3.4.1-6.el7_0.noarch
+---> Package libmpc.x86_64 0:1.0.1-3.el7 will be installed
+---> Package libstdc++-devel.x86_64 0:4.8.3-9.el7 will be installed
+---> Package mpfr.x86_64 0:3.1.1-4.el7 will be installed
+---> Package perl.x86_64 4:5.16.3-285.el7 will be installed
+--> Processing Dependency: perl-libs = 4:5.16.3-285.el7 for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Socket) >= 1.3 for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Scalar::Util) >= 1.10 for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl-macros for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl-libs for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(threads::shared) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(threads) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(constant) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Time::Local) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Time::HiRes) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Storable) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Socket) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Scalar::Util) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Pod::Simple::XHTML) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Pod::Simple::Search) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Getopt::Long) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Filter::Util::Call) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(File::Temp) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(File::Spec::Unix) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(File::Spec::Functions) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(File::Spec) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(File::Path) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Exporter) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Cwd) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: perl(Carp) for package: 4:perl-5.16.3-285.el7.x86_64
+--> Processing Dependency: libperl.so()(64bit) for package: 4:perl-5.16.3-285.el7.x86_64
+---> Package xerces-j2.noarch 0:2.11.0-17.el7_0 will be installed
+--> Processing Dependency: xml-commons-resolver >= 1.2 for package: xerces-j2-2.11.0-17.el7_0.noarch
+--> Processing Dependency: xalan-j2 >= 2.7.1 for package: xerces-j2-2.11.0-17.el7_0.noarch
+--> Processing Dependency: osgi(org.apache.xml.serializer) for package: xerces-j2-2.11.0-17.el7_0.noarch
+--> Processing Dependency: osgi(org.apache.xml.resolver) for package: xerces-j2-2.11.0-17.el7_0.noarch
+--> Processing Dependency: osgi(javax.xml) for package: xerces-j2-2.11.0-17.el7_0.noarch
+--> Running transaction check
+---> Package cpp.x86_64 0:4.8.3-9.el7 will be installed
+---> Package glibc-devel.x86_64 0:2.17-78.el7 will be installed
+--> Processing Dependency: glibc-headers = 2.17-78.el7 for package: glibc-devel-2.17-78.el7.x86_64
+--> Processing Dependency: glibc-headers for package: glibc-devel-2.17-78.el7.x86_64
+---> Package java-1.7.0-openjdk.x86_64 1:1.7.0.91-2.6.2.1.el7_1 will be installed
+--> Processing Dependency: java-1.7.0-openjdk-headless = 1:1.7.0.91-2.6.2.1.el7_1 for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: xorg-x11-fonts-Type1 for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libpulse.so.0(PULSE_0)(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libpng15.so.15(PNG15_0)(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libjvm.so(SUNWprivate_1.1)(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libjpeg.so.62(LIBJPEG_6.2)(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libjava.so(SUNWprivate_1.1)(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libasound.so.2(ALSA_0.9.0rc4)(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libasound.so.2(ALSA_0.9)(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: fontconfig for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libpulse.so.0()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libpng15.so.15()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libjvm.so()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libjpeg.so.62()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libjava.so()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libgif.so.4()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libfreetype.so.6()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libfontconfig.so.1()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libcups.so.2()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libawt.so()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libasound.so.2()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libXtst.so.6()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libXrender.so.1()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libXi.so.6()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libXext.so.6()(64bit) for package: 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64
+---> Package libX11.x86_64 0:1.6.0-2.1.el7 will be installed
+--> Processing Dependency: libX11-common = 1.6.0-2.1.el7 for package: libX11-1.6.0-2.1.el7.x86_64
+--> Processing Dependency: libxcb.so.1()(64bit) for package: libX11-1.6.0-2.1.el7.x86_64
+---> Package libxslt.x86_64 0:1.1.28-5.el7 will be installed
+---> Package perl-Carp.noarch 0:1.26-244.el7 will be installed
+---> Package perl-Exporter.noarch 0:5.68-3.el7 will be installed
+---> Package perl-File-Path.noarch 0:2.09-2.el7 will be installed
+---> Package perl-File-Temp.noarch 0:0.23.01-3.el7 will be installed
+---> Package perl-Filter.x86_64 0:1.49-3.el7 will be installed
+---> Package perl-Getopt-Long.noarch 0:2.40-2.el7 will be installed
+--> Processing Dependency: perl(Pod::Usage) >= 1.14 for package: perl-Getopt-Long-2.40-2.el7.noarch
+--> Processing Dependency: perl(Text::ParseWords) for package: perl-Getopt-Long-2.40-2.el7.noarch
+---> Package perl-PathTools.x86_64 0:3.40-5.el7 will be installed
+---> Package perl-Pod-Simple.noarch 1:3.28-4.el7 will be installed
+--> Processing Dependency: perl(Pod::Escapes) >= 1.04 for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+--> Processing Dependency: perl(Encode) for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+---> Package perl-Scalar-List-Utils.x86_64 0:1.27-248.el7 will be installed
+---> Package perl-Socket.x86_64 0:2.010-3.el7 will be installed
+---> Package perl-Storable.x86_64 0:2.45-3.el7 will be installed
+---> Package perl-Time-HiRes.x86_64 4:1.9725-3.el7 will be installed
+---> Package perl-Time-Local.noarch 0:1.2300-2.el7 will be installed
+---> Package perl-constant.noarch 0:1.27-2.el7 will be installed
+---> Package perl-libs.x86_64 4:5.16.3-285.el7 will be installed
+---> Package perl-macros.x86_64 4:5.16.3-285.el7 will be installed
+---> Package perl-threads.x86_64 0:1.87-4.el7 will be installed
+---> Package perl-threads-shared.x86_64 0:1.43-6.el7 will be installed
+---> Package python-javapackages.noarch 0:3.4.1-6.el7_0 will be installed
+--> Processing Dependency: python-lxml for package: python-javapackages-3.4.1-6.el7_0.noarch
+---> Package xalan-j2.noarch 0:2.7.1-23.el7 will be installed
+---> Package xml-commons-apis.noarch 0:1.4.01-16.el7 will be installed
+---> Package xml-commons-resolver.noarch 0:1.2-15.el7 will be installed
+--> Running transaction check
+---> Package alsa-lib.x86_64 0:1.0.28-2.el7 will be installed
+---> Package cups-libs.x86_64 1:1.6.3-17.el7_1.1 will be installed
+--> Processing Dependency: libavahi-common.so.3()(64bit) for package: 1:cups-libs-1.6.3-17.el7_1.1.x86_64
+--> Processing Dependency: libavahi-client.so.3()(64bit) for package: 1:cups-libs-1.6.3-17.el7_1.1.x86_64
+---> Package fontconfig.x86_64 0:2.10.95-7.el7 will be installed
+--> Processing Dependency: fontpackages-filesystem for package: fontconfig-2.10.95-7.el7.x86_64
+---> Package freetype.x86_64 0:2.4.11-10.el7_1.1 will be installed
+---> Package giflib.x86_64 0:4.1.6-9.el7 will be installed
+--> Processing Dependency: libSM.so.6()(64bit) for package: giflib-4.1.6-9.el7.x86_64
+--> Processing Dependency: libICE.so.6()(64bit) for package: giflib-4.1.6-9.el7.x86_64
+---> Package glibc-headers.x86_64 0:2.17-78.el7 will be installed
+--> Processing Dependency: kernel-headers >= 2.2.1 for package: glibc-headers-2.17-78.el7.x86_64
+--> Processing Dependency: kernel-headers for package: glibc-headers-2.17-78.el7.x86_64
+---> Package java-1.7.0-openjdk-headless.x86_64 1:1.7.0.91-2.6.2.1.el7_1 will be installed
+--> Processing Dependency: tzdata-java for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libsctp.so.1(VERS_1)(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libsctp.so.1()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libpcsclite.so.1()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libpangoft2-1.0.so.0()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libpangocairo-1.0.so.0()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libpango-1.0.so.0()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libgtk-x11-2.0.so.0()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libgdk_pixbuf-2.0.so.0()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libgdk-x11-2.0.so.0()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libgconf-2.so.4()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libcairo.so.2()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+--> Processing Dependency: libatk-1.0.so.0()(64bit) for package: 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x86_64
+---> Package libX11-common.noarch 0:1.6.0-2.1.el7 will be installed
+---> Package libXext.x86_64 0:1.3.2-2.1.el7 will be installed
+---> Package libXi.x86_64 0:1.7.2-2.1.el7 will be installed
+---> Package libXrender.x86_64 0:0.9.8-2.1.el7 will be installed
+---> Package libXtst.x86_64 0:1.2.2-2.1.el7 will be installed
+---> Package libjpeg-turbo.x86_64 0:1.2.90-5.el7 will be installed
+---> Package libpng.x86_64 2:1.5.13-5.el7 will be installed
+---> Package libxcb.x86_64 0:1.9-5.el7 will be installed
+--> Processing Dependency: libXau.so.6()(64bit) for package: libxcb-1.9-5.el7.x86_64
+---> Package perl-Encode.x86_64 0:2.51-7.el7 will be installed
+---> Package perl-Pod-Escapes.noarch 1:1.04-285.el7 will be installed
+---> Package perl-Pod-Usage.noarch 0:1.63-3.el7 will be installed
+--> Processing Dependency: perl(Pod::Text) >= 3.15 for package: perl-Pod-Usage-1.63-3.el7.noarch
+--> Processing Dependency: perl-Pod-Perldoc for package: perl-Pod-Usage-1.63-3.el7.noarch
+---> Package perl-Text-ParseWords.noarch 0:3.29-4.el7 will be installed
+---> Package pulseaudio-libs.x86_64 0:3.0-30.el7 will be installed
+--> Processing Dependency: libsndfile.so.1(libsndfile.so.1.0)(64bit) for package: pulseaudio-libs-3.0-30.el7.x86_64
+--> Processing Dependency: libwrap.so.0()(64bit) for package: pulseaudio-libs-3.0-30.el7.x86_64
+--> Processing Dependency: libsndfile.so.1()(64bit) for package: pulseaudio-libs-3.0-30.el7.x86_64
+--> Processing Dependency: libjson-c.so.2()(64bit) for package: pulseaudio-libs-3.0-30.el7.x86_64
+--> Processing Dependency: libasyncns.so.0()(64bit) for package: pulseaudio-libs-3.0-30.el7.x86_64
+---> Package python-lxml.x86_64 0:3.2.1-4.el7 will be installed
+---> Package xorg-x11-fonts-Type1.noarch 0:7.5-9.el7 will be installed
+--> Processing Dependency: ttmkfdir for package: xorg-x11-fonts-Type1-7.5-9.el7.noarch
+--> Processing Dependency: ttmkfdir for package: xorg-x11-fonts-Type1-7.5-9.el7.noarch
+--> Processing Dependency: mkfontdir for package: xorg-x11-fonts-Type1-7.5-9.el7.noarch
+--> Processing Dependency: mkfontdir for package: xorg-x11-fonts-Type1-7.5-9.el7.noarch
+--> Running transaction check
+---> Package GConf2.x86_64 0:3.2.6-8.el7 will be installed
+--> Processing Dependency: dbus for package: GConf2-3.2.6-8.el7.x86_64
+--> Processing Dependency: /usr/bin/killall for package: GConf2-3.2.6-8.el7.x86_64
+--> Processing Dependency: libpolkit-gobject-1.so.0()(64bit) for package: GConf2-3.2.6-8.el7.x86_64
+--> Processing Dependency: libdbus-glib-1.so.2()(64bit) for package: GConf2-3.2.6-8.el7.x86_64
+---> Package atk.x86_64 0:2.8.0-4.el7 will be installed
+---> Package avahi-libs.x86_64 0:0.6.31-14.el7 will be installed
+---> Package cairo.x86_64 0:1.12.14-6.el7 will be installed
+--> Processing Dependency: libpixman-1.so.0()(64bit) for package: cairo-1.12.14-6.el7.x86_64
+--> Processing Dependency: libGL.so.1()(64bit) for package: cairo-1.12.14-6.el7.x86_64
+--> Processing Dependency: libEGL.so.1()(64bit) for package: cairo-1.12.14-6.el7.x86_64
+---> Package fontpackages-filesystem.noarch 0:1.44-8.el7 will be installed
+---> Package gdk-pixbuf2.x86_64 0:2.28.2-5.el7_1 will be installed
+--> Processing Dependency: libtiff.so.5(LIBTIFF_4.0)(64bit) for package: gdk-pixbuf2-2.28.2-5.el7_1.x86_64
+--> Processing Dependency: libtiff.so.5()(64bit) for package: gdk-pixbuf2-2.28.2-5.el7_1.x86_64
+--> Processing Dependency: libjasper.so.1()(64bit) for package: gdk-pixbuf2-2.28.2-5.el7_1.x86_64
+---> Package gtk2.x86_64 0:2.24.22-5.el7_0.1 will be installed
+--> Processing Dependency: libXrandr >= 1.2.99.4-2 for package: gtk2-2.24.22-5.el7_0.1.x86_64
+--> Processing Dependency: hicolor-icon-theme for package: gtk2-2.24.22-5.el7_0.1.x86_64
+--> Processing Dependency: libXrandr.so.2()(64bit) for package: gtk2-2.24.22-5.el7_0.1.x86_64
+--> Processing Dependency: libXinerama.so.1()(64bit) for package: gtk2-2.24.22-5.el7_0.1.x86_64
+--> Processing Dependency: libXfixes.so.3()(64bit) for package: gtk2-2.24.22-5.el7_0.1.x86_64
+--> Processing Dependency: libXdamage.so.1()(64bit) for package: gtk2-2.24.22-5.el7_0.1.x86_64
+--> Processing Dependency: libXcursor.so.1()(64bit) for package: gtk2-2.24.22-5.el7_0.1.x86_64
+--> Processing Dependency: libXcomposite.so.1()(64bit) for package: gtk2-2.24.22-5.el7_0.1.x86_64
+---> Package json-c.x86_64 0:0.11-4.el7_0 will be installed
+---> Package kernel-headers.x86_64 0:3.10.0-229.20.1.el7 will be installed
+---> Package libICE.x86_64 0:1.0.8-7.el7 will be installed
+---> Package libSM.x86_64 0:1.2.1-7.el7 will be installed
+---> Package libXau.x86_64 0:1.0.8-2.1.el7 will be installed
+---> Package libasyncns.x86_64 0:0.8-7.el7 will be installed
+---> Package libsndfile.x86_64 0:1.0.25-9.el7 will be installed
+--> Processing Dependency: libvorbisenc.so.2()(64bit) for package: libsndfile-1.0.25-9.el7.x86_64
+--> Processing Dependency: libvorbis.so.0()(64bit) for package: libsndfile-1.0.25-9.el7.x86_64
+--> Processing Dependency: libogg.so.0()(64bit) for package: libsndfile-1.0.25-9.el7.x86_64
+--> Processing Dependency: libgsm.so.1()(64bit) for package: libsndfile-1.0.25-9.el7.x86_64
+--> Processing Dependency: libFLAC.so.8()(64bit) for package: libsndfile-1.0.25-9.el7.x86_64
+---> Package lksctp-tools.x86_64 0:1.0.13-3.el7 will be installed
+---> Package pango.x86_64 0:1.34.1-5.el7 will be installed
+--> Processing Dependency: libthai >= 0.1.9 for package: pango-1.34.1-5.el7.x86_64
+--> Processing Dependency: libthai.so.0(LIBTHAI_0.1)(64bit) for package: pango-1.34.1-5.el7.x86_64
+--> Processing Dependency: libthai.so.0()(64bit) for package: pango-1.34.1-5.el7.x86_64
+--> Processing Dependency: libharfbuzz.so.0()(64bit) for package: pango-1.34.1-5.el7.x86_64
+--> Processing Dependency: libXft.so.2()(64bit) for package: pango-1.34.1-5.el7.x86_64
+---> Package pcsc-lite-libs.x86_64 0:1.8.8-5.el7 will be installed
+---> Package perl-Pod-Perldoc.noarch 0:3.20-4.el7 will be installed
+--> Processing Dependency: perl(parent) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+--> Processing Dependency: perl(HTTP::Tiny) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+---> Package perl-podlators.noarch 0:2.5.1-3.el7 will be installed
+---> Package tcp_wrappers-libs.x86_64 0:7.6-77.el7 will be installed
+---> Package ttmkfdir.x86_64 0:3.0.9-41.el7 will be installed
+---> Package tzdata-java.noarch 0:2015g-1.el7 will be installed
+---> Package xorg-x11-font-utils.x86_64 1:7.5-18.1.el7 will be installed
+--> Processing Dependency: libfontenc.so.1()(64bit) for package: 1:xorg-x11-font-utils-7.5-18.1.el7.x86_64
+--> Processing Dependency: libXfont.so.1()(64bit) for package: 1:xorg-x11-font-utils-7.5-18.1.el7.x86_64
+--> Running transaction check
+---> Package dbus.x86_64 1:1.6.12-11.el7 will be installed
+---> Package dbus-glib.x86_64 0:0.100-7.el7 will be installed
+---> Package flac-libs.x86_64 0:1.3.0-5.el7_1 will be installed
+---> Package gsm.x86_64 0:1.0.13-11.el7 will be installed
+---> Package harfbuzz.x86_64 0:0.9.20-4.el7 will be installed
+--> Processing Dependency: libgraphite2.so.3()(64bit) for package: harfbuzz-0.9.20-4.el7.x86_64
+---> Package hicolor-icon-theme.noarch 0:0.12-7.el7 will be installed
+---> Package jasper-libs.x86_64 0:1.900.1-26.el7_0.3 will be installed
+---> Package libXcomposite.x86_64 0:0.4.4-4.1.el7 will be installed
+---> Package libXcursor.x86_64 0:1.1.14-2.1.el7 will be installed
+---> Package libXdamage.x86_64 0:1.1.4-4.1.el7 will be installed
+---> Package libXfixes.x86_64 0:5.0.1-2.1.el7 will be installed
+---> Package libXfont.x86_64 0:1.4.7-3.el7_1 will be installed
+---> Package libXft.x86_64 0:2.3.1-5.1.el7 will be installed
+---> Package libXinerama.x86_64 0:1.1.3-2.1.el7 will be installed
+---> Package libXrandr.x86_64 0:1.4.1-2.1.el7 will be installed
+---> Package libfontenc.x86_64 0:1.1.1-5.el7 will be installed
+---> Package libogg.x86_64 2:1.3.0-7.el7 will be installed
+---> Package libthai.x86_64 0:0.1.14-9.el7 will be installed
+---> Package libtiff.x86_64 0:4.0.3-14.el7 will be installed
+--> Processing Dependency: libjbig.so.2.0()(64bit) for package: libtiff-4.0.3-14.el7.x86_64
+---> Package libvorbis.x86_64 1:1.3.3-8.el7 will be installed
+---> Package mesa-libEGL.x86_64 0:10.2.7-5.20140910.el7_1.1 will be installed
+--> Processing Dependency: mesa-libgbm = 10.2.7-5.20140910.el7_1.1 for package: mesa-libEGL-10.2.7-5.20140910.el7_1.1.x86_64
+--> Processing Dependency: libglapi.so.0()(64bit) for package: mesa-libEGL-10.2.7-5.20140910.el7_1.1.x86_64
+--> Processing Dependency: libgbm.so.1()(64bit) for package: mesa-libEGL-10.2.7-5.20140910.el7_1.1.x86_64
+--> Processing Dependency: libdrm.so.2()(64bit) for package: mesa-libEGL-10.2.7-5.20140910.el7_1.1.x86_64
+---> Package mesa-libGL.x86_64 0:10.2.7-5.20140910.el7_1.1 will be installed
+--> Processing Dependency: libXxf86vm.so.1()(64bit) for package: mesa-libGL-10.2.7-5.20140910.el7_1.1.x86_64
+---> Package perl-HTTP-Tiny.noarch 0:0.033-3.el7 will be installed
+---> Package perl-parent.noarch 1:0.225-244.el7 will be installed
+---> Package pixman.x86_64 0:0.32.4-3.el7 will be installed
+---> Package polkit.x86_64 0:0.112-5.el7 will be installed
+--> Processing Dependency: polkit-pkla-compat for package: polkit-0.112-5.el7.x86_64
+--> Processing Dependency: libmozjs-17.0.so(mozjs_17.0)(64bit) for package: polkit-0.112-5.el7.x86_64
+--> Processing Dependency: libmozjs-17.0.so()(64bit) for package: polkit-0.112-5.el7.x86_64
+---> Package psmisc.x86_64 0:22.20-8.el7 will be installed
+--> Running transaction check
+---> Package graphite2.x86_64 0:1.2.2-5.el7 will be installed
+---> Package jbigkit-libs.x86_64 0:2.0-11.el7 will be installed
+---> Package libXxf86vm.x86_64 0:1.1.3-2.1.el7 will be installed
+---> Package libdrm.x86_64 0:2.4.56-2.el7 will be installed
+--> Processing Dependency: libpciaccess.so.0()(64bit) for package: libdrm-2.4.56-2.el7.x86_64
+---> Package mesa-libgbm.x86_64 0:10.2.7-5.20140910.el7_1.1 will be installed
+---> Package mesa-libglapi.x86_64 0:10.2.7-5.20140910.el7_1.1 will be installed
+---> Package mozjs17.x86_64 0:17.0.0-10.el7 will be installed
+---> Package polkit-pkla-compat.x86_64 0:0.1-4.el7 will be installed
+--> Running transaction check
+---> Package libpciaccess.x86_64 0:0.13.1-4.1.el7 will be installed
+--> Processing Dependency: hwdata for package: libpciaccess-0.13.1-4.1.el7.x86_64
+--> Running transaction check
+---> Package hwdata.x86_64 0:0.252-7.8.el7_1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package                      Arch    Version                    Repository
+                                                                           Size
+================================================================================
+Installing:
+ ant                          noarch  1.9.2-9.el7                base     1.9 M
+ gcc-c++                      x86_64  4.8.3-9.el7                base     7.2 M
+ make                         x86_64  1:3.82-21.el7              base     420 k
+ nano                         x86_64  2.3.1-10.el7               base     440 k
+ tar                          x86_64  2:1.26-29.el7              base     843 k
+ zlib-devel                   x86_64  1.2.7-13.el7               base      49 k
+Installing for dependencies:
+ GConf2                       x86_64  3.2.6-8.el7                base     1.0 M
+ alsa-lib                     x86_64  1.0.28-2.el7               base     391 k
+ atk                          x86_64  2.8.0-4.el7                base     233 k
+ avahi-libs                   x86_64  0.6.31-14.el7              base      60 k
+ cairo                        x86_64  1.12.14-6.el7              base     697 k
+ cpp                          x86_64  4.8.3-9.el7                base     5.9 M
+ cups-libs                    x86_64  1:1.6.3-17.el7_1.1         updates  354 k
+ dbus                         x86_64  1:1.6.12-11.el7            base     306 k
+ dbus-glib                    x86_64  0.100-7.el7                base     102 k
+ flac-libs                    x86_64  1.3.0-5.el7_1              updates  169 k
+ fontconfig                   x86_64  2.10.95-7.el7              base     228 k
+ fontpackages-filesystem      noarch  1.44-8.el7                 base     9.9 k
+ freetype                     x86_64  2.4.11-10.el7_1.1          updates  391 k
+ gcc                          x86_64  4.8.3-9.el7                base      16 M
+ gdk-pixbuf2                  x86_64  2.28.2-5.el7_1             updates  533 k
+ giflib                       x86_64  4.1.6-9.el7                base      40 k
+ glibc-devel                  x86_64  2.17-78.el7                base     1.0 M
+ glibc-headers                x86_64  2.17-78.el7                base     656 k
+ graphite2                    x86_64  1.2.2-5.el7                base      81 k
+ gsm                          x86_64  1.0.13-11.el7              base      30 k
+ gtk2                         x86_64  2.24.22-5.el7_0.1          base     3.4 M
+ harfbuzz                     x86_64  0.9.20-4.el7               base     145 k
+ hicolor-icon-theme           noarch  0.12-7.el7                 base      42 k
+ hwdata                       x86_64  0.252-7.8.el7_1            updates  2.0 M
+ jasper-libs                  x86_64  1.900.1-26.el7_0.3         base     149 k
+ java-1.7.0-openjdk           x86_64  1:1.7.0.91-2.6.2.1.el7_1   updates  204 k
+ java-1.7.0-openjdk-devel     x86_64  1:1.7.0.91-2.6.2.1.el7_1   updates  9.2 M
+ java-1.7.0-openjdk-headless  x86_64  1:1.7.0.91-2.6.2.1.el7_1   updates   25 M
+ javapackages-tools           noarch  3.4.1-6.el7_0              base      72 k
+ jbigkit-libs                 x86_64  2.0-11.el7                 base      46 k
+ json-c                       x86_64  0.11-4.el7_0               base      31 k
+ kernel-headers               x86_64  3.10.0-229.20.1.el7        updates  2.3 M
+ libICE                       x86_64  1.0.8-7.el7                base      63 k
+ libSM                        x86_64  1.2.1-7.el7                base      38 k
+ libX11                       x86_64  1.6.0-2.1.el7              base     605 k
+ libX11-common                noarch  1.6.0-2.1.el7              base     181 k
+ libXau                       x86_64  1.0.8-2.1.el7              base      29 k
+ libXcomposite                x86_64  0.4.4-4.1.el7              base      22 k
+ libXcursor                   x86_64  1.1.14-2.1.el7             base      30 k
+ libXdamage                   x86_64  1.1.4-4.1.el7              base      20 k
+ libXext                      x86_64  1.3.2-2.1.el7              base      38 k
+ libXfixes                    x86_64  5.0.1-2.1.el7              base      18 k
+ libXfont                     x86_64  1.4.7-3.el7_1              updates  145 k
+ libXft                       x86_64  2.3.1-5.1.el7              base      57 k
+ libXi                        x86_64  1.7.2-2.1.el7              base      39 k
+ libXinerama                  x86_64  1.1.3-2.1.el7              base      14 k
+ libXrandr                    x86_64  1.4.1-2.1.el7              base      25 k
+ libXrender                   x86_64  0.9.8-2.1.el7              base      25 k
+ libXtst                      x86_64  1.2.2-2.1.el7              base      20 k
+ libXxf86vm                   x86_64  1.1.3-2.1.el7              base      17 k
+ libasyncns                   x86_64  0.8-7.el7                  base      26 k
+ libdrm                       x86_64  2.4.56-2.el7               base     122 k
+ libfontenc                   x86_64  1.1.1-5.el7                base      29 k
+ libjpeg-turbo                x86_64  1.2.90-5.el7               base     134 k
+ libmpc                       x86_64  1.0.1-3.el7                base      51 k
+ libogg                       x86_64  2:1.3.0-7.el7              base      24 k
+ libpciaccess                 x86_64  0.13.1-4.1.el7             base      25 k
+ libpng                       x86_64  2:1.5.13-5.el7             base     212 k
+ libsndfile                   x86_64  1.0.25-9.el7               base     149 k
+ libstdc++-devel              x86_64  4.8.3-9.el7                base     1.5 M
+ libthai                      x86_64  0.1.14-9.el7               base     187 k
+ libtiff                      x86_64  4.0.3-14.el7               base     167 k
+ libvorbis                    x86_64  1:1.3.3-8.el7              base     204 k
+ libxcb                       x86_64  1.9-5.el7                  base     169 k
+ libxslt                      x86_64  1.1.28-5.el7               base     242 k
+ lksctp-tools                 x86_64  1.0.13-3.el7               base      87 k
+ mesa-libEGL                  x86_64  10.2.7-5.20140910.el7_1.1  updates   70 k
+ mesa-libGL                   x86_64  10.2.7-5.20140910.el7_1.1  updates  149 k
+ mesa-libgbm                  x86_64  10.2.7-5.20140910.el7_1.1  updates   31 k
+ mesa-libglapi                x86_64  10.2.7-5.20140910.el7_1.1  updates   37 k
+ mozjs17                      x86_64  17.0.0-10.el7              base     1.4 M
+ mpfr                         x86_64  3.1.1-4.el7                base     203 k
+ pango                        x86_64  1.34.1-5.el7               base     283 k
+ pcsc-lite-libs               x86_64  1.8.8-5.el7                base      34 k
+ perl                         x86_64  4:5.16.3-285.el7           base     8.0 M
+ perl-Carp                    noarch  1.26-244.el7               base      19 k
+ perl-Encode                  x86_64  2.51-7.el7                 base     1.5 M
+ perl-Exporter                noarch  5.68-3.el7                 base      28 k
+ perl-File-Path               noarch  2.09-2.el7                 base      26 k
+ perl-File-Temp               noarch  0.23.01-3.el7              base      56 k
+ perl-Filter                  x86_64  1.49-3.el7                 base      76 k
+ perl-Getopt-Long             noarch  2.40-2.el7                 base      56 k
+ perl-HTTP-Tiny               noarch  0.033-3.el7                base      38 k
+ perl-PathTools               x86_64  3.40-5.el7                 base      82 k
+ perl-Pod-Escapes             noarch  1:1.04-285.el7             base      50 k
+ perl-Pod-Perldoc             noarch  3.20-4.el7                 base      87 k
+ perl-Pod-Simple              noarch  1:3.28-4.el7               base     216 k
+ perl-Pod-Usage               noarch  1.63-3.el7                 base      27 k
+ perl-Scalar-List-Utils       x86_64  1.27-248.el7               base      36 k
+ perl-Socket                  x86_64  2.010-3.el7                base      49 k
+ perl-Storable                x86_64  2.45-3.el7                 base      77 k
+ perl-Text-ParseWords         noarch  3.29-4.el7                 base      14 k
+ perl-Time-HiRes              x86_64  4:1.9725-3.el7             base      45 k
+ perl-Time-Local              noarch  1.2300-2.el7               base      24 k
+ perl-constant                noarch  1.27-2.el7                 base      19 k
+ perl-libs                    x86_64  4:5.16.3-285.el7           base     687 k
+ perl-macros                  x86_64  4:5.16.3-285.el7           base      42 k
+ perl-parent                  noarch  1:0.225-244.el7            base      12 k
+ perl-podlators               noarch  2.5.1-3.el7                base     112 k
+ perl-threads                 x86_64  1.87-4.el7                 base      49 k
+ perl-threads-shared          x86_64  1.43-6.el7                 base      39 k
+ pixman                       x86_64  0.32.4-3.el7               base     254 k
+ polkit                       x86_64  0.112-5.el7                base     165 k
+ polkit-pkla-compat           x86_64  0.1-4.el7                  base      39 k
+ psmisc                       x86_64  22.20-8.el7                base     140 k
+ pulseaudio-libs              x86_64  3.0-30.el7                 base     556 k
+ python-javapackages          noarch  3.4.1-6.el7_0              base      31 k
+ python-lxml                  x86_64  3.2.1-4.el7                base     758 k
+ tcp_wrappers-libs            x86_64  7.6-77.el7                 base      66 k
+ ttmkfdir                     x86_64  3.0.9-41.el7               base      47 k
+ tzdata-java                  noarch  2015g-1.el7                updates  176 k
+ xalan-j2                     noarch  2.7.1-23.el7               base     1.9 M
+ xerces-j2                    noarch  2.11.0-17.el7_0            base     1.1 M
+ xml-commons-apis             noarch  1.4.01-16.el7              base     227 k
+ xml-commons-resolver         noarch  1.2-15.el7                 base     108 k
+ xorg-x11-font-utils          x86_64  1:7.5-18.1.el7             base      87 k
+ xorg-x11-fonts-Type1         noarch  7.5-9.el7                  base     521 k
+
+Transaction Summary
+================================================================================
+Install  6 Packages (+117 Dependent packages)
+
+Total download size: 106 M
+Installed size: 325 M
+Downloading packages:
+--------------------------------------------------------------------------------
+Total                                              6.8 MB/s | 106 MB  00:15     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+Warning: RPMDB altered outside of yum.
+  Installing : freetype-2.4.11-10.el7_1.1.x86_64                          1/123 
+  Installing : libjpeg-turbo-1.2.90-5.el7.x86_64                          2/123 
+  Installing : mpfr-3.1.1-4.el7.x86_64                                    3/123 
+  Installing : libmpc-1.0.1-3.el7.x86_64                                  4/123 
+  Installing : libICE-1.0.8-7.el7.x86_64                                  5/123 
+  Installing : mesa-libglapi-10.2.7-5.20140910.el7_1.1.x86_64             6/123 
+  Installing : 2:libogg-1.3.0-7.el7.x86_64                                7/123 
+  Installing : 2:libpng-1.5.13-5.el7.x86_64                               8/123 
+  Installing : libSM-1.2.1-7.el7.x86_64                                   9/123 
+  Installing : atk-2.8.0-4.el7.x86_64                                    10/123 
+  Installing : libxslt-1.1.28-5.el7.x86_64                               11/123 
+  Installing : libfontenc-1.1.1-5.el7.x86_64                             12/123 
+  Installing : 1:dbus-1.6.12-11.el7.x86_64                               13/123 
+  Installing : libXfont-1.4.7-3.el7_1.x86_64                             14/123 
+  Installing : 1:xorg-x11-font-utils-7.5-18.1.el7.x86_64                 15/123 
+  Installing : python-lxml-3.2.1-4.el7.x86_64                            16/123 
+  Installing : python-javapackages-3.4.1-6.el7_0.noarch                  17/123 
+  Installing : javapackages-tools-3.4.1-6.el7_0.noarch                   18/123 
+  Installing : 1:libvorbis-1.3.3-8.el7.x86_64                            19/123 
+  Installing : flac-libs-1.3.0-5.el7_1.x86_64                            20/123 
+  Installing : cpp-4.8.3-9.el7.x86_64                                    21/123 
+  Installing : jasper-libs-1.900.1-26.el7_0.3.x86_64                     22/123 
+  Installing : ttmkfdir-3.0.9-41.el7.x86_64                              23/123 
+  Installing : 1:perl-parent-0.225-244.el7.noarch                        24/123 
+  Installing : perl-HTTP-Tiny-0.033-3.el7.noarch                         25/123 
+  Installing : perl-podlators-2.5.1-3.el7.noarch                         26/123 
+  Installing : perl-Pod-Perldoc-3.20-4.el7.noarch                        27/123 
+  Installing : 1:perl-Pod-Escapes-1.04-285.el7.noarch                    28/123 
+  Installing : perl-Text-ParseWords-3.29-4.el7.noarch                    29/123 
+  Installing : perl-Encode-2.51-7.el7.x86_64                             30/123 
+  Installing : perl-Pod-Usage-1.63-3.el7.noarch                          31/123 
+  Installing : 4:perl-macros-5.16.3-285.el7.x86_64                       32/123 
+  Installing : 4:perl-libs-5.16.3-285.el7.x86_64                         33/123 
+  Installing : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                     34/123 
+  Installing : perl-threads-1.87-4.el7.x86_64                            35/123 
+  Installing : perl-Storable-2.45-3.el7.x86_64                           36/123 
+  Installing : perl-Carp-1.26-244.el7.noarch                             37/123 
+  Installing : perl-Filter-1.49-3.el7.x86_64                             38/123 
+  Installing : perl-Exporter-5.68-3.el7.noarch                           39/123 
+  Installing : perl-constant-1.27-2.el7.noarch                           40/123 
+  Installing : perl-Time-Local-1.2300-2.el7.noarch                       41/123 
+  Installing : perl-Socket-2.010-3.el7.x86_64                            42/123 
+  Installing : perl-threads-shared-1.43-6.el7.x86_64                     43/123 
+  Installing : perl-File-Temp-0.23.01-3.el7.noarch                       44/123 
+  Installing : perl-File-Path-2.09-2.el7.noarch                          45/123 
+  Installing : perl-PathTools-3.40-5.el7.x86_64                          46/123 
+  Installing : perl-Scalar-List-Utils-1.27-248.el7.x86_64                47/123 
+  Installing : 1:perl-Pod-Simple-3.28-4.el7.noarch                       48/123 
+  Installing : perl-Getopt-Long-2.40-2.el7.noarch                        49/123 
+  Installing : 4:perl-5.16.3-285.el7.x86_64                              50/123 
+  Installing : lksctp-tools-1.0.13-3.el7.x86_64                          51/123 
+  Installing : jbigkit-libs-2.0-11.el7.x86_64                            52/123 
+  Installing : libtiff-4.0.3-14.el7.x86_64                               53/123 
+  Installing : dbus-glib-0.100-7.el7.x86_64                              54/123 
+  Installing : json-c-0.11-4.el7_0.x86_64                                55/123 
+  Installing : libthai-0.1.14-9.el7.x86_64                               56/123 
+  Installing : libasyncns-0.8-7.el7.x86_64                               57/123 
+  Installing : avahi-libs-0.6.31-14.el7.x86_64                           58/123 
+  Installing : 1:cups-libs-1.6.3-17.el7_1.1.x86_64                       59/123 
+  Installing : alsa-lib-1.0.28-2.el7.x86_64                              60/123 
+  Installing : hicolor-icon-theme-0.12-7.el7.noarch                      61/123 
+  Installing : fontpackages-filesystem-1.44-8.el7.noarch                 62/123 
+  Installing : fontconfig-2.10.95-7.el7.x86_64                           63/123 
+  Installing : xorg-x11-fonts-Type1-7.5-9.el7.noarch                     64/123 
+  Installing : tcp_wrappers-libs-7.6-77.el7.x86_64                       65/123 
+  Installing : libX11-common-1.6.0-2.1.el7.noarch                        66/123 
+  Installing : mozjs17-17.0.0-10.el7.x86_64                              67/123 
+  Installing : polkit-0.112-5.el7.x86_64                                 68/123 
+  Installing : polkit-pkla-compat-0.1-4.el7.x86_64                       69/123 
+  Installing : gsm-1.0.13-11.el7.x86_64                                  70/123 
+  Installing : libsndfile-1.0.25-9.el7.x86_64                            71/123 
+  Installing : tzdata-java-2015g-1.el7.noarch                            72/123 
+  Installing : kernel-headers-3.10.0-229.20.1.el7.x86_64                 73/123 
+  Installing : glibc-headers-2.17-78.el7.x86_64                          74/123 
+  Installing : glibc-devel-2.17-78.el7.x86_64                            75/123 
+  Installing : gcc-4.8.3-9.el7.x86_64                                    76/123 
+  Installing : hwdata-0.252-7.8.el7_1.x86_64                             77/123 
+  Installing : libpciaccess-0.13.1-4.1.el7.x86_64                        78/123 
+  Installing : libdrm-2.4.56-2.el7.x86_64                                79/123 
+  Installing : mesa-libgbm-10.2.7-5.20140910.el7_1.1.x86_64              80/123 
+  Installing : libXau-1.0.8-2.1.el7.x86_64                               81/123 
+  Installing : libxcb-1.9-5.el7.x86_64                                   82/123 
+  Installing : libX11-1.6.0-2.1.el7.x86_64                               83/123 
+  Installing : libXext-1.3.2-2.1.el7.x86_64                              84/123 
+  Installing : libXrender-0.9.8-2.1.el7.x86_64                           85/123 
+  Installing : libXfixes-5.0.1-2.1.el7.x86_64                            86/123 
+  Installing : libXi-1.7.2-2.1.el7.x86_64                                87/123 
+  Installing : libXtst-1.2.2-2.1.el7.x86_64                              88/123 
+  Installing : libXdamage-1.1.4-4.1.el7.x86_64                           89/123 
+  Installing : gdk-pixbuf2-2.28.2-5.el7_1.x86_64                         90/123 
+  Installing : pulseaudio-libs-3.0-30.el7.x86_64                         91/123 
+  Installing : libXcursor-1.1.14-2.1.el7.x86_64                          92/123 
+  Installing : libXrandr-1.4.1-2.1.el7.x86_64                            93/123 
+  Installing : libXft-2.3.1-5.1.el7.x86_64                               94/123 
+  Installing : libXxf86vm-1.1.3-2.1.el7.x86_64                           95/123 
+  Installing : mesa-libGL-10.2.7-5.20140910.el7_1.1.x86_64               96/123 
+  Installing : libXinerama-1.1.3-2.1.el7.x86_64                          97/123 
+  Installing : libXcomposite-0.4.4-4.1.el7.x86_64                        98/123 
+  Installing : mesa-libEGL-10.2.7-5.20140910.el7_1.1.x86_64              99/123 
+  Installing : giflib-4.1.6-9.el7.x86_64                                100/123 
+  Installing : pcsc-lite-libs-1.8.8-5.el7.x86_64                        101/123 
+  Installing : graphite2-1.2.2-5.el7.x86_64                             102/123 
+  Installing : harfbuzz-0.9.20-4.el7.x86_64                             103/123 
+  Installing : psmisc-22.20-8.el7.x86_64                                104/123 
+  Installing : GConf2-3.2.6-8.el7.x86_64                                105/123 
+  Installing : libstdc++-devel-4.8.3-9.el7.x86_64                       106/123 
+  Installing : pixman-0.32.4-3.el7.x86_64                               107/123 
+  Installing : cairo-1.12.14-6.el7.x86_64                               108/123 
+  Installing : pango-1.34.1-5.el7.x86_64                                109/123 
+  Installing : gtk2-2.24.22-5.el7_0.1.x86_64                            110/123 
+  Installing : 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x   111/123 
+  Installing : 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64       112/123 
+  Installing : xml-commons-apis-1.4.01-16.el7.noarch                    113/123 
+  Installing : xml-commons-resolver-1.2-15.el7.noarch                   114/123 
+  Installing : xalan-j2-2.7.1-23.el7.noarch                             115/123 
+  Installing : xerces-j2-2.11.0-17.el7_0.noarch                         116/123 
+  Installing : 1:java-1.7.0-openjdk-devel-1.7.0.91-2.6.2.1.el7_1.x86_   117/123 
+  Installing : ant-1.9.2-9.el7.noarch                                   118/123 
+  Installing : gcc-c++-4.8.3-9.el7.x86_64                               119/123 
+  Installing : nano-2.3.1-10.el7.x86_64                                 120/123 
+  Installing : 1:make-3.82-21.el7.x86_64                                121/123 
+  Installing : zlib-devel-1.2.7-13.el7.x86_64                           122/123 
+  Installing : 2:tar-1.26-29.el7.x86_64                                 123/123 
+  Verifying  : 2:tar-1.26-29.el7.x86_64                                   1/123 
+  Verifying  : zlib-devel-1.2.7-13.el7.x86_64                             2/123 
+  Verifying  : perl-HTTP-Tiny-0.033-3.el7.noarch                          3/123 
+  Verifying  : 1:dbus-1.6.12-11.el7.x86_64                                4/123 
+  Verifying  : libXtst-1.2.2-2.1.el7.x86_64                               5/123 
+  Verifying  : python-lxml-3.2.1-4.el7.x86_64                             6/123 
+  Verifying  : 1:xorg-x11-font-utils-7.5-18.1.el7.x86_64                  7/123 
+  Verifying  : pixman-0.32.4-3.el7.x86_64                                 8/123 
+  Verifying  : libstdc++-devel-4.8.3-9.el7.x86_64                         9/123 
+  Verifying  : pulseaudio-libs-3.0-30.el7.x86_64                         10/123 
+  Verifying  : psmisc-22.20-8.el7.x86_64                                 11/123 
+  Verifying  : perl-File-Temp-0.23.01-3.el7.noarch                       12/123 
+  Verifying  : libXcomposite-0.4.4-4.1.el7.x86_64                        13/123 
+  Verifying  : graphite2-1.2.2-5.el7.x86_64                              14/123 
+  Verifying  : xerces-j2-2.11.0-17.el7_0.noarch                          15/123 
+  Verifying  : mesa-libEGL-10.2.7-5.20140910.el7_1.1.x86_64              16/123 
+  Verifying  : freetype-2.4.11-10.el7_1.1.x86_64                         17/123 
+  Verifying  : pcsc-lite-libs-1.8.8-5.el7.x86_64                         18/123 
+  Verifying  : 1:java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.1.el7_1.x    19/123 
+  Verifying  : glibc-devel-2.17-78.el7.x86_64                            20/123 
+  Verifying  : libSM-1.2.1-7.el7.x86_64                                  21/123 
+  Verifying  : 4:perl-macros-5.16.3-285.el7.x86_64                       22/123 
+  Verifying  : glibc-headers-2.17-78.el7.x86_64                          23/123 
+  Verifying  : gtk2-2.24.22-5.el7_0.1.x86_64                             24/123 
+  Verifying  : 4:perl-5.16.3-285.el7.x86_64                              25/123 
+  Verifying  : libXau-1.0.8-2.1.el7.x86_64                               26/123 
+  Verifying  : perl-File-Path-2.09-2.el7.noarch                          27/123 
+  Verifying  : hwdata-0.252-7.8.el7_1.x86_64                             28/123 
+  Verifying  : kernel-headers-3.10.0-229.20.1.el7.x86_64                 29/123 
+  Verifying  : 1:make-3.82-21.el7.x86_64                                 30/123 
+  Verifying  : cairo-1.12.14-6.el7.x86_64                                31/123 
+  Verifying  : perl-Text-ParseWords-3.29-4.el7.noarch                    32/123 
+  Verifying  : giflib-4.1.6-9.el7.x86_64                                 33/123 
+  Verifying  : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                     34/123 
+  Verifying  : gdk-pixbuf2-2.28.2-5.el7_1.x86_64                         35/123 
+  Verifying  : tzdata-java-2015g-1.el7.noarch                            36/123 
+  Verifying  : libtiff-4.0.3-14.el7.x86_64                               37/123 
+  Verifying  : libXrandr-1.4.1-2.1.el7.x86_64                            38/123 
+  Verifying  : ant-1.9.2-9.el7.noarch                                    39/123 
+  Verifying  : 2:libpng-1.5.13-5.el7.x86_64                              40/123 
+  Verifying  : libXft-2.3.1-5.1.el7.x86_64                               41/123 
+  Verifying  : gsm-1.0.13-11.el7.x86_64                                  42/123 
+  Verifying  : pango-1.34.1-5.el7.x86_64                                 43/123 
+  Verifying  : 2:libogg-1.3.0-7.el7.x86_64                               44/123 
+  Verifying  : libmpc-1.0.1-3.el7.x86_64                                 45/123 
+  Verifying  : perl-Pod-Usage-1.63-3.el7.noarch                          46/123 
+  Verifying  : libXfont-1.4.7-3.el7_1.x86_64                             47/123 
+  Verifying  : perl-Encode-2.51-7.el7.x86_64                             48/123 
+  Verifying  : libfontenc-1.1.1-5.el7.x86_64                             49/123 
+  Verifying  : mozjs17-17.0.0-10.el7.x86_64                              50/123 
+  Verifying  : perl-threads-1.87-4.el7.x86_64                            51/123 
+  Verifying  : fontconfig-2.10.95-7.el7.x86_64                           52/123 
+  Verifying  : 4:perl-libs-5.16.3-285.el7.x86_64                         53/123 
+  Verifying  : nano-2.3.1-10.el7.x86_64                                  54/123 
+  Verifying  : mesa-libGL-10.2.7-5.20140910.el7_1.1.x86_64               55/123 
+  Verifying  : mesa-libgbm-10.2.7-5.20140910.el7_1.1.x86_64              56/123 
+  Verifying  : libdrm-2.4.56-2.el7.x86_64                                57/123 
+  Verifying  : libjpeg-turbo-1.2.90-5.el7.x86_64                         58/123 
+  Verifying  : libX11-common-1.6.0-2.1.el7.noarch                        59/123 
+  Verifying  : perl-threads-shared-1.43-6.el7.x86_64                     60/123 
+  Verifying  : perl-Storable-2.45-3.el7.x86_64                           61/123 
+  Verifying  : mesa-libglapi-10.2.7-5.20140910.el7_1.1.x86_64            62/123 
+  Verifying  : tcp_wrappers-libs-7.6-77.el7.x86_64                       63/123 
+  Verifying  : 1:perl-Pod-Escapes-1.04-285.el7.noarch                    64/123 
+  Verifying  : libXxf86vm-1.1.3-2.1.el7.x86_64                           65/123 
+  Verifying  : fontpackages-filesystem-1.44-8.el7.noarch                 66/123 
+  Verifying  : hicolor-icon-theme-0.12-7.el7.noarch                      67/123 
+  Verifying  : 1:perl-parent-0.225-244.el7.noarch                        68/123 
+  Verifying  : libXcursor-1.1.14-2.1.el7.x86_64                          69/123 
+  Verifying  : libXi-1.7.2-2.1.el7.x86_64                                70/123 
+  Verifying  : 1:libvorbis-1.3.3-8.el7.x86_64                            71/123 
+  Verifying  : 1:java-1.7.0-openjdk-1.7.0.91-2.6.2.1.el7_1.x86_64        72/123 
+  Verifying  : libXrender-0.9.8-2.1.el7.x86_64                           73/123 
+  Verifying  : libxcb-1.9-5.el7.x86_64                                   74/123 
+  Verifying  : perl-Carp-1.26-244.el7.noarch                             75/123 
+  Verifying  : python-javapackages-3.4.1-6.el7_0.noarch                  76/123 
+  Verifying  : perl-podlators-2.5.1-3.el7.noarch                         77/123 
+  Verifying  : libxslt-1.1.28-5.el7.x86_64                               78/123 
+  Verifying  : 1:java-1.7.0-openjdk-devel-1.7.0.91-2.6.2.1.el7_1.x86_    79/123 
+  Verifying  : xalan-j2-2.7.1-23.el7.noarch                              80/123 
+  Verifying  : polkit-0.112-5.el7.x86_64                                 81/123 
+  Verifying  : alsa-lib-1.0.28-2.el7.x86_64                              82/123 
+  Verifying  : perl-Getopt-Long-2.40-2.el7.noarch                        83/123 
+  Verifying  : libXfixes-5.0.1-2.1.el7.x86_64                            84/123 
+  Verifying  : mpfr-3.1.1-4.el7.x86_64                                   85/123 
+  Verifying  : perl-Filter-1.49-3.el7.x86_64                             86/123 
+  Verifying  : libXdamage-1.1.4-4.1.el7.x86_64                           87/123 
+  Verifying  : atk-2.8.0-4.el7.x86_64                                    88/123 
+  Verifying  : libsndfile-1.0.25-9.el7.x86_64                            89/123 
+  Verifying  : libXinerama-1.1.3-2.1.el7.x86_64                          90/123 
+  Verifying  : harfbuzz-0.9.20-4.el7.x86_64                              91/123 
+  Verifying  : jasper-libs-1.900.1-26.el7_0.3.x86_64                     92/123 
+  Verifying  : avahi-libs-0.6.31-14.el7.x86_64                           93/123 
+  Verifying  : perl-Exporter-5.68-3.el7.noarch                           94/123 
+  Verifying  : perl-constant-1.27-2.el7.noarch                           95/123 
+  Verifying  : perl-PathTools-3.40-5.el7.x86_64                          96/123 
+  Verifying  : xml-commons-apis-1.4.01-16.el7.noarch                     97/123 
+  Verifying  : libasyncns-0.8-7.el7.x86_64                               98/123 
+  Verifying  : cpp-4.8.3-9.el7.x86_64                                    99/123 
+  Verifying  : 1:perl-Pod-Simple-3.28-4.el7.noarch                      100/123 
+  Verifying  : libthai-0.1.14-9.el7.x86_64                              101/123 
+  Verifying  : perl-Time-Local-1.2300-2.el7.noarch                      102/123 
+  Verifying  : javapackages-tools-3.4.1-6.el7_0.noarch                  103/123 
+  Verifying  : perl-Socket-2.010-3.el7.x86_64                           104/123 
+  Verifying  : json-c-0.11-4.el7_0.x86_64                               105/123 
+  Verifying  : gcc-c++-4.8.3-9.el7.x86_64                               106/123 
+  Verifying  : xml-commons-resolver-1.2-15.el7.noarch                   107/123 
+  Verifying  : flac-libs-1.3.0-5.el7_1.x86_64                           108/123 
+  Verifying  : xorg-x11-fonts-Type1-7.5-9.el7.noarch                    109/123 
+  Verifying  : ttmkfdir-3.0.9-41.el7.x86_64                             110/123 
+  Verifying  : polkit-pkla-compat-0.1-4.el7.x86_64                      111/123 
+  Verifying  : libICE-1.0.8-7.el7.x86_64                                112/123 
+  Verifying  : 1:cups-libs-1.6.3-17.el7_1.1.x86_64                      113/123 
+  Verifying  : perl-Scalar-List-Utils-1.27-248.el7.x86_64               114/123 
+  Verifying  : dbus-glib-0.100-7.el7.x86_64                             115/123 
+  Verifying  : libX11-1.6.0-2.1.el7.x86_64                              116/123 
+  Verifying  : jbigkit-libs-2.0-11.el7.x86_64                           117/123 
+  Verifying  : GConf2-3.2.6-8.el7.x86_64                                118/123 
+  Verifying  : gcc-4.8.3-9.el7.x86_64                                   119/123 
+  Verifying  : libpciaccess-0.13.1-4.1.el7.x86_64                       120/123 
+  Verifying  : perl-Pod-Perldoc-3.20-4.el7.noarch                       121/123 
+  Verifying  : libXext-1.3.2-2.1.el7.x86_64                             122/123 
+  Verifying  : lksctp-tools-1.0.13-3.el7.x86_64                         123/123 
+
+Installed:
+  ant.noarch 0:1.9.2-9.el7            gcc-c++.x86_64 0:4.8.3-9.el7              
+  make.x86_64 1:3.82-21.el7           nano.x86_64 0:2.3.1-10.el7                
+  tar.x86_64 2:1.26-29.el7            zlib-devel.x86_64 0:1.2.7-13.el7          
+
+Dependency Installed:
+  GConf2.x86_64 0:3.2.6-8.el7                                                   
+  alsa-lib.x86_64 0:1.0.28-2.el7                                                
+  atk.x86_64 0:2.8.0-4.el7                                                      
+  avahi-libs.x86_64 0:0.6.31-14.el7                                             
+  cairo.x86_64 0:1.12.14-6.el7                                                  
+  cpp.x86_64 0:4.8.3-9.el7                                                      
+  cups-libs.x86_64 1:1.6.3-17.el7_1.1                                           
+  dbus.x86_64 1:1.6.12-11.el7                                                   
+  dbus-glib.x86_64 0:0.100-7.el7                                                
+  flac-libs.x86_64 0:1.3.0-5.el7_1                                              
+  fontconfig.x86_64 0:2.10.95-7.el7                                             
+  fontpackages-filesystem.noarch 0:1.44-8.el7                                   
+  freetype.x86_64 0:2.4.11-10.el7_1.1                                           
+  gcc.x86_64 0:4.8.3-9.el7                                                      
+  gdk-pixbuf2.x86_64 0:2.28.2-5.el7_1                                           
+  giflib.x86_64 0:4.1.6-9.el7                                                   
+  glibc-devel.x86_64 0:2.17-78.el7                                              
+  glibc-headers.x86_64 0:2.17-78.el7                                            
+  graphite2.x86_64 0:1.2.2-5.el7                                                
+  gsm.x86_64 0:1.0.13-11.el7                                                    
+  gtk2.x86_64 0:2.24.22-5.el7_0.1                                               
+  harfbuzz.x86_64 0:0.9.20-4.el7                                                
+  hicolor-icon-theme.noarch 0:0.12-7.el7                                        
+  hwdata.x86_64 0:0.252-7.8.el7_1                                               
+  jasper-libs.x86_64 0:1.900.1-26.el7_0.3                                       
+  java-1.7.0-openjdk.x86_64 1:1.7.0.91-2.6.2.1.el7_1                            
+  java-1.7.0-openjdk-devel.x86_64 1:1.7.0.91-2.6.2.1.el7_1                      
+  java-1.7.0-openjdk-headless.x86_64 1:1.7.0.91-2.6.2.1.el7_1                   
+  javapackages-tools.noarch 0:3.4.1-6.el7_0                                     
+  jbigkit-libs.x86_64 0:2.0-11.el7                                              
+  json-c.x86_64 0:0.11-4.el7_0                                                  
+  kernel-headers.x86_64 0:3.10.0-229.20.1.el7                                   
+  libICE.x86_64 0:1.0.8-7.el7                                                   
+  libSM.x86_64 0:1.2.1-7.el7                                                    
+  libX11.x86_64 0:1.6.0-2.1.el7                                                 
+  libX11-common.noarch 0:1.6.0-2.1.el7                                          
+  libXau.x86_64 0:1.0.8-2.1.el7                                                 
+  libXcomposite.x86_64 0:0.4.4-4.1.el7                                          
+  libXcursor.x86_64 0:1.1.14-2.1.el7                                            
+  libXdamage.x86_64 0:1.1.4-4.1.el7                                             
+  libXext.x86_64 0:1.3.2-2.1.el7                                                
+  libXfixes.x86_64 0:5.0.1-2.1.el7                                              
+  libXfont.x86_64 0:1.4.7-3.el7_1                                               
+  libXft.x86_64 0:2.3.1-5.1.el7                                                 
+  libXi.x86_64 0:1.7.2-2.1.el7                                                  
+  libXinerama.x86_64 0:1.1.3-2.1.el7                                            
+  libXrandr.x86_64 0:1.4.1-2.1.el7                                              
+  libXrender.x86_64 0:0.9.8-2.1.el7                                             
+  libXtst.x86_64 0:1.2.2-2.1.el7                                                
+  libXxf86vm.x86_64 0:1.1.3-2.1.el7                                             
+  libasyncns.x86_64 0:0.8-7.el7                                                 
+  libdrm.x86_64 0:2.4.56-2.el7                                                  
+  libfontenc.x86_64 0:1.1.1-5.el7                                               
+  libjpeg-turbo.x86_64 0:1.2.90-5.el7                                           
+  libmpc.x86_64 0:1.0.1-3.el7                                                   
+  libogg.x86_64 2:1.3.0-7.el7                                                   
+  libpciaccess.x86_64 0:0.13.1-4.1.el7                                          
+  libpng.x86_64 2:1.5.13-5.el7                                                  
+  libsndfile.x86_64 0:1.0.25-9.el7                                              
+  libstdc++-devel.x86_64 0:4.8.3-9.el7                                          
+  libthai.x86_64 0:0.1.14-9.el7                                                 
+  libtiff.x86_64 0:4.0.3-14.el7                                                 
+  libvorbis.x86_64 1:1.3.3-8.el7                                                
+  libxcb.x86_64 0:1.9-5.el7                                                     
+  libxslt.x86_64 0:1.1.28-5.el7                                                 
+  lksctp-tools.x86_64 0:1.0.13-3.el7                                            
+  mesa-libEGL.x86_64 0:10.2.7-5.20140910.el7_1.1                                
+  mesa-libGL.x86_64 0:10.2.7-5.20140910.el7_1.1                                 
+  mesa-libgbm.x86_64 0:10.2.7-5.20140910.el7_1.1                                
+  mesa-libglapi.x86_64 0:10.2.7-5.20140910.el7_1.1                              
+  mozjs17.x86_64 0:17.0.0-10.el7                                                
+  mpfr.x86_64 0:3.1.1-4.el7                                                     
+  pango.x86_64 0:1.34.1-5.el7                                                   
+  pcsc-lite-libs.x86_64 0:1.8.8-5.el7                                           
+  perl.x86_64 4:5.16.3-285.el7                                                  
+  perl-Carp.noarch 0:1.26-244.el7                                               
+  perl-Encode.x86_64 0:2.51-7.el7                                               
+  perl-Exporter.noarch 0:5.68-3.el7                                             
+  perl-File-Path.noarch 0:2.09-2.el7                                            
+  perl-File-Temp.noarch 0:0.23.01-3.el7                                         
+  perl-Filter.x86_64 0:1.49-3.el7                                               
+  perl-Getopt-Long.noarch 0:2.40-2.el7                                          
+  perl-HTTP-Tiny.noarch 0:0.033-3.el7                                           
+  perl-PathTools.x86_64 0:3.40-5.el7                                            
+  perl-Pod-Escapes.noarch 1:1.04-285.el7                                        
+  perl-Pod-Perldoc.noarch 0:3.20-4.el7                                          
+  perl-Pod-Simple.noarch 1:3.28-4.el7                                           
+  perl-Pod-Usage.noarch 0:1.63-3.el7                                            
+  perl-Scalar-List-Utils.x86_64 0:1.27-248.el7                                  
+  perl-Socket.x86_64 0:2.010-3.el7                                              
+  perl-Storable.x86_64 0:2.45-3.el7                                             
+  perl-Text-ParseWords.noarch 0:3.29-4.el7                                      
+  perl-Time-HiRes.x86_64 4:1.9725-3.el7                                         
+  perl-Time-Local.noarch 0:1.2300-2.el7                                         
+  perl-constant.noarch 0:1.27-2.el7                                             
+  perl-libs.x86_64 4:5.16.3-285.el7                                             
+  perl-macros.x86_64 4:5.16.3-285.el7                                           
+  perl-parent.noarch 1:0.225-244.el7                                            
+  perl-podlators.noarch 0:2.5.1-3.el7                                           
+  perl-threads.x86_64 0:1.87-4.el7                                              
+  perl-threads-shared.x86_64 0:1.43-6.el7                                       
+  pixman.x86_64 0:0.32.4-3.el7                                                  
+  polkit.x86_64 0:0.112-5.el7                                                   
+  polkit-pkla-compat.x86_64 0:0.1-4.el7                                         
+  psmisc.x86_64 0:22.20-8.el7                                                   
+  pulseaudio-libs.x86_64 0:3.0-30.el7                                           
+  python-javapackages.noarch 0:3.4.1-6.el7_0                                    
+  python-lxml.x86_64 0:3.2.1-4.el7                                              
+  tcp_wrappers-libs.x86_64 0:7.6-77.el7                                         
+  ttmkfdir.x86_64 0:3.0.9-41.el7                                                
+  tzdata-java.noarch 0:2015g-1.el7                                              
+  xalan-j2.noarch 0:2.7.1-23.el7                                                
+  xerces-j2.noarch 0:2.11.0-17.el7_0                                            
+  xml-commons-apis.noarch 0:1.4.01-16.el7                                       
+  xml-commons-resolver.noarch 0:1.2-15.el7                                      
+  xorg-x11-font-utils.x86_64 1:7.5-18.1.el7                                     
+  xorg-x11-fonts-Type1.noarch 0:7.5-9.el7                                       
+
+Complete!
+ ---> c71410367dbe
+Removing intermediate container f0f3652f9a0f
+Step 6 : RUN mkdir /opt/tmp
+ ---> Running in 180c9f86e490
+ ---> b00b54259d61
+Removing intermediate container 180c9f86e490
+Step 7 : ADD http://cs.jhu.edu/~post/files/joshua-v6.0.4.tgz /opt/
+Downloading [==================================================>]   468 MB/468 MB
+ ---> a56cc13c0824
+Removing intermediate container 929583ffc4c7
+Step 8 : WORKDIR /opt
+ ---> Running in faef11193a10
+ ---> 6e9df2a1d901
+Removing intermediate container faef11193a10
+Step 9 : RUN tar -xf joshua-v6.0.4.tgz
+ ---> Running in fa2c98c8e2e9
+ ---> d1df7194ce84
+Removing intermediate container fa2c98c8e2e9
+Step 10 : ENV JOSHUA /opt/joshua-v6.0.4
+ ---> Running in 3bf6158d94ae
+ ---> 88ff2553fc57
+Removing intermediate container 3bf6158d94ae
+Step 11 : WORKDIR ${JOSHUA}
+ ---> Running in 98eff2859403
+ ---> 04ae65faf52d
+Removing intermediate container 98eff2859403
+Step 12 : RUN ant kenlm
+ ---> Running in 547eeb052f1c
+Buildfile: /opt/joshua-v6.0.4/build.xml
+
+check-joshua-home:
+     [echo] JOSHUA = /opt/joshua-v6.0.4 basedir = /opt/joshua-v6.0.4
+
+kenlm:
+     [exec] make: Entering directory `/opt/joshua-v6.0.4/src/joshua/decoder/ff/lm/kenlm'
+     [exec] make: Leaving directory `/opt/joshua-v6.0.4/src/joshua/decoder/ff/lm/kenlm'
+     [exec] Makefile:40: *** BOOST_ROOT () does not point to a Boost installation, quitting....  Stop.
+     [exec] Result: 2
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+ ---> 08819ac2e924
+Removing intermediate container 547eeb052f1c
+Successfully built 08819ac2e924
+
