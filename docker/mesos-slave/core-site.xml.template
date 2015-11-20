@@ -1,0 +1,42 @@
+<configuration>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://CLUSTER_NAME</value>
+  </property>
+
+  <property>
+    <name>ha.zookeeper.quorum</name>
+    <value>ZK_IPS</value>
+  </property>
+
+  <!-- Trash minutes to allow recover of deleted files-->
+  <property>
+    <name>fs.trash.interval</name>
+    <value>30</value>
+  </property>
+  <property>
+    <name>fs.trash.checkpoint.interval</name>
+    <value>15</value>
+  </property>
+  <!-- Trash minutes to allow recover of deleted files-->
+
+  <!-- Hue WebHDFS proxy user setting -->
+  <property>
+    <name>hadoop.proxyuser.httpfs.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.httpfs.groups</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hue.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hue.groups</name>
+    <value>*</value>
+  </property>
+  <!-- Hue WebHDFS proxy user setting -->
+
+</configuration>
