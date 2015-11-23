@@ -1,0 +1,20 @@
+[Unit]
+Description=kafka
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=/usr/bin/docker pull aarongdocker/kafka
+ExecStartPre=-/usr/bin/docker rm -v %p
+ExecStart=/usr/bin/docker run --name %p --restart on-failure:5 --log-driver=journald \
+ -e BROKER_ID=`ifconfig bond0 | sed -n 2p | awk '{ print $2 }' | sed 's/\.//g'` \
+ -e CLUSTER_NAME=dsra \
+ -e ZK_IPS=r105u01:2181,r105u03:2181,r105u05:2181,r105u07:2181,r105u09:2181 \
+ -e ADVERTISED_HOST=%H.dsra.local \
+ -p 9092:9092 aarongdocker/kafka
+ExecStop=/usr/bin/docker stop %p
+TimeoutStartSec=900s
+
+[X-Fleet]
+MachineMetadata=ip=10.105.0.1

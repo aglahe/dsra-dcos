@@ -2,18 +2,18 @@
 
 # make sure we have everyrthing
 if [ -z $BROKER_ID ] || [ -z $CLUSTER_NAME ] || [ -z $ZK_IPS ]; then
-  echo BROKER_ID, CLUSTER_NAME (which becomes the ZK ROOT), ZK_IPS needs to be set as environment addresses to be able to run
+  echo BROKER_ID, CLUSTER_NAME \(which becomes the ZK ROOT\), ZK_IPS needs to be set as environment addresses to be able to run
   exit;
 fi
 
 # Set the Logs DIR
-sed -r -i "s/(log.dir)=(.*)/\1=\/data\/kafka/g" $KAFKA_HOME/config/server.properties
+sed -r -i "s/(log.dirs)=(.*)/\1=\/data\/kafka/g" $KAFKA_HOME/config/server.properties
 
 # Set the broker Id
 sed -r -i "s/(broker.id)=(.*)/\1=$BROKER_ID/g" $KAFKA_HOME/config/server.properties
 
 # Set the ZK_IPS amd CLUSTER_NAME
-sed -r -i "s/(zookeeper.connect)=(.*)/\1=$ZK_IPS\/$CLUSTER_NAME/g" $KAFKA_HOME/config/server.properties
+sed -r -i "s/(zookeeper.connect)=(.*)/\1=$ZK_IPS\/$CLUSTER_NAME-kafka/g" $KAFKA_HOME/config/server.properties
 
 # Set the external host and port
 if [ ! -z "$ADVERTISED_HOST" ]; then
