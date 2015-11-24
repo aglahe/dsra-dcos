@@ -1,13 +1,12 @@
 {
-  "id": "kafka-mesos",
+  "id": "kafka-manager",
   "cpus": 1.0,
   "mem": 2048.0,
   "instances": 1,
   "env": {
-     "ZK_HOSTS": "xd-zk01.xdata.data-tactics-corp.com:2181,xd-zk02.xdata.data-tactics-corp.com:2181,xd-zk03.xdata.data-tactics-corp.com:2181",
+     "ZK_HOSTS": "r105u01.dsra.local:2181,r105u03.dsra.local:2181,r105u05.dsra.local:2181,r105u07.dsra.local:2181,r105u09.dsra.local:2181/dsra-kafka",
      "APPLICATION_SECRET":"pleaseletmeplaywiththeothers"
   },
-  "args": ["-Dhttp.port=33333"],
   "container": {
     "type": "DOCKER",
     "docker": {
@@ -15,7 +14,7 @@
       "forcePullImage": true,
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 33333, "hostPort": 33333, "servicePort": 33333, "protocol": "tcp" }
+        { "containerPort": 9000, "hostPort": 31900, "servicePort": 9000, "protocol": "tcp" }
       ],
       "parameters": [
         { "key": "name", "value": "kafka-manager" }
