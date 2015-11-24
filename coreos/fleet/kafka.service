@@ -14,7 +14,7 @@ ExecStart=/usr/bin/bash -c "/usr/bin/docker run --name %p --restart on-failure:5
  -e CLUSTER_NAME=dsra \
  -e ZK_IPS=r105u01.dsra.local:2181,r105u03.dsra.local:2181,r105u05.dsra.local:2181,r105u07.dsra.local:2181,r105u09.dsra.local:2181 \
  -e ADVERTISED_HOST=%H.dsra.local \
- -p 9092:9092 aarongdocker/kafka"
+ -p 9092:9092 -p 9999:9999 aarongdocker/kafka"
 ExecStop=/usr/bin/docker stop %p
 TimeoutStartSec=900s
 

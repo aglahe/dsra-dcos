@@ -7,6 +7,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-amd64
 ENV SCALA_VERSION 2.11
 ENV KAFKA_VERSION 0.8.2.2
 ENV KAFKA_HOME /opt/kafka
+ENV JMX_PORT 9999
 
 # Install Kafka, Zookeeper and other needed things
 RUN apt-get update && \
@@ -17,7 +18,7 @@ RUN apt-get update && \
  ln -s /opt/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION" /opt/kafka
 
 #Ports
-EXPOSE 9092
+EXPOSE 9092 9999
 
 # Location to store data
 VOLUME ["/data/kafka"]
