@@ -18,7 +18,7 @@ RUN apt-get update && \
  ln -s /opt/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION" /opt/kafka
 
 #Ports
-EXPOSE 9092 9999
+EXPOSE 9092 ${JMX_PORT}
 
 # Location to store data
 VOLUME ["/data/kafka"]

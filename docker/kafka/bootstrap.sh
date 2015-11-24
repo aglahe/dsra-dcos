@@ -19,9 +19,9 @@ fi
 sed -r -i "s/(broker.id)=(.*)/\1=$BROKER_ID/g" $KAFKA_HOME/config/server.properties
 
 # Set the external host and port
-if [ ! -z "$ADVERTISED_HOST" ]; then
+if [ ! -z "$ADVERTISED_HOST_NAME" ]; then
     echo "advertised host: $ADVERTISED_HOST"
-    sed -r -i "s/#(advertised.host.name)=(.*)/\1=$ADVERTISED_HOST/g" $KAFKA_HOME/config/server.properties
+    sed -r -i "s/#(advertised.host.name)=(.*)/\1=$ADVERTISED_HOST_NAME/g" $KAFKA_HOME/config/server.properties
 fi
 if [ ! -z "$ADVERTISED_PORT" ]; then
     echo "advertised port: $ADVERTISED_PORT"
@@ -40,6 +40,16 @@ fi
 if [ ! -z "$NUM_PARTITIONS" ]; then
     echo "default number of partition: $NUM_PARTITIONS"
     sed -r -i "s/(num.partitions)=(.*)/\1=$NUM_PARTITIONS/g" $KAFKA_HOME/config/server.properties
+fi
+
+# Stolen from ches/docker-kafka to help enable JMX monitoring
+if [ -z $KAFKA_JMX_OPTS ]; then
+    KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote=true"
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.authenticate=false"
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.ssl=false"
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT"
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${JAVA_RMI_SERVER_HOSTNAME:-$ADVERTISED_HOST_NAME} "
+    export KAFKA_JMX_OPTS
 fi
 
 # Run Kafka
