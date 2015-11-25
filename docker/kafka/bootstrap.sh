@@ -12,9 +12,9 @@ sed -r -i "s/(log.dirs)=(.*)/\1=\/data\/kafka/g" $KAFKA_HOME/config/server.prope
 # Set the ZK_IPS amd CLUSTER_NAME
 sed -r -i "s/(zookeeper.connect)=(.*)/\1=$ZK_IPS\/$CLUSTER_NAME-kafka/g" $KAFKA_HOME/config/server.properties
 
-# Set the broker Id, if not available create one
+# Set the broker Id, if not available create one, 1-100
 if [[ -z $BROKER_ID ]]; then
-    export BROKER_ID=$RANDOM
+    export BROKER_ID=$((RANDOM % 100)+1)
 fi
 sed -r -i "s/(broker.id)=(.*)/\1=$BROKER_ID/g" $KAFKA_HOME/config/server.properties
 
