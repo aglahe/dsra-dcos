@@ -36,5 +36,6 @@ __9999__: JMX Port
 ```
 
 #### Example Broker ID, using the last octet of the IP:
-
+```
 BROKER_ID=`/usr/bin/ifconfig bond0 | /usr/bin/sed -n 2p | /usr/bin/awk '{ print $2 }' | cut -d . -f 4`
+```
