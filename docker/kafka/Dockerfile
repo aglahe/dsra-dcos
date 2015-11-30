@@ -9,7 +9,7 @@ ENV KAFKA_VERSION 0.9.0.0
 ENV KAFKA_HOME /opt/kafka
 ENV JMX_PORT 9999
 
-# Install Kafka, Zookeeper and other needed things
+# Install Kafka
 RUN apt-get update && \
  apt-get install -y wget && \
  rm -rf /var/lib/apt/lists/* && \
