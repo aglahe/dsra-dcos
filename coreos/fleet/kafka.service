@@ -10,11 +10,11 @@ ExecStartPre=-/usr/bin/docker create --name kafka-data aarongdocker/kafka /bin/t
 ExecStartPre=-/usr/bin/docker rm -v %p
 ExecStart=/usr/bin/bash -c "/usr/bin/docker run --name %p --restart on-failure:5 --log-driver=journald \
  --volumes-from kafka-data \
- -e BROKER_ID=`/usr/bin/ifconfig bond0 | /usr/bin/sed -n 2p | /usr/bin/awk '{ print $2 }' | /usr/bin/sed 's/\.//g'` \
+ -e BROKER_ID=`/usr/bin/ifconfig bond0 | /usr/bin/sed -n 2p | /usr/bin/awk '{ print $2 }' | cut -d . -f 4` \
  -e CLUSTER_NAME=dsra \
  -e ZK_IPS=r105u01.dsra.local:2181,r105u03.dsra.local:2181,r105u05.dsra.local:2181,r105u07.dsra.local:2181,r105u09.dsra.local:2181 \
- -e ADVERTISED_HOST=%H.dsra.local \
- -p 9092:9092 aarongdocker/kafka"
+ -e ADVERTISED_HOST_NAME=%H.dsra.local \
+ -p 9092:9092 -p 9999:9999 aarongdocker/kafka"
 ExecStop=/usr/bin/docker stop %p
 TimeoutStartSec=900s
 
