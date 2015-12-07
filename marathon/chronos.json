@@ -1,5 +1,5 @@
 {
-   "id": "chronos",
+   "id": "/dsra/chronos",
    "instances": 1,
    "cpus": 1.0,
    "mem": 2048,
