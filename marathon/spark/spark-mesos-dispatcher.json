@@ -1,8 +1,7 @@
 {
-    "id": "spark-mesos-dispatcher", 
-    "cmd": "/opt/spark-1.5.0-bin-hadoop2.6/sbin/start-mesos-dispatcher.sh --master zk://10.105.0.1:2181,10.105.0.3:2181,10.105.0.5:2181,10.105.0.7:2181,10.105.0.9:2181/mesos",
+    "id": "spark-mesos-dispatcher",
+    "cmd": "/usr/local/spark/sbin/start-mesos-dispatcher.sh --master zk://10.105.0.1:2181,10.105.0.3:2181,10.105.0.5:2181,10.105.0.7:2181,10.105.0.9:2181/mesos",
     "cpus": 1,
     "mem": 4,
     "instances": 1
 }
-
