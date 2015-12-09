@@ -6,7 +6,7 @@
   "args": ["start"],
   "env": {
      "CLUSTER_NAME": "dsra",
-     "HTTPFS_SERVER": "httpfs.marathon.mesos",
+     "HTTPFS_SERVER": "httpfs-dsra.marathon.mesos",
      "HTTPFS_PORT": "31400"
   },
   "container": {
