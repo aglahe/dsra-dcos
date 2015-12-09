@@ -6,7 +6,7 @@ Requires=docker.service
 [Service]
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm -v %p
-ExecStartPre=/usr/bin/docker pull bamboo
+ExecStartPre=/usr/bin/docker pull milk/bamboo:multiple-ports
 ExecStart=/usr/bin/docker run --name %p \
                               --rm \
                               -p 8000:8000 \
@@ -18,7 +18,7 @@ ExecStart=/usr/bin/docker run --name %p \
                               -e BIND=":8000" \
                               -e CONFIG_PATH="config/production.example.json" \
                               -e BAMBOO_DOCKER_AUTO_HOST=true \
-                              bamboo
+                              milk/bamboo:multiple-ports
 ExecStop=/usr/bin/docker stop %p
 TimeoutStartSec=900s
 
