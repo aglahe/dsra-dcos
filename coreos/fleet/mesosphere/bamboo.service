@@ -7,11 +7,8 @@ Requires=docker.service
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm -v %p
 ExecStartPre=/usr/bin/docker pull milk/bamboo:multiple-ports
-ExecStart=/usr/bin/docker run --name %p \
-                              --rm \
-                              -p 8000:8000 \
-                              -p 80:80 \
-                              -e MARATHON_ENDPOINT=http://marathon:8080 \
+ExecStart=/usr/bin/docker run --name %p --rm -p 8000:8000 -p 80:80 \
+                              -e MARATHON_ENDPOINT=http://marathon \
                               -e BAMBOO_ENDPOINT=http://bamboo:8000 \
                               -e BAMBOO_ZK_HOST=zk://10.105.0.1:2181,10.105.0.3:2181,10.105.0.5:2181,10.105.0.7:2181,10.105.0.9:2181 \
                               -e BAMBOO_ZK_PATH=/bamboo \
@@ -24,7 +21,7 @@ TimeoutStartSec=900s
 
 [X-Fleet]
 Global=true
-MachineMetadata=role=service
+MachineMetadata=role=worker
 
 
 
