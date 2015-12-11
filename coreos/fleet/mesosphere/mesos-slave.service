@@ -17,6 +17,9 @@ ExecStart=/usr/bin/docker run --privileged --net=host --name %p --restart=always
  -v /lib64/libpthread.so.0:/lib/libpthread.so.0:ro \
  -v /lib64/libsqlite3.so.0:/lib/libsqlite3.so.0:ro \
  -v /lib64/libudev.so.1:/lib/libudev.so.1:ro \
+ -v /lib64/libsystemd.so:/usr/lib/libsystemd.so.0:ro \
+ -v /lib64/libcrypt.so:/usr/lib/libcrypt.so.20:ro \
+ -v /lib64/libgcrypt.so:/usr/lib/libgcrypt.so.20:ro \
  -e MESOS_SWITCH_USER=0 \
  -e MESOS_LOG_DIR=/tmp/log \
  -e MESOS_LOG_LEVEL=INFO \
