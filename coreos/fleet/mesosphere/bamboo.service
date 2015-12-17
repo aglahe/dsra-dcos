@@ -6,7 +6,7 @@ Requires=docker.service
 [Service]
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm -v %p
-ExecStartPre=/usr/bin/docker pull milk/bamboo:multiple-ports
+ExecStartPre=/usr/bin/docker pull hub.dsra.local:5000/dsra/bamboo:0.2.16
 ExecStart=/usr/bin/docker run --name %p --rm -p 8000:8000 -p 80:80 \
                               -e MARATHON_ENDPOINT=http://marathon \
                               -e BAMBOO_ENDPOINT=http://bamboo:8000 \
@@ -15,7 +15,7 @@ ExecStart=/usr/bin/docker run --name %p --rm -p 8000:8000 -p 80:80 \
                               -e BIND=":8000" \
                               -e CONFIG_PATH="config/production.example.json" \
                               -e BAMBOO_DOCKER_AUTO_HOST=true \
-                              milk/bamboo:multiple-ports
+                              hub.dsra.local:5000/dsra/bamboo:0.2.16
 ExecStop=/usr/bin/docker stop %p
 TimeoutStartSec=900s
 
