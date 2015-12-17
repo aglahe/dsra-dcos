@@ -7,7 +7,7 @@ Requires=docker.service
 User=core
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm -v %p
-ExecStartPre=/usr/bin/docker pull hub.dsra.local:5000/dsra/mesos-master:0.25.0-0.2.70.ubuntu1404
+ExecStartPre=/usr/bin/docker pull hub.dsra.local:5000/dsra/mesos-master:0.26.0-0.2.145.ubuntu1404
 ExecStart=/usr/bin/docker run --net=host --name %p \
  -v /var/log/mesos \
  -e MESOS_HOSTNAME=%H.dsra.local \
