@@ -35,7 +35,7 @@ ExecStart=/usr/bin/docker run --privileged --net=host --name %p --restart=always
  -e NNODE2_IP=r105u03.dsra.local \
  -e ZK_IPS=r105u01.dsra.local:2181,r105u03.dsra.local:2181,r105u05.dsra.local:2181,r105u07.dsra.local:2181,r105u09.dsra.local:2181 \
  -e JN_IPS=r105u01.dsra.local:8485,r105u03.dsra.local:8485,r105u05.dsra.local:8485,r105u07.dsra.local:8485,r105u09.dsra.local:8485 \
- hub.dsra.local:5000/dsra/mesos-slave:0.25.0-0.2.70.ubuntu1404
+ hub.dsra.local:5000/dsra/mesos-slave:0.26.0-0.2.145.ubuntu1404
 ExecStop=/usr/bin/docker stop %p
 TimeoutStartSec=900s
 
