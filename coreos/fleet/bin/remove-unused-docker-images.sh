@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for item in `docker ps -a | grep Exited | grep -Po '^([\d\w])+'`; 
+for containerId in `docker ps -a | grep Exited | grep -Po '^([\d\w])+'`; 
 do
-   docker rm -v $item
+   docker rm -v $containerId
 done
