@@ -29,5 +29,23 @@
 
     "uris":  [
       "file:///etc/docker.tar.gz"
+    ],
+
+    "healthChecks": [
+       {
+         "protocol": "HTTP",
+         "portIndex": 80,
+         "path": "/",
+         "gracePeriodSeconds": 5,
+         "intervalSeconds": 20,
+         "maxConsecutiveFailures": 3
+       },{
+         "protocol": "HTTP",
+         "portIndex": 8000,
+         "path": "/",
+         "gracePeriodSeconds": 5,
+         "intervalSeconds": 20,
+         "maxConsecutiveFailures": 3
+       }
     ]
 }
