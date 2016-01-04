@@ -9,6 +9,11 @@ fi
 # Set the Logs DIR
 sed -r -i "s/(log.dirs)=(.*)/\1=\/data\/kafka/g" $KAFKA_HOME/config/server.properties
 
+# Add the delete logs property if it is set, put it right after the log.dirs setting
+if [[ -z $DELETE_TOPIC_ENABLE ]]; then
+    sed -r -i "/(log.dirs)=/a delete.topic.enable=$DELETE_TOPIC_ENABLE"
+fi
+
 # Set the ZK_IPS amd CLUSTER_NAME
 sed -r -i "s/(zookeeper.connect)=(.*)/\1=$ZK_IPS\/$CLUSTER_NAME-kafka/g" $KAFKA_HOME/config/server.properties
 
