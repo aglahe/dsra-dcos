@@ -17,7 +17,7 @@ RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.7/zookee
  COPY zoo.cfg.template conf/zoo.cfg
 
 # Have zookeeper own everything
-RUN chown -R zookeeper:zookeeper /var/lib/zookeeper /usr/local/zookeeper-3.4.6
+RUN chown -R zookeeper:zookeeper /var/lib/zookeeper /usr/local/zookeeper-3.4.7
 
 # Zookeeper client port, peer port, and leader (election) port
 EXPOSE 2181 2888 3888
