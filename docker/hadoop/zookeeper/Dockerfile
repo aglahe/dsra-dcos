@@ -1,4 +1,4 @@
-FROM java:7
+FROM java:8
 MAINTAINER Aaron Glahe <aarongmldt@gmail.com>
 
 # Setup env
@@ -6,7 +6,7 @@ USER root
 ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk-amd64
 
 # Download Apache Zookeeper, untar, setup zookeeper user, log/snapshot DIR
-RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz | tar -xzf - -C /usr/local \
+RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.7/zookeeper-3.4.7.tar.gz | tar -xzf - -C /usr/local \
  && ln -s /usr/local/zookeeper-3.4.6 /usr/local/zookeeper \
  && groupadd -r zookeeper && useradd -r -g zookeeper zookeeper \
  && mkdir -p /var/lib/zookeeper
