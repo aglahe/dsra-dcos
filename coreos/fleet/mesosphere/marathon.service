@@ -6,7 +6,7 @@ Requires=docker.service
 [Service]
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm -v %p
-ExecStartPre=/usr/bin/docker pull mesosphere/marathon:v0.13.0
+ExecStartPre=/usr/bin/docker pull mesosphere/marathon:v0.15.0-RC2
 ExecStart=/usr/bin/docker run --name %p --rm --net=host \
  -e MARATHON_EVENT_SUBSCRIBER=http_callback \
  -e MARATHON_HOSTNAME=%H.dsra.local \
