@@ -18,11 +18,11 @@ if [ ! -z "$ZK_SERVERS" ]; then
     exit 1
   else # odd count
     # remove current server entries
-    sed '/^server\.[0-9]*=.*$/d' -i /usr/local/zookeeper/conf/zoo.cfg
+    sed '/^server\.[0-9]*=.*$/d' -i /opt/zookeeper/conf/zoo.cfg
     # add entries from array
     for i in ${!arr[@]}; do
       #echo "$i ${arr[i]}"
-      echo "server.$(expr 1 + $i)=${arr[i]}" >> /usr/local/zookeeper/conf/zoo.cfg
+      echo "server.$(expr 1 + $i)=${arr[i]}" >> /opt/zookeeper/conf/zoo.cfg
     done
   fi
 fi

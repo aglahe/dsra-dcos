@@ -10,8 +10,9 @@ fi
 sed -r -i "s/(log.dirs)=(.*)/\1=\/data\/kafka/g" $KAFKA_HOME/config/server.properties
 
 # Add the delete logs property if it is set, put it right after the log.dirs setting
-if [[ -z "$DELETE_TOPIC_ENABLE" ]]; then
-    sed -r -i "/(log.dirs)=/a delete.topic.enable=$DELETE_TOPIC_ENABLE"
+if [ ! -z "$DELETE_TOPIC_ENABLE" ]; then
+    echo "allow topic delete: $DELETE_TOPIC_ENABLE"
+    sed -r -i "/(log.dirs)=/a delete.topic.enable=$DELETE_TOPIC_ENABLE" $KAFKA_HOME/config/server.properties
 fi
 
 # Set the ZK_IPS amd CLUSTER_NAME

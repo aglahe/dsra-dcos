@@ -6,7 +6,7 @@ Instructions to build Bamboo
 3. docker login hub.dsra.local:5000
 4. docker build -t hub.dsra.local:5000/dsra/bamboo:[VERSION]
 5. docker push hub.dsra.local:5000/dsra/bamboo:[VERSION]
-6. Use marathon configuratoin to deploy on all worker nodes.
+6. Use marathon configuration to deploy on all worker nodes.
 
 
 
