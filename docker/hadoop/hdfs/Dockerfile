@@ -1,4 +1,4 @@
-FROM java:7
+FROM java:8
 MAINTAINER Aaron Glahe <aarongmldt@gmail.com>
 
 # Setup env
