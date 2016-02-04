@@ -18,19 +18,21 @@ sudo pip install ipython
 
 # Now install golang
 echo "Install Go"
-sudo wget -q -O - https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz | tar -xzf - -C /usr/local
-sudo echo "export GOROOT=/usr/local/go" >> /etc/profile.d/go.sh
-sudo echo "export PATH=/usr/local/go/bin:\$PATH" >> /etc/profile.d/go.sh
+sudo wget -q -O - https://storage.googleapis.com/golang/go1.5.3.linux-amd64.tar.gz | tar -xzf - -C //opt
+sudo echo "export GOROOT=/opt/go" >> /etc/profile.d/go.sh
+sudo echo "export PATH=/opt/go/bin:\$PATH" >> /etc/profile.d/go.sh
 
 # Get Hadoop, and "install" it
 echo "Install Hadoop"
-sudo wget -q -O - http://apache.mirrors.pair.com/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xzf - -C /usr/local
+sudo wget -q -O - http://apache.mirrors.pair.com/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xzf - -C /opt
+sudo /usr/sbin/groupadd -r hdfs
+sudo /usr/sbin/useradd -r -g hdfs hdfs
 sudo /usr/sbin/groupadd -r hadoop
 sudo /usr/sbin/useradd -r -g hadoop hadoop
-sudo /bin/chown hadoop.hadoop -R /usr/local/hadoop-2.7.1
-sudo /bin/ln -s /usr/local/hadoop-2.7.1 /usr/local/hadoop
-sudo echo "export HADOOP_HOME=/usr/local/hadoop" >> /etc/profile.d/hdfs.sh
-sudo echo "export PATH=/usr/local/hadoop/bin:\$PATH" >> /etc/profile.d/hdfs.sh
+sudo /bin/chown hadoop.hadoop -R /opt/hadoop-2.7.1
+sudo /bin/ln -s /opt/hadoop-2.7.1 /opt/hadoop
+sudo echo "export HADOOP_HOME=/opt/hadoop" >> /etc/profile.d/hdfs.sh
+sudo echo "export PATH=/opt/hadoop/bin:\$PATH" >> /etc/profile.d/hdfs.sh
 
 # Get Docker installed
 echo "Install Docker"
@@ -39,12 +41,12 @@ sudo curl -sSL https://get.docker.com/ | sh
 # Now get fleetctl and etcdctl and set them up
 echo "Install fleetctl and etcdctl"
 sudo apt-get install -y git
-sudo git clone https://github.com/coreos/fleet.git /usr/local/fleet
-sudo git clone https://github.com/coreos/etcd.git /usr/local/etcd
-cd /usr/local/fleet && sudo env "PATH=$PATH:/usr/local/go/bin" /usr/local/fleet/build
-cd /usr/local/etcd && sudo env "PATH=$PATH:/usr/local/go/bin" /usr/local/etcd/build
-sudo echo "export PATH=/usr/local/etcd/bin:\$PATH" >> /etc/profile.d/etcd.sh
-sudo echo "export PATH=/usr/local/fleet/bin:\$PATH" >> /etc/profile.d/fleet.sh
+sudo git clone https://github.com/coreos/fleet.git /opt/fleet
+sudo git clone https://github.com/coreos/etcd.git /opt/etcd
+cd /opt/fleet && sudo env "PATH=$PATH:/opt/go/bin" /opt/fleet/build
+cd /opt/etcd && sudo env "PATH=$PATH:/opt/go/bin" /opt/etcd/build
+sudo echo "export PATH=/opt/etcd/bin:\$PATH" >> /etc/profile.d/etcd.sh
+sudo echo "export PATH=/opt/fleet/bin:\$PATH" >> /etc/profile.d/fleet.sh
 
 # Get Scala 2.11.7
 # sudo wget -q -O - http://www.scala-lang.org/files/archive/scala-2.11.7.tgz | tar -xzf - -C /usr/lib
@@ -52,11 +54,11 @@ sudo echo "export PATH=/usr/local/fleet/bin:\$PATH" >> /etc/profile.d/fleet.sh
 # sudo echo "export SCALA_HOME=/usr/lib/scala" >> /etc/profile.d/scala.sh
 # sudo echo "export PATH=\$SCALA_HOME/bin:\$PATH" >> /etc/profile.d/scala.sh
 
-# Spark 1.5
-echo "Install Spark 1.5"
-sudo wget -q -O - http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz | tar -xzf - -C /usr/lib
-sudo ln -s /usr/lib/spark-1.5.1-bin-hadoop2.6 /usr/lib/spark
-sudo echo "export PATH=/usr/lib/sparl/bin:\$PATH" >> /etc/profile.d/spark.sh
+# Spark 1.6
+echo "Install Spark 1.6"
+sudo wget -q -O - http://d3kbcqa49mib13.cloudfront.net/spark-1.6.0-bin-hadoop2.6.tgz | tar -xzf - -C /opt
+sudo ln -s /opt/spark-1.6.0-bin-hadoop2.6 /opt/spark
+sudo echo "export PATH=/opt/spark/bin:\$PATH" >> /etc/profile.d/spark.sh
 
 # Get MESOS libs installed
  echo "Install Mesos Libs"
@@ -66,10 +68,10 @@ sudo echo "export PATH=/usr/lib/sparl/bin:\$PATH" >> /etc/profile.d/spark.sh
 
 # Kafka
 echo "Install Kafka"
-sudo wget -q -O - https://github.com/apache/kafka/archive/0.8.2.1.tar.gz | tar -xzf - -C /usr/lib
-sudo ln -s /usr/lib/kafka-0.8.2.1 /usr/lib/kafka
+sudo wget -q -O - http://apache.arvixe.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz | tar -xzf - -C /opt
+sudo ln -s /opt/kafka_2.11-0.9.0.0 /opt/kafka
 sudo mkdir -p /var/log/kafka
-sudo echo "export PATH=/usr/lib/kafka/bin:\$PATH" >> /etc/profile.d/kafka.sh
+sudo echo "export PATH=/opt/kafka/bin:\$PATH" >> /etc/profile.d/kafka.sh
 
 #Mongodb-org
 echo "Install Mongodb"

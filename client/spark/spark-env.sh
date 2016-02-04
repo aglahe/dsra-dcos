@@ -8,4 +8,4 @@ export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 export MESOS_NATIVE_JAVA_LIBRARY=/usr/local/lib/libmesos.so
 
 # Where the Spark Dist lives
-export SPARK_EXECUTOR_URI=http://hub.dsra.local:8088/dsra/repo/frameworks/spark-1.5.1-bin-2.6.0.tgz
+export SPARK_EXECUTOR_URI=hdfs://dsra/user/spark/dist/spark-1.6.0-bin-2.6.0.tgz

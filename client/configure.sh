@@ -18,9 +18,9 @@ sudo echo "export ETCDCTL_ENDPOINT=$ETCDCTL_ENDPOINT" >> /etc/profile.d/etcd.sh
  | sed "s/NNODE1_IP/$NNODE1_IP/" \
  | sed "s/NNODE2_IP/$NNODE2_IP/" \
  | sed "s/JNODES/$JNODES/" \
- > /usr/local/hadoop/etc/hadoop/hdfs-site.xml
+ > /opt/hadoop/etc/hadoop/hdfs-site.xml
 
  # Replace all the variables in core-site.xml
  sudo sed "s/CLUSTER_NAME/$CLUSTER_NAME/" /tmp/core-site.xml.template \
  | sed "s/ZK_IPS/$ZK_IPS/" \
- > /usr/local/hadoop/etc/hadoop/core-site.xml
+ > /opt/hadoop/etc/hadoop/core-site.xml
