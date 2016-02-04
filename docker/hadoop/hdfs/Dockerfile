@@ -3,7 +3,7 @@ MAINTAINER Aaron Glahe <aarongmldt@gmail.com>
 
 # Setup env
 USER root
-ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 ENV HADOOP_USER hdfs
 
