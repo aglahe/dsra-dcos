@@ -4,11 +4,6 @@
   "mem": 2048.0,
   "instances": 1,
   "args": ["lein run"],
-  "env": {
-     "CLUSTER_NAME": "dsra",
-     "HTTPFS_SERVER": "httpfs-dsra.marathon.slave.mesos",
-     "HTTPFS_PORT": "31400"
-  },
   "container": {
     "type": "DOCKER",
     "docker": {
