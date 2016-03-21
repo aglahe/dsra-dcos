@@ -14,7 +14,7 @@ TimeoutStartSec=900s
 
 [X-Fleet]
 Global=true
-MachineMetadata=role=worker
+# MachineMetadata=role=worker
 
 
 
