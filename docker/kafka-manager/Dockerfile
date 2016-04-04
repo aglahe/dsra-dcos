@@ -2,8 +2,8 @@ FROM hseeberger/scala-sbt
 MAINTAINER Aaron Glahe <aarongmldt@gmail.com>
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 \
-    KM_VERSION=1.3.0.4 \
-    KM_REVISION=1b45af100ee302dfe53f31a9c7a041999fe3d83a
+    KM_VERSION=1.3.0.7 \
+    KM_REVISION=4b57fc9b65e6f9ac88fff4391994fd06bb782663
 
 RUN mkdir -p /tmp && \
     cd /tmp && \
