@@ -11,9 +11,8 @@ RUN mkdir -p /tmp && \
     cd /tmp/kafka-manager && \
     git checkout ${KM_REVISION}
 
-# Fix for long class names
-RUN echo "scalacOptions ++= Seq(\"-Xmax-classfile-name\", \"200\")" >> /tmp/kafka-manager/build.sbt
-
+WORKDIR /tmp/kafka-manager
+RUN /bin/echo 'scalacOptions ++= Seq("-Xmax-classfile-name", "200")' >> build.sbt
 RUN sbt clean dist && \
     unzip  -d / ./target/universal/kafka-manager-${KM_VERSION}.zip && \
     rm -fr /tmp/*
