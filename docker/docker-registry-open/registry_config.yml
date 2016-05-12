@@ -1,0 +1,23 @@
+version: 0.1
+log:
+  level: debug
+
+common:
+  search_backend: sqlalchemy
+  sqlalchemy_index_database: sqlite:////tmp/docker-registry.db
+
+storage:
+  filesystem:
+    rootdirectory: /data
+
+http:
+   addr: 0.0.0.0:5000
+   net: tcp
+   secret: askdravherqp305u235lkadjfalsdjkfsasdfasdf  
+   tls:
+      certificate: /certs/domain.crt
+      key: /certs/domain.key
+   debug:
+     addr: 0.0.0.0:5001
+
+
