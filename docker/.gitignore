@@ -1,0 +1,5 @@
+#ignore following files
+#private key
+domain.key
+#database
+*.sqlite
